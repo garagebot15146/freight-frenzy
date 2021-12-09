@@ -10,6 +10,7 @@ public class HardwareConfig {
     /* Public OpMode members. */
     public DcMotor leftMotor   = null;
     public DcMotor rightMotor  = null;
+    public DcMotor liftMotor = null;
     public DcMotor carouselMotor = null;
 
     /* local OpMode members. */
@@ -28,6 +29,7 @@ public class HardwareConfig {
         // Define and Initialize Motors
         leftMotor  = hwMap.get(DcMotor.class, "leftMotor");
         rightMotor = hwMap.get(DcMotor.class, "rightMotor");
+        liftMotor = hwMap.get(DcMotor.class, "liftMotor");
         carouselMotor = hwMap.get(DcMotor.class, "carouselMotor");
 
         leftMotor.setDirection(DcMotor.Direction.FORWARD);

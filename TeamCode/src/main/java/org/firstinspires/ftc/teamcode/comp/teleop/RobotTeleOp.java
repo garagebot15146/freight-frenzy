@@ -32,18 +32,19 @@ public class RobotTeleOp extends OpMode {
     @Override
     public void loop() {
 
-        if(gamepad1.right_bumper){
-            robot.leftMotor.setPower(gamepad1.left_stick_y * 0.7);
-            robot.rightMotor.setPower(gamepad1.right_stick_y * 0.7);
+        //GAMEPAD 1
+        if(gamepad1.a){
+            robot.leftMotor.setPower(gamepad1.left_stick_y);
+            robot.rightMotor.setPower(gamepad1.right_stick_y);
         } else {
-            robot.leftMotor.setPower(gamepad1.left_stick_y * 0.4);
-            robot.rightMotor.setPower(gamepad1.right_stick_y * 0.4);
+            robot.leftMotor.setPower(gamepad1.left_stick_y * 0.6);
+            robot.rightMotor.setPower(gamepad1.right_stick_y * 0.6);
         }
 
+        //GAMEPAD 2
         if(gamepad2.a == true){
             robot.carouselMotor.setPower(1);
-        }
-        else{
+        } else{
             robot.carouselMotor.setPower(0);
         }
     }
