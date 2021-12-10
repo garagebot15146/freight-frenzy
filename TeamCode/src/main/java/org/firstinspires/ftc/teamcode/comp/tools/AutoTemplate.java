@@ -50,19 +50,9 @@ public class AutoTemplate extends LinearOpMode {
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
 
-        // Step through each leg of the path,
-        // Note: Reverse movement is obtained by setting a negative distance (not speed)
-//        encoderDrive(DRIVE_SPEED,  -5,  -5, 2.0);  // S1: Forward 47 Inches with 5 Sec timeout
-          runtime.reset();
-          robot.leftMotor.setPower(0.05);
-          robot.rightMotor.setPower(0.05);
-          while (runtime.seconds() < 1){
-
-          }
-        robot.leftMotor.setPower(0);
-        robot.rightMotor.setPower(0);
-//        encoderDrive(TURN_SPEED,   5, -5, 4.0);  // S2: Turn Right 12 Inches with 4 Sec timeout
-//        encoderDrive(DRIVE_SPEED, -5, -5, 4.0);  // S3: Reverse 24 Inches with 4 Sec timeout
+        //Note: Reverse movement is obtained by setting a negative distance (not speed)
+        encoderDrive(DRIVE_SPEED,  10,  10, 2.0);  // S1: Forward 47 Inches with 5 Sec timeout
+        encoderDrive(DRIVE_SPEED, -10, -10, 4.0);  // S3: Reverse 24 Inches with 4 Sec timeout
 
         telemetry.addData("Path", "Complete");
         telemetry.update();

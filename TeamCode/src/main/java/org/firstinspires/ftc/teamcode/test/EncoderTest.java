@@ -1,54 +1,51 @@
 package org.firstinspires.ftc.teamcode.test;
 
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorController;
 
-@Autonomous(name = "Encoder Test", group = "Linear Opmode")
-@Disabled
-public class EncoderTest extends LinearOpMode {
-    private DcMotor leftMotor = null;
-    private DcMotor rightMotor = null;
+import org.firstinspires.ftc.teamcode.comp.HardwareConfig;
+
+@TeleOp(name = "EncoderTest", group = "Iterative Opmode")
+public class EncoderTest extends OpMode {
+
+    HardwareConfig robot = new HardwareConfig();
 
     @Override
-    public void runOpMode() {
-        telemetry.addData("Status", "Initialized");
-        telemetry.update();
+    public void init() {
+        telemetry.addData("Status", "initializing");
+        robot.init(hardwareMap);
 
-        leftMotor = hardwareMap.get(DcMotor.class, "leftMotor");
-        rightMotor = hardwareMap.get(DcMotor.class, "rightMotor");
+        robot.leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        leftMotor.setDirection(DcMotor.Direction.FORWARD);
-        rightMotor.setDirection(DcMotor.Direction.REVERSE);
+        robot.leftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.rightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        telemetry.addData("Status", "motorized");
 
-        waitForStart();
-
-        Distance(12, 10);
     }
 
-    public void Distance(int distance, double power) {
-        leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-
-        leftMotor.setTargetPosition(distance);
-        rightMotor.setTargetPosition(distance);
-
-        leftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        rightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-        leftMotor.setPower(power);
-        rightMotor.setPower(power);
-
-        while (leftMotor.isBusy() && rightMotor.isBusy()) {
-
-        }
-
-        leftMotor.setPower(0);
-        rightMotor.setPower(0);
-
-        leftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        rightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+    @Override
+    public void init_loop() {
     }
+
+    @Override
+    public void start() {
+
+    }
+
+
+    @Override
+    public void loop() {
+        robot.leftMotor.setPower(gamepad1.left_stick_y);
+        robot.rightMotor.setPower(gamepad1.right_stick_y);
+        telemetry.addData("Encoder Left:", robot.leftMotor.getCurrentPosition());
+        telemetry.addData("Encoder Right:", robot.rightMotor.getCurrentPosition());
+    }
+
+    @Override
+    public void stop() {
+
+    }
+
 }
