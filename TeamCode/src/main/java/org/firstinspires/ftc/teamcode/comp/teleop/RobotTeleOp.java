@@ -34,7 +34,7 @@ public class RobotTeleOp extends OpMode {
     public void loop() {
 
         //GAMEPAD 1
-        if (gamepad1.a) {
+        if (gamepad1.b) {
             robot.leftMotor.setPower(gamepad1.left_stick_y);
             robot.rightMotor.setPower(gamepad1.right_stick_y);
         } else {
