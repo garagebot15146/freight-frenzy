@@ -7,14 +7,21 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 public class HardwareConfig {
-    /* Public OpMode members. */
-    public DcMotor leftMotor = null;
-    public DcMotor rightMotor = null;
-    public DcMotor intakeMotor = null;
-    public DcMotor liftMotor = null;
-    public DcMotor carouselMotor = null;
+    /* In Order of the Ports */
 
-    /* local OpMode members. */
+    //Control Hub Ports 0 - 3:
+    public DcMotor capMotor = null;
+    public DcMotor liftMotor = null;
+    public DcMotor frontLeftMotor = null;
+    public DcMotor frontRightMotor = null;
+
+    //Expansion Hub Ports 0 -3:
+    public DcMotor backRightMotor = null;
+    public DcMotor backLeftMotor = null;
+    public DcMotor carouselMotor = null;
+    public DcMotor intakeMotor = null;
+
+    /* Hardware Map Object */
     com.qualcomm.robotcore.hardware.HardwareMap hwMap = null;
 
     /* Constructor */
@@ -28,28 +35,53 @@ public class HardwareConfig {
         hwMap = ahwMap;
 
         // Define and Initialize Motors
-        leftMotor = hwMap.get(DcMotor.class, "leftMotor");
-        rightMotor = hwMap.get(DcMotor.class, "rightMotor");
-        intakeMotor = hwMap.get(DcMotor.class, "intakeMotor");
+
+        //Control Hub:
+        capMotor = hwMap.get(DcMotor.class, "capMotor");
         liftMotor = hwMap.get(DcMotor.class, "liftMotor");
+        frontLeftMotor = hwMap.get(DcMotor.class, "frontLeftMotor");
+        frontRightMotor = hwMap.get(DcMotor.class, "frontRightMotor");
+
+        //Expansion Hub:
+        backRightMotor = hwMap.get(DcMotor.class, "backRightMotor");
+        backLeftMotor = hwMap.get(DcMotor.class, "backLeftMotor");
         carouselMotor = hwMap.get(DcMotor.class, "carouselMotor");
+        intakeMotor = hwMap.get(DcMotor.class, "intakeMotor");
 
-        leftMotor.setDirection(DcMotor.Direction.FORWARD);
-        rightMotor.setDirection(DcMotor.Direction.REVERSE);
-        intakeMotor.setDirection(DcMotor.Direction.FORWARD);
+        //Set Directions
+
+        //Control Hub:
+        capMotor.setDirection(DcMotor.Direction.FORWARD);
         liftMotor.setDirection(DcMotor.Direction.FORWARD);
-        carouselMotor.setDirection(DcMotor.Direction.FORWARD);
+        frontLeftMotor.setDirection(DcMotor.Direction.FORWARD);
+        frontRightMotor.setDirection(DcMotor.Direction.REVERSE);
 
-        leftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        rightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        //Expansion Hub:
+        backRightMotor.setDirection(DcMotor.Direction.REVERSE);
+        backLeftMotor.setDirection(DcMotor.Direction.FORWARD);
+        carouselMotor.setDirection(DcMotor.Direction.FORWARD);
+        intakeMotor.setDirection(DcMotor.Direction.FORWARD);
+
+        //Set Behavior
+        frontLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        frontRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        backRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        backLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
 
         liftMotor.setZeroPowerBehavior((DcMotor.ZeroPowerBehavior.BRAKE));
         // Set all motors to zero power
-        leftMotor.setPower(0);
-        rightMotor.setPower(0);
-        intakeMotor.setPower(0);
+
+        //Control Hub
+        capMotor.setPower(0);
         liftMotor.setPower(0);
+        frontLeftMotor.setPower(0);
+        frontRightMotor.setPower(0);
+
+        //Expansion Hub:
+        backRightMotor.setPower(0);
+        backLeftMotor.setPower(0);
         carouselMotor.setPower(0);
+        intakeMotor.setPower(0);
     }
 }
 
