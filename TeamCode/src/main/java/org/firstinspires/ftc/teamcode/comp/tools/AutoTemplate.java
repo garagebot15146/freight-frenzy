@@ -52,6 +52,9 @@ public class AutoTemplate extends LinearOpMode {
 
         //Note: Reverse movement is obtained by setting a negative distance (not speed)
         encoderDrive(1,  15,  15, 2.0);  // S1: Forward 47 Inches with 5 Sec timeout
+        encoderDrive(0.5,  10,  0, 2.0);  // S1: Forward 47 Inches with 5 Sec timeout
+        encoderDrive(0.5,  0,  10, 2.0);  // S1: Forward 47 Inches with 5 Sec timeout
+
 
         telemetry.addData("Path", "Complete");
         telemetry.update();
@@ -84,8 +87,8 @@ public class AutoTemplate extends LinearOpMode {
 
             // reset the timeout time and start motion.
             runtime.reset();
-            robot.leftMotor.setPower(0.1);
-            robot.rightMotor.setPower(0.1);
+            robot.leftMotor.setPower(speed);
+            robot.rightMotor.setPower(speed);
 
             // keep looping while we are still active, and there is time left, and both motors are running.
             // Note: We use (isBusy() && isBusy()) in the loop test, which means that when EITHER motor hits
