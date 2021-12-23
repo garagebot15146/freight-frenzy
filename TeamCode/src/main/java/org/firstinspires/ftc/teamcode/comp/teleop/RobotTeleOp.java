@@ -49,7 +49,7 @@ public class RobotTeleOp extends OpMode {
 
         //GAMEPAD 2
         if (gamepad2.a == true) {
-            robot.carouselMotor.setPower(0.2);
+            robot.carouselMotor.setPower(1);
         } else {
             robot.carouselMotor.setPower(0);
         }
