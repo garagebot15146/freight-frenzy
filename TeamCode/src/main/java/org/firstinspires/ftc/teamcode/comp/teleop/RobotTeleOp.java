@@ -30,6 +30,12 @@ public class RobotTeleOp extends OpMode {
     }
 
 
+    //Variables
+    boolean lock1 = false;
+    boolean state1 = false;
+    boolean lock2 = false;
+    boolean state2 = false;
+
     @Override
     public void loop() {
 
@@ -51,16 +57,35 @@ public class RobotTeleOp extends OpMode {
         }
 
         //intake
-        if (gamepad1.right_bumper) {
-            robot.intakeMotor.setPower(1);
-        } else {
-            robot.intakeMotor.setPower(0);
-        }
+            if (gamepad1.right_bumper && !lock1 && !gamepad1.left_bumper) {
+                lock1 = true;
+                if (state1) {
+                    robot.intakeMotor.setPower(0);
+                    state1 = false;
 
-        if (gamepad1.left_bumper) {
-            robot.intakeMotor.setPower(-1);
-        } else {
-            robot.intakeMotor.setPower(0);
+                } else {
+                    robot.intakeMotor.setPower(1);
+                    state1 = true;
+
+                }
+            } else if (!gamepad1.right_bumper && lock1 && !gamepad1.left_bumper) {
+                lock1 = false;
+            }
+
+        //outtake
+        if (gamepad1.left_bumper && !lock2 && !gamepad1.right_bumper) {
+            lock2 = true;
+            if (state2) {
+                robot.intakeMotor.setPower(0);
+                state2 = false;
+
+            } else {
+                robot.intakeMotor.setPower(-1);
+                state2 = true;
+
+            }
+        } else if (!gamepad1.left_bumper && lock2 && !gamepad1.right_bumper) {
+            lock2 = false;
         }
 
         /* GAMEPAD 2 */

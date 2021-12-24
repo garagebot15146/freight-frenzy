@@ -8,8 +8,8 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 @TeleOp(name = "MotorFind", group = "Iterative Opmode")
-//@Disabled
-public class TeleToggleOp extends OpMode {
+@Disabled
+public class MotorFind extends OpMode {
     ElapsedTime runtime = new ElapsedTime();
     DcMotor testMotor = null;
 
