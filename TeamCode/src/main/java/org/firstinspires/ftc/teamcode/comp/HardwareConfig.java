@@ -39,12 +39,12 @@ public class HardwareConfig {
         //Control Hub:
         capMotor = hwMap.get(DcMotor.class, "capMotor");
         liftMotor = hwMap.get(DcMotor.class, "liftMotor");
-        frontLeftMotor = hwMap.get(DcMotor.class, "frontLeftMotor");
-        backRightMotor = hwMap.get(DcMotor.class, "backRightMotor");
+        frontLeftMotor = hwMap.get(DcMotor.class, "leftFront");
+        backRightMotor = hwMap.get(DcMotor.class, "rightRear");
 
         //Expansion Hub:
-        frontRightMotor = hwMap.get(DcMotor.class, "frontRightMotor");
-        backLeftMotor = hwMap.get(DcMotor.class, "backLeftMotor");
+        frontRightMotor = hwMap.get(DcMotor.class, "rightFront");
+        backLeftMotor = hwMap.get(DcMotor.class, "leftRear");
         carouselMotor = hwMap.get(DcMotor.class, "carouselMotor");
         intakeMotor = hwMap.get(DcMotor.class, "intakeMotor");
 

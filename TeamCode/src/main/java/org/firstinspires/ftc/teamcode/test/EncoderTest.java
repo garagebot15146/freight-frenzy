@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.teamcode.comp.HardwareConfig;
 
 @TeleOp(name = "EncoderTest", group = "Iterative Opmode")
-@Disabled
+//@Disabled
 public class EncoderTest extends OpMode {
 
     HardwareConfig robot = new HardwareConfig();
