@@ -16,11 +16,15 @@ public class EncoderTest extends OpMode {
         telemetry.addData("Status", "initializing");
         robot.init(hardwareMap);
 
-        robot.leftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.rightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        robot.leftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        robot.rightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.frontRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.backRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         telemetry.addData("Status", "motorized");
 
     }
@@ -37,10 +41,14 @@ public class EncoderTest extends OpMode {
 
     @Override
     public void loop() {
-        robot.leftMotor.setPower(gamepad1.left_stick_y);
-        robot.rightMotor.setPower(gamepad1.right_stick_y);
-        telemetry.addData("Encoder Left:", robot.leftMotor.getCurrentPosition());
-        telemetry.addData("Encoder Right:", robot.rightMotor.getCurrentPosition());
+        robot.frontLeftMotor.setPower(gamepad1.left_stick_y);
+        robot.frontRightMotor.setPower(gamepad1.right_stick_y);
+        robot.backLeftMotor.setPower(gamepad1.left_stick_y);
+        robot.backRightMotor.setPower(gamepad1.right_stick_y);
+        telemetry.addData("Encoder Left Front:", robot.frontLeftMotor.getCurrentPosition());
+        telemetry.addData("Encoder Right Front:", robot.frontRightMotor.getCurrentPosition());
+        telemetry.addData("Encoder Left Back:", robot.backLeftMotor.getCurrentPosition());
+        telemetry.addData("Encoder Right Back:", robot.backRightMotor.getCurrentPosition());
     }
 
     @Override

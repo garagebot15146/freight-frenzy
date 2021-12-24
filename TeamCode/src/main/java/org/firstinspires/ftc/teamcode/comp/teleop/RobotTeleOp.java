@@ -33,29 +33,51 @@ public class RobotTeleOp extends OpMode {
     @Override
     public void loop() {
 
-        //GAMEPAD 1
+        /* GAMEPAD 1 */
+
+        //driveTrain
+        double nerf = 0.6;
+
         if (gamepad1.b) {
-            robot.leftMotor.setPower(gamepad1.left_stick_y);
-            robot.rightMotor.setPower(gamepad1.right_stick_y);
+            robot.frontLeftMotor.setPower(gamepad1.left_stick_y);
+            robot.frontRightMotor.setPower(gamepad1.right_stick_y);
+            robot.backLeftMotor.setPower(gamepad1.left_stick_y);
+            robot.backRightMotor.setPower(gamepad1.right_stick_y);
         } else {
-            robot.leftMotor.setPower(gamepad1.left_stick_y * 0.6);
-            robot.rightMotor.setPower(gamepad1.right_stick_y * 0.6);
+            robot.frontLeftMotor.setPower(gamepad1.left_stick_y * nerf);
+            robot.frontRightMotor.setPower(gamepad1.right_stick_y * nerf);
+            robot.backLeftMotor.setPower(gamepad1.left_stick_y * nerf);
+            robot.backRightMotor.setPower(gamepad1.right_stick_y * nerf);
         }
+
+        //intake
         if (gamepad1.right_bumper) {
             robot.intakeMotor.setPower(1);
         } else {
             robot.intakeMotor.setPower(0);
         }
 
-        //GAMEPAD 2
+        if (gamepad1.left_bumper) {
+            robot.intakeMotor.setPower(-1);
+        } else {
+            robot.intakeMotor.setPower(0);
+        }
+
+        /* GAMEPAD 2 */
+
+        //carousel
         if (gamepad2.a == true) {
-            robot.carouselMotor.setPower(0.2);
+            robot.carouselMotor.setPower(0.3);
         } else {
             robot.carouselMotor.setPower(0);
         }
 
-        robot.liftMotor.setPower(Math.abs(gamepad2.left_stick_y * 0.7));
-        robot.liftMotor.setPower(-1 * Math.abs(gamepad2.right_stick_y * 0.2));
+        //lift
+        robot.liftMotor.setPower(gamepad2.left_stick_y);
+
+        //cap
+        robot.capMotor.setPower(gamepad2.right_stick_y * 0.6);
+
 
     }
 

@@ -40,26 +40,27 @@ public class HardwareConfig {
         capMotor = hwMap.get(DcMotor.class, "capMotor");
         liftMotor = hwMap.get(DcMotor.class, "liftMotor");
         frontLeftMotor = hwMap.get(DcMotor.class, "frontLeftMotor");
-        frontRightMotor = hwMap.get(DcMotor.class, "frontRightMotor");
+        backRightMotor = hwMap.get(DcMotor.class, "backRightMotor");
 
         //Expansion Hub:
-        backRightMotor = hwMap.get(DcMotor.class, "backRightMotor");
+        frontRightMotor = hwMap.get(DcMotor.class, "frontRightMotor");
         backLeftMotor = hwMap.get(DcMotor.class, "backLeftMotor");
         carouselMotor = hwMap.get(DcMotor.class, "carouselMotor");
         intakeMotor = hwMap.get(DcMotor.class, "intakeMotor");
+
 
         //Set Directions
 
         //Control Hub:
         capMotor.setDirection(DcMotor.Direction.FORWARD);
         liftMotor.setDirection(DcMotor.Direction.FORWARD);
-        frontLeftMotor.setDirection(DcMotor.Direction.FORWARD);
-        frontRightMotor.setDirection(DcMotor.Direction.REVERSE);
+        frontLeftMotor.setDirection(DcMotor.Direction.REVERSE);
+        frontRightMotor.setDirection(DcMotor.Direction.FORWARD);
 
         //Expansion Hub:
         backRightMotor.setDirection(DcMotor.Direction.REVERSE);
         backLeftMotor.setDirection(DcMotor.Direction.FORWARD);
-        carouselMotor.setDirection(DcMotor.Direction.FORWARD);
+        carouselMotor.setDirection(DcMotor.Direction.REVERSE);
         intakeMotor.setDirection(DcMotor.Direction.FORWARD);
 
         //Set Behavior
