@@ -14,6 +14,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.RobotLog;
 
 import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
+import org.firstinspires.ftc.teamcode.drive.SampleTankDrive;
 
 import java.util.Objects;
 
@@ -24,29 +25,14 @@ import static org.firstinspires.ftc.teamcode.drive.DriveConstants.kA;
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.kStatic;
 import static org.firstinspires.ftc.teamcode.drive.DriveConstants.kV;
 
-/*
- * This routine is designed to tune the open-loop feedforward coefficients. Although it may seem unnecessary,
- * tuning these coefficients is just as important as the positional parameters. Like the other
- * manual tuning routines, this op mode relies heavily upon the dashboard. To access the dashboard,
- * connect your computer to the RC's WiFi network. In your browser, navigate to
- * https://192.168.49.1:8080/dash if you're using the RC phone or https://192.168.43.1:8080/dash if
- * you are using the Control Hub. Once you've successfully connected, start the program, and your
- * robot will begin moving forward and backward according to a motion profile. Your job is to graph
- * the velocity errors over time and adjust the feedforward coefficients. Once you've found a
- * satisfactory set of gains, add them to the appropriate fields in the DriveConstants.java file.
- *
- * Pressing Y/Δ (Xbox/PS4) will pause the tuning process and enter driver override, allowing the
- * user to reset the position of the bot in the event that it drifts off the path.
- * Pressing B/O (Xbox/PS4) will cede control back to the tuning process.
- */
 @Config
 @Autonomous(group = "drive")
 public class ManualFeedforwardTuner extends LinearOpMode {
-    public static double DISTANCE = 72; // in
+    public static double DISTANCE = 46; // in
 
     private FtcDashboard dashboard = FtcDashboard.getInstance();
 
-    private SampleMecanumDrive drive;
+    private SampleTankDrive drive;
 
     enum Mode {
         DRIVER_MODE,
@@ -70,7 +56,7 @@ public class ManualFeedforwardTuner extends LinearOpMode {
 
         telemetry = new MultipleTelemetry(telemetry, dashboard.getTelemetry());
 
-        drive = new SampleMecanumDrive(hardwareMap);
+        drive = new SampleTankDrive(hardwareMap);
 
         mode = Mode.TUNING_MODE;
 
