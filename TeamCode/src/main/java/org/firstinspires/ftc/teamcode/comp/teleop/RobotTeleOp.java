@@ -96,11 +96,7 @@ public class RobotTeleOp extends OpMode {
         } else {
             robot.carouselMotor.setPower(0);
         }
-        if(gamepad2.left_trigger>.2){
-            robot.capServo.setPosition(.2);
-        }else{
-            robot.capServo.setPosition(.8);
-        }
+
         //lift
         robot.liftMotor.setPower(gamepad2.left_stick_y);
 
