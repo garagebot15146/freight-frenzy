@@ -9,13 +9,15 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 public class HardwareConfig {
     /* In Order of the Ports */
 
-    //Control Hub Ports 0 - 3:
+    //Control Hub Motor Ports 0 - 3:
     public DcMotor capMotor = null;
     public DcMotor liftMotor = null;
     public DcMotor frontLeftMotor = null;
     public DcMotor frontRightMotor = null;
 
-    //Expansion Hub Ports 0 -3:
+    public Servo capServo = null;
+
+    //Expansion Hub Motor Ports 0 -3:
     public DcMotor backRightMotor = null;
     public DcMotor backLeftMotor = null;
     public DcMotor carouselMotor = null;
@@ -64,10 +66,10 @@ public class HardwareConfig {
         intakeMotor.setDirection(DcMotor.Direction.FORWARD);
 
         //Set Behavior
-        frontLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        frontRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        backRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
-        backLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
+        frontLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        frontRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        backRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        backLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         liftMotor.setZeroPowerBehavior((DcMotor.ZeroPowerBehavior.BRAKE));
         // Set all motors to zero power
