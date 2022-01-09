@@ -44,6 +44,8 @@ public class HardwareConfig {
         frontLeftMotor = hwMap.get(DcMotor.class, "leftFront");
         backRightMotor = hwMap.get(DcMotor.class, "rightRear");
 
+        capServo = hwMap.get(Servo.class,"capServo");
+
         //Expansion Hub:
         frontRightMotor = hwMap.get(DcMotor.class, "rightFront");
         backLeftMotor = hwMap.get(DcMotor.class, "leftRear");
