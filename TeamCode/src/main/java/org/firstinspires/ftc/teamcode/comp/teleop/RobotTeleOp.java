@@ -99,6 +99,10 @@ public class RobotTeleOp extends OpMode {
 
         //lift
         robot.liftMotor.setPower(gamepad2.left_stick_y);
+        telemetry.addData("gamepad:", gamepad2.left_stick_y);
+        telemetry.addData("gamepad:", robot.liftMotor.getPower());
+
+
 
         //cap
         robot.capMotor.setPower(gamepad2.right_stick_y * 0.6);

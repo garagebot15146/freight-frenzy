@@ -15,8 +15,6 @@ public class HardwareConfig {
     public DcMotor frontLeftMotor = null;
     public DcMotor frontRightMotor = null;
 
-    public Servo capServo = null;
-
     //Expansion Hub Motor Ports 0 -3:
     public DcMotor backRightMotor = null;
     public DcMotor backLeftMotor = null;
@@ -42,12 +40,10 @@ public class HardwareConfig {
         capMotor = hwMap.get(DcMotor.class, "capMotor");
         liftMotor = hwMap.get(DcMotor.class, "liftMotor");
         frontLeftMotor = hwMap.get(DcMotor.class, "leftFront");
-        backRightMotor = hwMap.get(DcMotor.class, "rightRear");
-
-        capServo = hwMap.get(Servo.class,"capServo");
+        frontRightMotor = hwMap.get(DcMotor.class, "rightFront");
 
         //Expansion Hub:
-        frontRightMotor = hwMap.get(DcMotor.class, "rightFront");
+        backRightMotor = hwMap.get(DcMotor.class, "rightRear");
         backLeftMotor = hwMap.get(DcMotor.class, "leftRear");
         carouselMotor = hwMap.get(DcMotor.class, "carouselMotor");
         intakeMotor = hwMap.get(DcMotor.class, "intakeMotor");
