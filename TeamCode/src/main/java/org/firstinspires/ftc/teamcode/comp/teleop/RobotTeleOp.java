@@ -114,9 +114,14 @@ public class RobotTeleOp extends OpMode {
         }
 
         //lift
-        robot.liftMotor.setPower(gamepad2.left_stick_y);
-        telemetry.addData("gamepad:", gamepad2.left_stick_y);
-        telemetry.addData("gamepad:", robot.liftMotor.getPower());
+        //robot.liftMotor.setPower(-gamepad2.left_stick_y);
+        POS-=gamepad2.left_stick_y*5;
+        robot.liftMotor.setTargetPosition(POS);
+        if(POS<0){
+            POS = 0;
+        }
+        robot.liftMotor.setPower(.8);
+        robot.liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
 
 
