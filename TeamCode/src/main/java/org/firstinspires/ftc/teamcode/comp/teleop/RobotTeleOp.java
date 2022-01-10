@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.comp.teleop;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.comp.HardwareConfig;
 
@@ -14,6 +15,8 @@ public class RobotTeleOp extends OpMode {
     public void init() {
         telemetry.addData("Status", "initializing");
         robot.init(hardwareMap);
+
+        robot.liftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
         telemetry.addData("Status", "motorized");
 
