@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.comp.teleop;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.comp.HardwareConfig;
 
@@ -14,7 +15,7 @@ public class RobotTeleOp extends OpMode {
     public void init() {
         telemetry.addData("Status", "initializing");
         robot.init(hardwareMap);
-
+        robot.liftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         telemetry.addData("Status", "motorized");
 
     }
@@ -35,6 +36,7 @@ public class RobotTeleOp extends OpMode {
     boolean state1 = false;
     boolean lock2 = false;
     boolean state2 = false;
+    int POS = 0;
 
     @Override
     public void loop() {
@@ -42,8 +44,7 @@ public class RobotTeleOp extends OpMode {
         /* GAMEPAD 1 */
 
         //driveTrain
-        double nerf = 0.6;
-
+        double nerf = 1;
         if (gamepad1.b) {
             robot.frontLeftMotor.setPower(gamepad1.left_stick_y);
             robot.frontRightMotor.setPower(gamepad1.right_stick_y);
@@ -87,6 +88,17 @@ public class RobotTeleOp extends OpMode {
         } else if (!gamepad1.left_bumper && lock2 && !gamepad1.right_bumper) {
             lock2 = false;
         }
+//        if(gamepad1.left_trigger>.2){
+//            robot.intakeMotor.setPower(-1);
+//        }if(gamepad1.left_trigger<.2){
+//            robot.intakeMotor.setPower(0);
+//        }
+//        if(gamepad1.right_trigger>.2){
+//            robot.intakeMotor.setPower(1);
+//        }
+//        if(gamepad1.right_trigger<.2){
+//            robot.intakeMotor.setPower(0);
+//        }
 
         /* GAMEPAD 2 */
 
@@ -96,19 +108,25 @@ public class RobotTeleOp extends OpMode {
         } else {
             robot.carouselMotor.setPower(0);
         }
-        if(gamepad2.left_trigger>.2){
-            robot.jankerEject.setPosition(.2);
-        }else{
-            robot.jankerEject.setPosition(.8);
+        if(gamepad2.left_bumper){
+            robot.jankerEject.setPosition(.28);
+        }if(gamepad2.right_bumper){
+            robot.jankerEject.setPosition(.85);
+
         }
 
         //lift
-        robot.liftMotor.setPower(gamepad2.left_stick_y);
-
-        //cap
+        //robot.liftMotor.setPower(-gamepad2.left_stick_y);
+        POS-=gamepad2.left_stick_y*5;
+        robot.liftMotor.setTargetPosition(POS);
+        if(POS<0){
+            POS = 0;
+        }
+        robot.liftMotor.setPower(.8);
+        robot.liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        //robot.liftMotor.set
         robot.capMotor.setPower(gamepad2.right_stick_y * 0.6);
-
-
+        telemetry.addData("LITTLE SHIT",POS);
     }
 
     @Override

@@ -32,6 +32,7 @@ public class HardwareConfig {
 
     /* Initialize standard Hardware interfaces */
     public void init(com.qualcomm.robotcore.hardware.HardwareMap ahwMap) {
+
         // Save reference to Hardware map
         hwMap = ahwMap;
 
@@ -71,6 +72,8 @@ public class HardwareConfig {
         backRightMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         backLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
+        liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         liftMotor.setZeroPowerBehavior((DcMotor.ZeroPowerBehavior.BRAKE));
         // Set all motors to zero power
 
