@@ -105,13 +105,18 @@ public class RobotTeleOp extends OpMode {
         //carousel
         if (gamepad2.a == true) {
             robot.carouselMotor.setPower(0.3);
+            telemetry.addData("test", "test");
         } else {
             robot.carouselMotor.setPower(0);
         }
+
         if(gamepad2.left_bumper){
-            robot.jankerEject.setPosition(.28);
+            robot.jankerEject.setPosition(0.2);
+            telemetry.addData("test1", robot.jankerEject.getPosition());
+
         }if(gamepad2.right_bumper){
-            robot.jankerEject.setPosition(.85);
+            robot.jankerEject.setPosition(1);
+            telemetry.addData("test2", robot.jankerEject.getPosition());
 
         }
 

@@ -15,7 +15,9 @@ public class HardwareConfig {
     public DcMotor frontLeftMotor = null;
     public DcMotor frontRightMotor = null;
 
-    
+    public Servo jankerEject = null;
+
+
     //Expansion Hub Motor Ports 0 -3:
     public DcMotor backRightMotor = null;
     public DcMotor backLeftMotor = null;
@@ -37,7 +39,7 @@ public class HardwareConfig {
 
         // Define and Initialize Motors
 
-        jankerEject = hwMap.get(Servo.class,"dePooper");
+        jankerEject = hwMap.get(Servo.class,"dropServo");
 
         //Control Hub:
         capMotor = hwMap.get(DcMotor.class, "capMotor");
