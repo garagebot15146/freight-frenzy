@@ -108,12 +108,12 @@ public class RobotTeleOp extends OpMode {
         } else {
             robot.carouselMotor.setPower(0);
         }
-//        if(gamepad2.left_bumper){
-//            robot.capMotor.setPosition(.28);
-//        }if(gamepad2.right_bumper){
-//            robot.capMotor.setPosition(.85);
-//
-//        }
+        if(gamepad2.left_bumper){
+            robot.jankerEject.setPosition(.28);
+        }if(gamepad2.right_bumper){
+            robot.jankerEject.setPosition(.85);
+
+        }
 
         //lift
         //robot.liftMotor.setPower(-gamepad2.left_stick_y);
