@@ -37,6 +37,8 @@ public class HardwareConfig {
 
         // Define and Initialize Motors
 
+        jankerEject = hwMap.get(Servo.class,"dePooper");
+
         //Control Hub:
         capMotor = hwMap.get(DcMotor.class, "capMotor");
         liftMotor = hwMap.get(DcMotor.class, "liftMotor");
