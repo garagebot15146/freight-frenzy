@@ -92,6 +92,18 @@ public class RobotTeleOp extends OpMode {
             lock2 = false;
         }
 
+                if(gamepad1.left_trigger>.2){
+            robot.intakeMotor.setPower(-1);
+        }if(gamepad1.left_trigger<.2){
+            robot.intakeMotor.setPower(0);
+        }
+        if(gamepad1.right_trigger>.2){
+            robot.intakeMotor.setPower(1);
+        }
+        if(gamepad1.right_trigger<.2){
+            robot.intakeMotor.setPower(0);
+        }
+
         /* GAMEPAD 2 */
 
         //carousel
