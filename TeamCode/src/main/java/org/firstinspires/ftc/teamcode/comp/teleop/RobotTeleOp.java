@@ -38,6 +38,7 @@ public class RobotTeleOp extends OpMode {
     boolean state1 = false;
     boolean lock2 = false;
     boolean state2 = false;
+    int POS = 0;
 
     @Override
     public void loop() {
