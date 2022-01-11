@@ -15,7 +15,6 @@ public class RobotTeleOp extends OpMode {
     public void init() {
         telemetry.addData("Status", "initializing");
         robot.init(hardwareMap);
-        robot.liftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         telemetry.addData("Status", "motorized");
 
     }
@@ -44,17 +43,17 @@ public class RobotTeleOp extends OpMode {
         /* GAMEPAD 1 */
 
         //driveTrain
-        double nerf = 1;
+        double nerf = 0.8;
         if (gamepad1.b) {
-            robot.frontLeftMotor.setPower(gamepad1.left_stick_y);
-            robot.frontRightMotor.setPower(gamepad1.right_stick_y);
-            robot.backLeftMotor.setPower(gamepad1.left_stick_y);
-            robot.backRightMotor.setPower(gamepad1.right_stick_y);
+            robot.frontLeftMotor.setPower(-gamepad1.left_stick_y);
+            robot.frontRightMotor.setPower(-gamepad1.right_stick_y);
+            robot.backRightMotor.setPower(-gamepad1.right_stick_y);
+            robot.backLeftMotor.setPower(-gamepad1.left_stick_y);
         } else {
-            robot.frontLeftMotor.setPower(gamepad1.left_stick_y * nerf);
-            robot.frontRightMotor.setPower(gamepad1.right_stick_y * nerf);
-            robot.backLeftMotor.setPower(gamepad1.left_stick_y * nerf);
-            robot.backRightMotor.setPower(gamepad1.right_stick_y * nerf);
+            robot.frontLeftMotor.setPower(-gamepad1.left_stick_y * nerf);
+            robot.frontRightMotor.setPower(-gamepad1.right_stick_y * nerf);
+            robot.backRightMotor.setPower(-gamepad1.right_stick_y * nerf);
+            robot.backLeftMotor.setPower(-gamepad1.left_stick_y * nerf);
         }
 
         //intake
@@ -88,40 +87,28 @@ public class RobotTeleOp extends OpMode {
         } else if (!gamepad1.left_bumper && lock2 && !gamepad1.right_bumper) {
             lock2 = false;
         }
-//        if(gamepad1.left_trigger>.2){
-//            robot.intakeMotor.setPower(-1);
-//        }if(gamepad1.left_trigger<.2){
-//            robot.intakeMotor.setPower(0);
-//        }
-//        if(gamepad1.right_trigger>.2){
-//            robot.intakeMotor.setPower(1);
-//        }
-//        if(gamepad1.right_trigger<.2){
-//            robot.intakeMotor.setPower(0);
-//        }
 
         /* GAMEPAD 2 */
 
         //carousel
         if (gamepad2.a == true) {
             robot.carouselMotor.setPower(0.3);
-            telemetry.addData("test", "test");
         } else {
             robot.carouselMotor.setPower(0);
         }
 
         if(gamepad2.left_bumper){
-            robot.jankerEject.setPosition(0.2);
-            telemetry.addData("test1", robot.jankerEject.getPosition());
+            robot.dropServo.setPosition(0);
+            telemetry.addData("pos 0", "boop");
+
 
         }if(gamepad2.right_bumper){
-            robot.jankerEject.setPosition(1);
-            telemetry.addData("test2", robot.jankerEject.getPosition());
+            robot.dropServo.setPosition(1);
+            telemetry.addData("pos 1", "wooo");
 
         }
 
         //lift
-        //robot.liftMotor.setPower(-gamepad2.left_stick_y);
         POS-=gamepad2.left_stick_y*5;
         robot.liftMotor.setTargetPosition(POS);
         if(POS<0){
@@ -129,7 +116,8 @@ public class RobotTeleOp extends OpMode {
         }
         robot.liftMotor.setPower(.8);
         robot.liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        //robot.liftMotor.set
+
+        //cap
         robot.capMotor.setPower(gamepad2.right_stick_y * 0.6);
     }
 

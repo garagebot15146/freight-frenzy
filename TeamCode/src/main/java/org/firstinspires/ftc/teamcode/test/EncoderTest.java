@@ -43,10 +43,10 @@ public class EncoderTest extends OpMode {
 
     @Override
     public void loop() {
-        robot.frontLeftMotor.setPower(gamepad1.left_stick_y);
-        robot.frontRightMotor.setPower(gamepad1.right_stick_y);
-        robot.backLeftMotor.setPower(gamepad1.left_stick_y);
-        robot.backRightMotor.setPower(gamepad1.right_stick_y);
+        robot.frontLeftMotor.setPower(-gamepad1.left_stick_y);
+        robot.frontRightMotor.setPower(-gamepad1.right_stick_y);
+        robot.backRightMotor.setPower(-gamepad1.right_stick_y);
+        robot.backLeftMotor.setPower(-gamepad1.left_stick_y);
         telemetry.addData("Encoder Left Front:", robot.frontLeftMotor.getCurrentPosition());
         telemetry.addData("Encoder Right Front:", robot.frontRightMotor.getCurrentPosition());
         telemetry.addData("Encoder Left Back:", robot.backLeftMotor.getCurrentPosition());

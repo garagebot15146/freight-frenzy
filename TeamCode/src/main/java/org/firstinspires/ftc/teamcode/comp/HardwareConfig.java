@@ -9,16 +9,21 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 public class HardwareConfig {
     /* In Order of the Ports */
 
-    //Control Hub Motor Ports 0 - 3:
+    //Control Hub
+
+    // Motor Ports 0 - 3:
     public DcMotor capMotor = null;
     public DcMotor liftMotor = null;
     public DcMotor frontLeftMotor = null;
     public DcMotor frontRightMotor = null;
 
-    public Servo jankerEject = null;
+    //Servo Ports 0-3
+    public Servo dropServo = null;
 
 
-    //Expansion Hub Motor Ports 0 -3:
+    //Expansion Hub
+
+    // Motor Ports 0 -3:
     public DcMotor backRightMotor = null;
     public DcMotor backLeftMotor = null;
     public DcMotor carouselMotor = null;
@@ -39,15 +44,20 @@ public class HardwareConfig {
 
         // Define and Initialize Motors
 
-        jankerEject = hwMap.get(Servo.class,"dropServo");
-
         //Control Hub:
+
+        // Motor Ports 0 - 3:
         capMotor = hwMap.get(DcMotor.class, "capMotor");
         liftMotor = hwMap.get(DcMotor.class, "liftMotor");
         frontLeftMotor = hwMap.get(DcMotor.class, "leftFront");
         frontRightMotor = hwMap.get(DcMotor.class, "rightFront");
 
+        //Servo Ports 0-3
+        dropServo = hwMap.get(Servo.class,"dropServo");
+
         //Expansion Hub:
+
+        // Motor Ports 0 - 3:
         backRightMotor = hwMap.get(DcMotor.class, "rightRear");
         backLeftMotor = hwMap.get(DcMotor.class, "leftRear");
         carouselMotor = hwMap.get(DcMotor.class, "carouselMotor");
@@ -59,12 +69,12 @@ public class HardwareConfig {
         //Control Hub:
         capMotor.setDirection(DcMotor.Direction.FORWARD);
         liftMotor.setDirection(DcMotor.Direction.FORWARD);
-        frontLeftMotor.setDirection(DcMotor.Direction.REVERSE);
-        frontRightMotor.setDirection(DcMotor.Direction.REVERSE);
+        frontLeftMotor.setDirection(DcMotor.Direction.FORWARD);
+        frontRightMotor.setDirection(DcMotor.Direction.FORWARD);
 
         //Expansion Hub:
-        backRightMotor.setDirection(DcMotor.Direction.FORWARD);
-        backLeftMotor.setDirection(DcMotor.Direction.FORWARD);
+        backRightMotor.setDirection(DcMotor.Direction.REVERSE);
+        backLeftMotor.setDirection(DcMotor.Direction.REVERSE);
         carouselMotor.setDirection(DcMotor.Direction.REVERSE);
         intakeMotor.setDirection(DcMotor.Direction.FORWARD);
 
@@ -75,9 +85,7 @@ public class HardwareConfig {
         backLeftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
         liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         liftMotor.setZeroPowerBehavior((DcMotor.ZeroPowerBehavior.BRAKE));
-        // Set all motors to zero power
 
         //Control Hub
         capMotor.setPower(0);
