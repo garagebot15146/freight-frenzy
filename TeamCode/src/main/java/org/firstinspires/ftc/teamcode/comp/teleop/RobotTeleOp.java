@@ -4,12 +4,12 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
-import org.firstinspires.ftc.teamcode.comp.HardwareConfig;
+import org.firstinspires.ftc.teamcode.comp.HWMapTeleOp;
 
 @TeleOp(name = "RobotTeleOp", group = "Iterative Opmode")
 public class RobotTeleOp extends OpMode {
 
-    HardwareConfig robot = new HardwareConfig();
+    HWMapTeleOp robot = new HWMapTeleOp();
 
     int POS = 0;
 

@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-public class HardwareConfig {
+public class HWMapTeleOp {
     /* In Order of the Ports */
 
     //Control Hub
@@ -33,7 +33,7 @@ public class HardwareConfig {
     com.qualcomm.robotcore.hardware.HardwareMap hwMap = null;
 
     /* Constructor */
-    public HardwareConfig() {
+    public HWMapTeleOp() {
 
     }
 
