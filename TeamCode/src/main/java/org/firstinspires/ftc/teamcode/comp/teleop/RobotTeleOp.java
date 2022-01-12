@@ -45,7 +45,7 @@ public class RobotTeleOp extends OpMode {
         /* GAMEPAD 1 */
 
         //driveTrain
-        double nerf = 0.8;
+        double nerf = 0.6;
         if (gamepad1.b) {
             robot.frontLeftMotor.setPower(-gamepad1.left_stick_y);
             robot.frontRightMotor.setPower(-gamepad1.right_stick_y);
