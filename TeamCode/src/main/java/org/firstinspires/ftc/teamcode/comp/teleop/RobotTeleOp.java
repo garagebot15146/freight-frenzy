@@ -11,10 +11,13 @@ public class RobotTeleOp extends OpMode {
 
     HardwareConfig robot = new HardwareConfig();
 
+    int POS = 0;
+
     @Override
     public void init() {
         telemetry.addData("Status", "initializing");
         robot.init(hardwareMap);
+        robot.liftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         telemetry.addData("Status", "motorized");
 
     }
@@ -35,7 +38,6 @@ public class RobotTeleOp extends OpMode {
     boolean state1 = false;
     boolean lock2 = false;
     boolean state2 = false;
-    int POS = 0;
 
     @Override
     public void loop() {
