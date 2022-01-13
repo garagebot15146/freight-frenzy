@@ -25,7 +25,7 @@ import org.openftc.easyopencv.OpenCvWebcam;
  * the sample regions over the first 3 stones.
  */
 @TeleOp
-@Disabled
+//@Disabled
 public class DetectTest extends LinearOpMode
 {
     OpenCvWebcam webcam;
