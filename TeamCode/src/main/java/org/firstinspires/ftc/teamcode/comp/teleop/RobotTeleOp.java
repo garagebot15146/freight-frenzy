@@ -95,25 +95,28 @@ public class RobotTeleOp extends OpMode {
         //carousel
         if (gamepad2.a == true) {
             robot.carouselMotor.setPower(0.3);
+        } else if (gamepad2.b == true) {
+            robot.carouselMotor.setPower(-0.3);
         } else {
             robot.carouselMotor.setPower(0);
         }
 
-        if(gamepad2.left_bumper){
+        if (gamepad2.left_bumper) {
             robot.dropServo.setPosition(0);
             telemetry.addData("pos 0", "boop");
 
 
-        }if(gamepad2.right_bumper){
+        }
+        if (gamepad2.right_bumper) {
             robot.dropServo.setPosition(1);
             telemetry.addData("pos 1", "wooo");
 
         }
 
         //lift
-        POS-=gamepad2.left_stick_y*5;
+        POS -= gamepad2.left_stick_y * 5;
         robot.liftMotor.setTargetPosition(POS);
-        if(POS<0){
+        if (POS < 0) {
             POS = 0;
         }
         robot.liftMotor.setPower(.8);

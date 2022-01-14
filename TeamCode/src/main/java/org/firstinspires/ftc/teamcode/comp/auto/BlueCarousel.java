@@ -197,15 +197,27 @@ public class BlueCarousel extends LinearOpMode {
 
         robot.liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
+        telemetry.addData("lift", "works");
+
     }
 
     public void deposit(){
         robot.dropServo.setPosition(0);
-        sleep(1000);
+        pause(1);
         robot.dropServo.setPosition(1);
-        sleep(1000);
+        pause(1.4);
+        telemetry.addData("deposit", "works");
+
     }
 
+    public void pause(double seconds){
+        runtime.reset();
+        while (runtime.seconds() < seconds) {
+            telemetry.addData("Path", runtime.seconds());
+            telemetry.update();
+        }
+
+    }
     // Pipeline class
     public static class SkystoneDeterminationPipeline extends OpenCvPipeline
     {
