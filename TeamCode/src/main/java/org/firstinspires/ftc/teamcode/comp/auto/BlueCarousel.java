@@ -154,7 +154,7 @@ public class BlueCarousel extends LinearOpMode {
             case "LEFT":
                 drive.followTrajectory(trajectoryA1);
                 drive.turn(Math.toRadians(100));
-                liftUp(0.7, 15, 5);
+                liftUp(1, 15);
                 drive.followTrajectory(trajectoryA2);
                 deposit();
                 telemetry.addData("Path Left", "Complete");
@@ -178,26 +178,25 @@ public class BlueCarousel extends LinearOpMode {
 
     }
 
-    public void liftUp(double speed, double inches, double timeoutS) {
-        int newTarget;
-
+    public void liftUp(double power, double inches) {
         robot.liftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        if (opModeIsActive()) {
 
-            newTarget = robot.liftMotor.getCurrentPosition() + (int)(inches * 200);
-            robot.liftMotor.setTargetPosition(newTarget);
-            robot.liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            runtime.reset();
-            robot.liftMotor.setPower(Math.abs(speed));
-            while (opModeIsActive() && (runtime.seconds() < timeoutS) && (robot.liftMotor.isBusy())) {
-                telemetry.addData("Path1", newTarget);
-                telemetry.addData("Path2", robot.liftMotor.getCurrentPosition());
-                telemetry.update();
-            }
+        int newTarget = robot.liftMotor.getCurrentPosition() + (int)(inches * 200);
 
-            robot.liftMotor.setPower(0);
+        robot.liftMotor.setTargetPosition(newTarget);
+
+        robot.liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        robot.liftMotor.setPower(power);
+
+        while (robot.liftMotor.isBusy()) {
+
         }
+
+        robot.liftMotor.setPower(0);
+
+        robot.liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
     }
 
     public void deposit(){
