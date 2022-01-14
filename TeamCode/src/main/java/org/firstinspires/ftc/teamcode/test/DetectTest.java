@@ -15,7 +15,6 @@ import org.opencv.imgproc.Imgproc;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
-import org.openftc.easyopencv.OpenCvInternalCamera;
 import org.openftc.easyopencv.OpenCvPipeline;
 import org.openftc.easyopencv.OpenCvWebcam;
 
@@ -95,9 +94,9 @@ public class DetectTest extends LinearOpMode
         /*
          * The core values which define the location and size of the sample regions
          */
-        static final Point REGION1_TOPLEFT_ANCHOR_POINT = new Point(320,410);
-        static final Point REGION2_TOPLEFT_ANCHOR_POINT = new Point(700,415);
-        static final Point REGION3_TOPLEFT_ANCHOR_POINT = new Point(1150,450);
+        static final Point REGION1_TOPLEFT_ANCHOR_POINT = new Point(180,290);
+        static final Point REGION2_TOPLEFT_ANCHOR_POINT = new Point(590,308);
+        static final Point REGION3_TOPLEFT_ANCHOR_POINT = new Point(973,308);
         static final int REGION_WIDTH = 50;
         static final int REGION_HEIGHT = 50;
 
