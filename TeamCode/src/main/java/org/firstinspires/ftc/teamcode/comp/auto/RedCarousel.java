@@ -25,9 +25,9 @@ import org.openftc.easyopencv.OpenCvPipeline;
 import org.firstinspires.ftc.teamcode.comp.HWMapAuto;
 import org.openftc.easyopencv.OpenCvWebcam;
 
-@Autonomous(name = "Blue Carousel", group = "Autonomous")
+@Autonomous(name = "Red Carousel", group = "Autonomous")
 //@Disabled
-public class BlueCarousel extends LinearOpMode {
+public class RedCarousel extends LinearOpMode {
 
     //Runtime
     private ElapsedTime runtime = new ElapsedTime();
@@ -54,7 +54,7 @@ public class BlueCarousel extends LinearOpMode {
         robot.init(hardwareMap);
 
         //Set starting position
-        Pose2d startPose = new Pose2d(-39, 61, Math.toRadians(270));
+        Pose2d startPose = new Pose2d(-39, -61, Math.toRadians(90));
         drive.setPoseEstimate(startPose);
 
         // Camera Init
@@ -79,35 +79,19 @@ public class BlueCarousel extends LinearOpMode {
 //
 ////CASE A INIT START
         Trajectory trajectoryA1 = drive.trajectoryBuilder(startPose)
-                .strafeTo(new Vector2d(-39, 40))
+                .strafeTo(new Vector2d(-39, -40))
                 .build();
         Trajectory trajectoryA2 = drive.trajectoryBuilder(trajectoryA1.end().plus(new Pose2d(0, 0, Math.toRadians(90))), false)
-                .strafeTo(new Vector2d(-32, 40))
-                .addDisplacementMarker(4, () -> {
-                    robot.dropServo.setPosition(0);
-                })
-                .addDisplacementMarker(5.5, () -> {
-                    robot.dropServo.setPosition(1);
-                })
-                .build();
-        Trajectory trajectoryA3 = drive.trajectoryBuilder(trajectoryA2.end())
-                .strafeTo(new Vector2d(-37, 40))
-                .build();
-        Trajectory trajectoryA4 = drive.trajectoryBuilder(trajectoryA3.end())
-                .strafeTo(new Vector2d(-61, 40))
-                .build();
-
-        Trajectory trajectoryA5 = drive.trajectoryBuilder(trajectoryA4.end())
-                .back(5)
+                .strafeTo(new Vector2d(-29, -40))
                 .build();
 ////CASE A INIT END
-
+//
 ////CASE B INIT START
         Trajectory trajectoryB1 = drive.trajectoryBuilder(startPose)
                 .strafeTo(new Vector2d(-39, 40))
                 .build();
         Trajectory trajectoryB2 = drive.trajectoryBuilder(trajectoryB1.end().plus(new Pose2d(0, 0, Math.toRadians(90))), false)
-                .strafeTo(new Vector2d(-27, 40))
+                .strafeTo(new Vector2d(-29, 40))
                 .build();
 ////CASE B INIT END
 
@@ -138,24 +122,17 @@ public class BlueCarousel extends LinearOpMode {
         switch (route) {
             case "LEFT":
                 drive.followTrajectory(trajectoryA1);
-                drive.turn(Math.toRadians(104));
-//                liftUp(1, 15, 6);
+                drive.turn(Math.toRadians(100));
+                liftUp(1, 15);
                 drive.followTrajectory(trajectoryA2);
-//                pause(1);
-//                deposit();
-//                pause(1);
-                drive.followTrajectory(trajectoryA3);
-                drive.turn(Math.toRadians(-73));
-                drive.followTrajectory(trajectoryA4);
-                encoderDrive(0.1, -3.5, -3.5, 3);
-                duckBlue(0.2, 3);
+                deposit();
                 telemetry.addData("Path Left", "Complete");
                 telemetry.update();
                 break;
             case "CENTER":
                 drive.followTrajectory(trajectoryB1);
                 drive.turn(Math.toRadians(100));
-                liftUp(1, 6, 2);
+                liftUp(1, 10);
                 drive.followTrajectory(trajectoryB2);
                 deposit();
                 telemetry.addData("Path Center", "Complete");
@@ -164,7 +141,7 @@ public class BlueCarousel extends LinearOpMode {
             case "RIGHT":
                 drive.followTrajectory(trajectoryC1);
                 drive.turn(Math.toRadians(100));
-                liftUp(1, 6, 2);
+                liftUp(1, 10);
                 drive.followTrajectory(trajectoryC2);
                 deposit();
                 telemetry.addData("Path Right", "Complete");
@@ -173,7 +150,7 @@ public class BlueCarousel extends LinearOpMode {
             default:
                 drive.followTrajectory(trajectoryC1);
                 drive.turn(Math.toRadians(100));
-                liftUp(1, 6, 2);
+                liftUp(1, 10);
                 drive.followTrajectory(trajectoryC2);
                 deposit();
                 telemetry.addData("Path Default", "Complete");
@@ -182,32 +159,32 @@ public class BlueCarousel extends LinearOpMode {
 
     }
 
-    public void liftUp(double power, int inches, double timeoutS) {
-//        robot.liftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    public void liftUp(double power, double inches) {
+        robot.liftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        int newTarget = inches * 200;
+        int newTarget = robot.liftMotor.getCurrentPosition() + (int)(inches * 200);
 
         robot.liftMotor.setTargetPosition(newTarget);
-        runtime.reset();
-
-        robot.liftMotor.setPower(power);
 
         robot.liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
+        robot.liftMotor.setPower(power);
 
-        while (opModeIsActive() && robot.liftMotor.isBusy() && (runtime.seconds() < timeoutS)) {
+        while (opModeIsActive() && robot.liftMotor.isBusy()) {
 
         }
 
         robot.liftMotor.setPower(0);
+
+        robot.liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
     }
 
     public void deposit(){
         robot.dropServo.setPosition(0);
         pause(1);
         robot.dropServo.setPosition(1);
-        telemetry.addData("Servo", "Worked");
         pause(1.4);
+
     }
 
     public void pause(double seconds){
@@ -216,65 +193,6 @@ public class BlueCarousel extends LinearOpMode {
         }
 
     }
-
-    public void duckBlue(double power, double seconds){
-        runtime.reset();
-        robot.carouselMotor.setPower(-power);
-        while (opModeIsActive() && runtime.seconds() < seconds) {
-        }
-        robot.carouselMotor.setPower(0);
-    }
-    public void encoderDrive(double speed, double leftInches, double rightInches, double timeoutS) {
-        int newLeftFrontTarget;
-        int newLeftRearTarget;
-        int newRightFrontTarget;
-        int newRightRearTarget;
-
-
-        // Ensure that the opmode is still active
-        if (opModeIsActive()) {
-
-            // Determine new target position, and pass to motor controller
-            newLeftFrontTarget = robot.frontLeftMotor.getCurrentPosition() + (int)(leftInches * 50);
-            newLeftRearTarget = robot.backLeftMotor.getCurrentPosition() + (int)(leftInches * 200);
-            newRightFrontTarget = robot.frontRightMotor.getCurrentPosition() + (int)(rightInches * 200);
-            newRightRearTarget = robot.backRightMotor.getCurrentPosition() + (int)(rightInches * 200);
-
-            robot.frontLeftMotor.setTargetPosition(newLeftFrontTarget);
-            robot.backLeftMotor.setTargetPosition(newLeftRearTarget);
-            robot.frontRightMotor.setTargetPosition(newRightFrontTarget);
-            robot.backRightMotor.setTargetPosition(newRightRearTarget);
-
-            // Turn On RUN_TO_POSITION
-            robot.frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            robot.backLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            robot.frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            robot.backRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-            // reset the timeout time and start motion.
-            runtime.reset();
-            robot.frontLeftMotor.setPower(speed);
-            robot.backLeftMotor.setPower(speed);
-            robot.frontRightMotor.setPower(speed);
-            robot.backRightMotor.setPower(speed);
-
-            while (opModeIsActive() && (runtime.seconds() < timeoutS) && (robot.frontLeftMotor.isBusy() && robot.backLeftMotor.isBusy() && robot.frontRightMotor.isBusy() && robot.backRightMotor.isBusy())) {
-            }
-
-            // Stop all motion;
-            robot.frontLeftMotor.setPower(0);
-            robot.backLeftMotor.setPower(0);
-            robot.frontRightMotor.setPower(0);
-            robot.backRightMotor.setPower(0);
-
-            // Turn off RUN_TO_POSITION
-            robot.frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            robot.backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            robot.frontRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            robot.backRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        }
-    }
-
     // Pipeline class
     public static class SkystoneDeterminationPipeline extends OpenCvPipeline
     {
