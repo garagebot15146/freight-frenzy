@@ -137,10 +137,11 @@ public class BlueCarousel extends LinearOpMode {
                 drive.followTrajectory(trajectoryA3);
                 drive.turn(Math.toRadians(-70));
                 drive.followTrajectory(trajectoryA4);
-                encoderDrive(0.1, -2.2, -2.2, 3);
+                encoderDrive(0.1, -3.1, -3.1, 3);
                 duckBlue(3);
-                drive.turn(Math.toRadians(-50));
-                encoderDrive(0.2, 5, 5, 3);
+                drive.turn(Math.toRadians(-30));
+                pause(1);
+                encoderDrive(0.2, 6, 6, 3);
                 liftReset(1);
 
                 telemetry.addData("Path Left", "Complete");

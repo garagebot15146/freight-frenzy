@@ -82,7 +82,7 @@ public class RedCarousel extends LinearOpMode {
                 .strafeTo(new Vector2d(-39, -40))
                 .build();
         Trajectory trajectoryA2 = drive.trajectoryBuilder(trajectoryA1.end().plus(new Pose2d(0, 0, Math.toRadians(90))), false)
-                .strafeTo(new Vector2d(-32, -40))
+                .strafeTo(new Vector2d(-32.5, -40))
                 .build();
         Trajectory trajectoryA3 = drive.trajectoryBuilder(trajectoryA2.end())
                 .strafeTo(new Vector2d(-37.5, -40))
@@ -137,7 +137,7 @@ public class RedCarousel extends LinearOpMode {
                 drive.followTrajectory(trajectoryA3);
                 drive.turn(Math.toRadians(70));
                 drive.followTrajectory(trajectoryA4);
-                encoderDrive(0.1, -2.2, -2.2, 3);
+                encoderDrive(0.1, -3.2, -3.2, 3);
                 duckRed(3);
                 drive.turn(Math.toRadians(50));
                 encoderDrive(0.2, 5, 5, 3);
