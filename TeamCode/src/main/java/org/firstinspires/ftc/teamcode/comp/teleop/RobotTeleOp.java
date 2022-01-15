@@ -94,9 +94,9 @@ public class RobotTeleOp extends OpMode {
 
         //carousel
         if (gamepad2.a == true) {
-            robot.carouselMotor.setPower(0.3);
+            robot.carouselMotor.setPower(0.2);
         } else if (gamepad2.b == true) {
-            robot.carouselMotor.setPower(-0.3);
+            robot.carouselMotor.setPower(-0.2);
         } else {
             robot.carouselMotor.setPower(0);
         }

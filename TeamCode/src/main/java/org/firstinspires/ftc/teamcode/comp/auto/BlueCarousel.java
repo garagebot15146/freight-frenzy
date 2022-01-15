@@ -139,11 +139,11 @@ public class BlueCarousel extends LinearOpMode {
             case "LEFT":
                 drive.followTrajectory(trajectoryA1);
                 drive.turn(Math.toRadians(104));
-//                liftUp(1, 15, 6);
+                liftUp(1, 15, 6);
                 drive.followTrajectory(trajectoryA2);
-//                pause(1);
-//                deposit();
-//                pause(1);
+                pause(1);
+                deposit();
+                pause(1);
                 drive.followTrajectory(trajectoryA3);
                 drive.turn(Math.toRadians(-73));
                 drive.followTrajectory(trajectoryA4);
