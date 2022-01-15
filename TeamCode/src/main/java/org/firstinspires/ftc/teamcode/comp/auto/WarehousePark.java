@@ -31,7 +31,7 @@ public class WarehousePark extends LinearOpMode {
         if (isStopRequested()) return;
         telemetry.update();
 
-        encoderDrive(0.2, 15, 15, 5);
+        encoderDrive(0.2, -15, -15, 5);
     }
 
 
@@ -77,6 +77,7 @@ public class WarehousePark extends LinearOpMode {
             robot.backRightMotor.setPower(speed);
 
             while (opModeIsActive() && (runtime.seconds() < timeoutS) && (robot.frontLeftMotor.isBusy() && robot.backLeftMotor.isBusy() && robot.frontRightMotor.isBusy() && robot.backRightMotor.isBusy())) {
+                robot.intakeMotor.setPower(-1);
             }
 
             // Stop all motion;
