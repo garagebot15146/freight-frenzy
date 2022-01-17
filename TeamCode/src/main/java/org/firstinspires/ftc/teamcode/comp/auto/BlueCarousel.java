@@ -77,7 +77,7 @@ public class BlueCarousel extends LinearOpMode {
 //PATH CONSTANTS
 
 //
-////CASE A INIT START
+////CASE Left INIT START
         Trajectory trajectoryA1 = drive.trajectoryBuilder(startPose)
                 .strafeTo(new Vector2d(-39, 40))
                 .build();
@@ -90,30 +90,31 @@ public class BlueCarousel extends LinearOpMode {
         Trajectory trajectoryA4 = drive.trajectoryBuilder(trajectoryA3.end())
                 .strafeTo(new Vector2d(-62, 40))
                 .build();
-////CASE A INIT END
+////CASE Left INIT END
 
-////CASE B INIT START
+////CASE Center INIT START
         Trajectory trajectoryB1 = drive.trajectoryBuilder(startPose)
                 .strafeTo(new Vector2d(-39, 56))
                 .build();
         Trajectory trajectoryB2 = drive.trajectoryBuilder(trajectoryB1.end())
                 .strafeTo(new Vector2d(-39, 40))
                 .build();
-////CASE B INIT END
+////CASE Center INIT END
 
-//CASE C INIT START
+//CASE Right INIT START
         Trajectory trajectoryC1 = drive.trajectoryBuilder(startPose)
                 .strafeTo(new Vector2d(-39, 56))
                 .build();
         Trajectory trajectoryC2 = drive.trajectoryBuilder(trajectoryC1.end())
                 .strafeTo(new Vector2d(-39, 41))
                 .build();
-//CASE C INIT END
+//CASE Right INIT END
 
 
         telemetry.addData("Status", "Pipeline Initializing");
         telemetry.update();
 
+        //Start Moving
         waitForStart();
         if (isStopRequested()) return;
         telemetry.update();
