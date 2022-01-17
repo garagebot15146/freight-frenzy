@@ -45,18 +45,35 @@ public class RobotTeleOp extends OpMode {
         /* GAMEPAD 1 */
 
         //driveTrain
-        double nerf = 0.6;
-        if (gamepad1.b) {
-            robot.frontLeftMotor.setPower(-gamepad1.left_stick_y);
-            robot.frontRightMotor.setPower(-gamepad1.right_stick_y);
-            robot.backRightMotor.setPower(-gamepad1.right_stick_y);
-            robot.backLeftMotor.setPower(-gamepad1.left_stick_y);
-        } else {
-            robot.frontLeftMotor.setPower(-gamepad1.left_stick_y * nerf);
-            robot.frontRightMotor.setPower(-gamepad1.right_stick_y * nerf);
-            robot.backRightMotor.setPower(-gamepad1.right_stick_y * nerf);
-            robot.backLeftMotor.setPower(-gamepad1.left_stick_y * nerf);
-        }
+//        double nerf = 0.6;
+//        if (gamepad1.b) {
+//            robot.frontLeftMotor.setPower(-gamepad1.left_stick_y);
+//            robot.frontRightMotor.setPower(-gamepad1.right_stick_y);
+//            robot.backRightMotor.setPower(-gamepad1.right_stick_y);
+//            robot.backLeftMotor.setPower(-gamepad1.left_stick_y);
+//        } else {
+//            robot.frontLeftMotor.setPower(-gamepad1.left_stick_y * nerf);
+//            robot.frontRightMotor.setPower(-gamepad1.right_stick_y * nerf);
+//            robot.backRightMotor.setPower(-gamepad1.right_stick_y * nerf);
+//            robot.backLeftMotor.setPower(-gamepad1.left_stick_y * nerf);
+//        }
+
+        //DRIVE
+        double forward = -gamepad1.left_stick_y;
+        double side = gamepad1.left_stick_x; //Positive means right
+        double turn = gamepad1.right_stick_x; //Positive means turn right
+
+
+        double leftFrontPower = (forward + side + turn);
+        double leftBackPower = (forward - side + turn);
+        double rightFrontPower = (forward - side - turn);
+        double rightBackPower = (forward + side - turn);
+
+        // Send power to wheel motors
+        robot.frontLeftMotor.setPower(leftFrontPower);
+        robot.frontRightMotor.setPower(rightFrontPower);
+        robot.backLeftMotor.setPower(leftBackPower);
+        robot.backRightMotor.setPower(rightBackPower);
 
         //intake
         if (gamepad1.right_bumper && !lock1 && !gamepad1.left_bumper) {
