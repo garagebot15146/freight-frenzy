@@ -18,17 +18,17 @@ public class EncoderTest extends OpMode {
         telemetry.addData("Status", "initializing");
         robot.init(hardwareMap);
 
-        robot.frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.leftFrontMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.rightFrontMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.leftBackMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.rightBackMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.liftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
 
-        robot.frontLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        robot.frontRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        robot.backLeftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        robot.backRightMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.leftFrontMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.rightFrontMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.leftBackMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.rightBackMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         telemetry.addData("Status", "motorized");
 
@@ -46,15 +46,15 @@ public class EncoderTest extends OpMode {
 
     @Override
     public void loop() {
-        robot.frontLeftMotor.setPower(-gamepad1.left_stick_y);
-        robot.frontRightMotor.setPower(-gamepad1.right_stick_y);
-        robot.backRightMotor.setPower(-gamepad1.right_stick_y);
-        robot.backLeftMotor.setPower(-gamepad1.left_stick_y);
+        robot.leftFrontMotor.setPower(-gamepad1.left_stick_y);
+        robot.rightFrontMotor.setPower(-gamepad1.right_stick_y);
+        robot.rightBackMotor.setPower(-gamepad1.right_stick_y);
+        robot.leftBackMotor.setPower(-gamepad1.left_stick_y);
         robot.liftMotor.setPower(-gamepad2.left_stick_y);;
-        telemetry.addData("Encoder Left Front:", robot.frontLeftMotor.getCurrentPosition());
-        telemetry.addData("Encoder Right Front:", robot.frontRightMotor.getCurrentPosition());
-        telemetry.addData("Encoder Left Back:", robot.backLeftMotor.getCurrentPosition());
-        telemetry.addData("Encoder Right Back:", robot.backRightMotor.getCurrentPosition());
+        telemetry.addData("Encoder Left Front:", robot.leftFrontMotor.getCurrentPosition());
+        telemetry.addData("Encoder Right Front:", robot.rightFrontMotor.getCurrentPosition());
+        telemetry.addData("Encoder Left Back:", robot.leftBackMotor.getCurrentPosition());
+        telemetry.addData("Encoder Right Back:", robot.rightBackMotor.getCurrentPosition());
         telemetry.addData("Encoder Lift:", robot.liftMotor.getCurrentPosition());
 
     }
