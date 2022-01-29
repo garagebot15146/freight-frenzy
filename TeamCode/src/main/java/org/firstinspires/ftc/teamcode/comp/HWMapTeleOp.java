@@ -22,9 +22,9 @@ public class HWMapTeleOp {
     // Motor Ports 0 - 3:
     public DcMotor intakeMotor = null;
     public DcMotor liftMotor = null;
+    public DcMotor carouselMotor = null;
 
 //    public DcMotor capMotor = null;
-//    public DcMotor carouselMotor = null;
 
 
     //Servo Ports 0-3
@@ -51,8 +51,9 @@ public class HWMapTeleOp {
         leftFrontMotor = hwMap.get(DcMotor.class, "leftFront");
         rightFrontMotor = hwMap.get(DcMotor.class, "rightFront");
         rightBackMotor = hwMap.get(DcMotor.class, "rightBack");
+        carouselMotor = hwMap.get(DcMotor.class, "carouselMotor");
+
         //        capMotor = hwMap.get(DcMotor.class, "capMotor");
-        //        carouselMotor = hwMap.get(DcMotor.class, "carouselMotor");
         //        dropServo = hwMap.get(Servo.class,"dropServo");
 
 
@@ -63,8 +64,8 @@ public class HWMapTeleOp {
         rightBackMotor.setDirection(DcMotor.Direction.FORWARD);
         intakeMotor.setDirection(DcMotor.Direction.FORWARD);
         liftMotor.setDirection(DcMotor.Direction.FORWARD);
+        carouselMotor.setDirection(DcMotor.Direction.REVERSE);
         //        capMotor.setDirection(DcMotor.Direction.FORWARD);
-        //        carouselMotor.setDirection(DcMotor.Direction.REVERSE);
 
         //Set Behavior
 //        leftBackMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
@@ -81,8 +82,8 @@ public class HWMapTeleOp {
         rightBackMotor.setPower(0);
         liftMotor.setPower(0);
         intakeMotor.setPower(0);
+        carouselMotor.setPower(0);
         //        capMotor.setPower(0);
-        //        carouselMotor.setPower(0);
 
     }
 }
