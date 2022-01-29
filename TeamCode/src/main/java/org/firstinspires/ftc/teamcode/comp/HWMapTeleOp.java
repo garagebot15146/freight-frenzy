@@ -17,6 +17,9 @@ public class HWMapTeleOp {
     public DcMotor rightFrontMotor = null;
     public DcMotor rightBackMotor = null;
 
+    //Servo Ports 0-3
+    public Servo dropServo = null;
+
     //Expansion Hub
 
     // Motor Ports 0 - 3:
@@ -27,8 +30,6 @@ public class HWMapTeleOp {
 //    public DcMotor capMotor = null;
 
 
-    //Servo Ports 0-3
-//    public Servo dropServo = null;
 
     /* Hardware Map Object */
     com.qualcomm.robotcore.hardware.HardwareMap hwMap = null;
@@ -52,14 +53,13 @@ public class HWMapTeleOp {
         rightFrontMotor = hwMap.get(DcMotor.class, "rightFront");
         rightBackMotor = hwMap.get(DcMotor.class, "rightBack");
         carouselMotor = hwMap.get(DcMotor.class, "carouselMotor");
-
+        dropServo = hwMap.get(Servo.class,"dropServo");
         //        capMotor = hwMap.get(DcMotor.class, "capMotor");
-        //        dropServo = hwMap.get(Servo.class,"dropServo");
 
 
         //Set Directions
-        leftBackMotor.setDirection(DcMotor.Direction.REVERSE);
-        leftFrontMotor.setDirection(DcMotor.Direction.REVERSE);
+        leftBackMotor.setDirection(DcMotor.Direction.FORWARD);
+        leftFrontMotor.setDirection(DcMotor.Direction.FORWARD);
         rightFrontMotor.setDirection(DcMotor.Direction.FORWARD);
         rightBackMotor.setDirection(DcMotor.Direction.FORWARD);
         intakeMotor.setDirection(DcMotor.Direction.FORWARD);

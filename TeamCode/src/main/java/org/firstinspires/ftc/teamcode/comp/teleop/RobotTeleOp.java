@@ -108,26 +108,27 @@ public class RobotTeleOp extends OpMode {
             robot.carouselMotor.setPower(0);
         }
 
-//        if (gamepad2.left_bumper) {
-//            robot.dropServo.setPosition(0);
-//            telemetry.addData("pos 0", "boop");
-//
-//
-//        }
-//        if (gamepad2.right_bumper) {
-//            robot.dropServo.setPosition(1);
-//            telemetry.addData("pos 1", "wooo");
-//
-//        }
+        if (gamepad2.left_bumper) {
+            robot.dropServo.setPosition(0.3);
+            telemetry.addData("pos 0", "boop");
+
+
+        }
+        if (gamepad2.right_bumper) {
+            robot.dropServo.setPosition(0.75);
+            telemetry.addData("pos 1", "wooo");
+
+        }
 
         //lift
-        POS -= gamepad2.left_stick_y;
+        POS -= gamepad2.left_stick_y * 4;
         robot.liftMotor.setTargetPosition(POS);
         if (POS < 0) {
             POS = 0;
         }
-        robot.liftMotor.setPower(.8);
+        robot.liftMotor.setPower(0.2);
         robot.liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        telemetry.addData("lift encoder", robot.liftMotor.getCurrentPosition());
 //        robot.liftMotor.setPower(gamepad2.left_stick_y * 0.6);
 
 //        //cap

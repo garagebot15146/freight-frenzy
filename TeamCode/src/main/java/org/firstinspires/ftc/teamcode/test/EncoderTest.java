@@ -46,16 +46,36 @@ public class EncoderTest extends OpMode {
 
     @Override
     public void loop() {
-        robot.leftFrontMotor.setPower(-gamepad1.left_stick_y);
-        robot.rightFrontMotor.setPower(-gamepad1.right_stick_y);
-        robot.rightBackMotor.setPower(-gamepad1.right_stick_y);
-        robot.leftBackMotor.setPower(-gamepad1.left_stick_y);
+        double nerf = 0.6;
+
+        //DRIVE
+        double forward = -gamepad1.left_stick_y;
+        double side = gamepad1.left_stick_x; //Positive means right
+        double turn = gamepad1.right_stick_x; //Positive means turn right
+
+
+        double leftFrontPower = (forward + side + turn);
+        double leftBackPower = (forward - side + turn);
+        double rightFrontPower = (forward - side - turn);
+        double rightBackPower = (forward + side - turn);
+
+        // Send power to wheel motors
+        robot.leftFrontMotor.setPower(leftFrontPower * nerf);
+        robot.rightFrontMotor.setPower(rightFrontPower * nerf);
+        robot.leftBackMotor.setPower(leftBackPower * nerf);
+        robot.rightBackMotor.setPower(rightBackPower * nerf);
+
         robot.liftMotor.setPower(-gamepad2.left_stick_y);;
         telemetry.addData("Encoder Left Front:", robot.leftFrontMotor.getCurrentPosition());
         telemetry.addData("Encoder Right Front:", robot.rightFrontMotor.getCurrentPosition());
         telemetry.addData("Encoder Left Back:", robot.leftBackMotor.getCurrentPosition());
         telemetry.addData("Encoder Right Back:", robot.rightBackMotor.getCurrentPosition());
         telemetry.addData("Encoder Lift:", robot.liftMotor.getCurrentPosition());
+
+        telemetry.addData("Power Left Front:", robot.leftFrontMotor.getPower());
+        telemetry.addData("Power Right Front:", robot.rightFrontMotor.getPower());
+        telemetry.addData("Power Left Back:", robot.leftBackMotor.getPower());
+        telemetry.addData("Power Right Back:", robot.rightBackMotor.getPower());
 
     }
 
