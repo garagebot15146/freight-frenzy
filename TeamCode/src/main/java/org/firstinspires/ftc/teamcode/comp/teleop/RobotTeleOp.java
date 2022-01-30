@@ -48,7 +48,7 @@ public class RobotTeleOp extends OpMode {
         /* GAMEPAD 1 */
 
         //driveTrain
-        double nerf = 1;
+        double nerf = 0.8;
 
         //DRIVE
         double forward = -gamepad1.left_stick_y;
@@ -68,7 +68,7 @@ public class RobotTeleOp extends OpMode {
         robot.rightBackMotor.setPower(rightBackPower * nerf);
 
         //outtake
-        double intakeNerf = 0.8;
+        double intakeNerf = 0.7;
         if (gamepad1.right_bumper && !lock1 && !gamepad1.left_bumper) {
             lock1 = true;
             if (state1) {
@@ -104,9 +104,9 @@ public class RobotTeleOp extends OpMode {
 
         //carousel
         if (gamepad2.a == true) {
-            robot.carouselMotor.setPower(0.4);
+            robot.carouselMotor.setPower(0.6);
         } else if (gamepad2.b == true) {
-            robot.carouselMotor.setPower(-0.4);
+            robot.carouselMotor.setPower(-0.6);
         } else {
             robot.carouselMotor.setPower(0);
         }

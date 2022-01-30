@@ -31,7 +31,7 @@ public class WarehouseWaitPark extends LinearOpMode {
         if (isStopRequested()) return;
         telemetry.update();
         pause(26);
-        encoderDrive(0.2, -40, -40, 5);
+        encoderDrive(0.5, -47, -47, 5);
     }
 
 
