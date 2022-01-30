@@ -65,7 +65,7 @@ public class EncoderTest extends OpMode {
         robot.leftBackMotor.setPower(leftBackPower * nerf);
         robot.rightBackMotor.setPower(rightBackPower * nerf);
 
-        robot.liftMotor.setPower(-gamepad2.left_stick_y);;
+        robot.liftMotor.setPower(gamepad2.left_stick_y);;
         telemetry.addData("Encoder Left Front:", robot.leftFrontMotor.getCurrentPosition());
         telemetry.addData("Encoder Right Front:", robot.rightFrontMotor.getCurrentPosition());
         telemetry.addData("Encoder Left Back:", robot.leftBackMotor.getCurrentPosition());

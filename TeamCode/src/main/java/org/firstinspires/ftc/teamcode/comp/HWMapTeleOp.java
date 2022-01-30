@@ -17,7 +17,7 @@ public class HWMapTeleOp {
     public DcMotor rightFrontMotor = null;
     public DcMotor rightBackMotor = null;
 
-    //Servo Ports 0-3
+    //Servo Port 3
     public Servo dropServo = null;
 
     //Expansion Hub
@@ -63,7 +63,7 @@ public class HWMapTeleOp {
         rightFrontMotor.setDirection(DcMotor.Direction.FORWARD);
         rightBackMotor.setDirection(DcMotor.Direction.FORWARD);
         intakeMotor.setDirection(DcMotor.Direction.FORWARD);
-        liftMotor.setDirection(DcMotor.Direction.FORWARD);
+        liftMotor.setDirection(DcMotor.Direction.REVERSE);
         carouselMotor.setDirection(DcMotor.Direction.REVERSE);
         //        capMotor.setDirection(DcMotor.Direction.FORWARD);
 

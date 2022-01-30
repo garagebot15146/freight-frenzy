@@ -18,6 +18,9 @@ public class RobotTeleOp extends OpMode {
         telemetry.addData("Status", "initializing");
         robot.init(hardwareMap);
         robot.liftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        robot.dropServo.setPosition(0.75);
         telemetry.addData("Status", "motorized");
 
     }
@@ -49,8 +52,8 @@ public class RobotTeleOp extends OpMode {
 
         //DRIVE
         double forward = -gamepad1.left_stick_y;
-        double side = gamepad1.left_stick_x; //Positive means right
-        double turn = gamepad1.right_stick_x; //Positive means turn right
+        double side = gamepad1.right_stick_x; //Positive means right
+        double turn = gamepad1.right_stick_y; //Positive means turn right
 
 
         double leftFrontPower = (forward + side + turn);
@@ -101,9 +104,9 @@ public class RobotTeleOp extends OpMode {
 
         //carousel
         if (gamepad2.a == true) {
-            robot.carouselMotor.setPower(0.2);
+            robot.carouselMotor.setPower(0.4);
         } else if (gamepad2.b == true) {
-            robot.carouselMotor.setPower(-0.2);
+            robot.carouselMotor.setPower(-0.4);
         } else {
             robot.carouselMotor.setPower(0);
         }
@@ -121,15 +124,23 @@ public class RobotTeleOp extends OpMode {
         }
 
         //lift
-        POS -= gamepad2.left_stick_y * 4;
+        POS -= gamepad2.left_stick_y * 19;
         robot.liftMotor.setTargetPosition(POS);
         if (POS < 0) {
             POS = 0;
         }
-        robot.liftMotor.setPower(0.2);
+        telemetry.addData("test", POS);
+        robot.liftMotor.setPower(1);
         robot.liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         telemetry.addData("lift encoder", robot.liftMotor.getCurrentPosition());
-//        robot.liftMotor.setPower(gamepad2.left_stick_y * 0.6);
+//        if(robot.liftMotor.getCurrentPosition() <= 0){
+//            robot.liftMotor.setPower(Math.abs(gamepad2.left_stick_y));
+//        } else {
+//            robot.liftMotor.setPower(gamepad2.left_stick_y);
+//        }
+
+        telemetry.addData("lift encoder", robot.liftMotor.getCurrentPosition());
+
 
 //        //cap
 //        robot.capMotor.setPower(gamepad2.right_stick_y * 0.6);
