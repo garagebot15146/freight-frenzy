@@ -67,7 +67,7 @@ public class RobotTeleOp extends OpMode {
         robot.leftBackMotor.setPower(leftBackPower * nerf);
         robot.rightBackMotor.setPower(rightBackPower * nerf);
 
-        //intake
+        //outtake
         double intakeNerf = 0.8;
         if (gamepad1.right_bumper && !lock1 && !gamepad1.left_bumper) {
             lock1 = true;
@@ -84,7 +84,7 @@ public class RobotTeleOp extends OpMode {
             lock1 = false;
         }
 
-        //outtake
+        //intake
         if (gamepad1.left_bumper && !lock2 && !gamepad1.right_bumper) {
             lock2 = true;
             if (state2) {

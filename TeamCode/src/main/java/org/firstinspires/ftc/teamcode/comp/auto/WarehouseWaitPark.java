@@ -7,9 +7,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.teamcode.comp.HWMapTeleOp;
 
 
-@Autonomous(name = "Warehouse Park", group = "Autonomous")
+@Autonomous(name = "Warehouse Wait Park", group = "Autonomous")
 //@Disabled
-public class WarehousePark extends LinearOpMode {
+public class WarehouseWaitPark extends LinearOpMode {
 
     //Runtime
     private ElapsedTime runtime = new ElapsedTime();
@@ -30,8 +30,8 @@ public class WarehousePark extends LinearOpMode {
         waitForStart();
         if (isStopRequested()) return;
         telemetry.update();
-
-        encoderDrive(0.2, -15, -15, 5);
+        pause(26);
+        encoderDrive(0.2, -40, -40, 5);
     }
 
 
