@@ -123,6 +123,11 @@ public class RobotTeleOp extends OpMode {
 
         }
 
+        if(robot.liftMotor.getCurrentPosition() < 1300 & robot.dropServo.getPosition() == 0.3){
+            robot.dropServo.setPosition(0.75);
+            telemetry.addData("lift", "below safe region");
+        }
+
         //lift
         POS -= gamepad2.left_stick_y * 19;
         robot.liftMotor.setTargetPosition(POS);
