@@ -48,7 +48,7 @@ public class RobotTeleOp extends OpMode {
         /* GAMEPAD 1 */
 
         //driveTrain
-        double nerf = 0.6;
+        double nerf = 1;
 
         //DRIVE
         double forward = -gamepad1.left_stick_y;
@@ -123,13 +123,13 @@ public class RobotTeleOp extends OpMode {
 
         }
 
-        if(robot.liftMotor.getCurrentPosition() < 1300 & robot.dropServo.getPosition() == 0.3){
+        if(robot.liftMotor.getCurrentPosition() < 1100 & robot.dropServo.getPosition() == 0.3){
             robot.dropServo.setPosition(0.75);
             telemetry.addData("lift", "below safe region");
         }
 
         //lift
-        POS -= gamepad2.left_stick_y * 19;
+        POS -= gamepad2.left_stick_y * 21;
         robot.liftMotor.setTargetPosition(POS);
         if (POS < 0) {
             POS = 0;
