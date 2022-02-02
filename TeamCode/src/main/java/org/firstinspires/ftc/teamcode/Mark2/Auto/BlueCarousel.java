@@ -130,48 +130,33 @@ public class BlueCarousel extends LinearOpMode {
         switch (route) {
             case "LEFT":
                 drive.followTrajectory(trajectoryA1);
-//                drive.turn(Math.toRadians(104));
                 liftUp(11.3, 3);
-//                pause(1);
                 deposit();
-//                liftDown();
-//                drive.followTrajectory(trajectoryA2);
-//                encoderDrive(0.5, -20, -20, 5);
-//                drive.followTrajectory(trajectoryA3);
-//                drive.turn(Math.toRadians(-70));
-//                drive.followTrajectory(trajectoryA4);
-//                encoderDrive(0.1, -3.1, -3.1, 3);
-//                duckBlue(3);
-//                drive.turn(Math.toRadians(-30));
-//                pause(1);
-//                encoderDrive(0.2, 6, 6, 3);
-//                liftReset(1);
+                liftDown();
+                drive.followTrajectory(trajectoryA2);
+                encoderDrive(0.5, -20, -20, 5);
 
                 telemetry.addData("Path Left", "Complete");
                 telemetry.update();
                 break;
             case "CENTER":
                 drive.followTrajectory(trajectoryA1);
-//                drive.turn(Math.toRadians(104));
                 liftUp(9, 3);
-//                pause(1);
                 deposit();
-//                liftDown();
-//                drive.followTrajectory(trajectoryA2);
-//                encoderDrive(0.5, -20, -20, 5);
+                liftDown();
+                drive.followTrajectory(trajectoryA2);
+                encoderDrive(0.5, -20, -20, 5);
 
                 telemetry.addData("Path Center", "Complete");
                 telemetry.update();
                 break;
             case "RIGHT":
                 drive.followTrajectory(trajectoryA1);
-//                drive.turn(Math.toRadians(104));
                 liftUp(6.3, 3);
-//                pause(1);
                 deposit();
-//                liftDown();
-//                drive.followTrajectory(trajectoryA2);
-//                encoderDrive(0.5, -20, -20, 5);
+                liftDown();
+                drive.followTrajectory(trajectoryA2);
+                encoderDrive(0.5, -20, -20, 5);
 
                 telemetry.addData("Path Right", "Complete");
                 telemetry.update();
