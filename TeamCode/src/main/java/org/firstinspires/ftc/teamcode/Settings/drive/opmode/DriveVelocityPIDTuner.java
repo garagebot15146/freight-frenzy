@@ -14,6 +14,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.RobotLog;
 
+import org.firstinspires.ftc.teamcode.Settings.HWMapMecanum;
 import org.firstinspires.ftc.teamcode.Settings.HWMapTank;
 
 import java.util.List;
@@ -26,10 +27,10 @@ import static org.firstinspires.ftc.teamcode.Settings.drive.DriveConstants.kV;
 
 
 @Config
-@Disabled
+//@Disabled
 @Autonomous(group = "drive")
 public class DriveVelocityPIDTuner extends LinearOpMode {
-    public static double DISTANCE = 70; // in
+    public static double DISTANCE = 140; // in
 
     enum Mode {
         DRIVER_MODE,
@@ -51,7 +52,7 @@ public class DriveVelocityPIDTuner extends LinearOpMode {
 
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
 
-        HWMapTank drive = new HWMapTank(hardwareMap);
+        HWMapMecanum drive = new HWMapMecanum(hardwareMap);
 
         Mode mode = Mode.TUNING_MODE;
 

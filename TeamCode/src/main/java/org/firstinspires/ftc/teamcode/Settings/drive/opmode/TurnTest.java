@@ -5,20 +5,21 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
+import org.firstinspires.ftc.teamcode.Settings.HWMapMecanum;
 import org.firstinspires.ftc.teamcode.Settings.HWMapTank;
 
 /*
  * This is a simple routine to test turning capabilities.
  */
 @Config
-@Disabled
+//@Disabled
 @Autonomous(group = "drive")
 public class TurnTest extends LinearOpMode {
     public static double ANGLE = 90; // deg
 
     @Override
     public void runOpMode() throws InterruptedException {
-        HWMapTank drive = new HWMapTank(hardwareMap);
+        HWMapMecanum drive = new HWMapMecanum(hardwareMap);
 
         waitForStart();
 

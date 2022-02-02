@@ -22,7 +22,6 @@ public class GarTeleOp extends OpMode {
         robot.liftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         robot.liftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        robot.dropServo.setPosition(0.75);
         telemetry.addData("Status", "motorized");
 
     }

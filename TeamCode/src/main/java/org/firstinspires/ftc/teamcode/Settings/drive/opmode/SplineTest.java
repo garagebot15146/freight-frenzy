@@ -7,17 +7,18 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
+import org.firstinspires.ftc.teamcode.Settings.HWMapMecanum;
 import org.firstinspires.ftc.teamcode.Settings.HWMapTank;
 
 /*
  * This is an example of a more complex path to really test the tuning.
  */
 @Autonomous(group = "drive")
-@Disabled
+//@Disabled
 public class SplineTest extends LinearOpMode {
     @Override
     public void runOpMode() throws InterruptedException {
-        HWMapTank drive = new HWMapTank(hardwareMap);
+        HWMapMecanum drive = new HWMapMecanum(hardwareMap);
 
         waitForStart();
 

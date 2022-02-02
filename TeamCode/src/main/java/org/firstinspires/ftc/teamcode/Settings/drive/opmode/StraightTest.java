@@ -9,6 +9,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
+import org.firstinspires.ftc.teamcode.Settings.HWMapMecanum;
 import org.firstinspires.ftc.teamcode.Settings.HWMapTank;
 
 /*
@@ -16,15 +17,15 @@ import org.firstinspires.ftc.teamcode.Settings.HWMapTank;
  */
 @Config
 @Autonomous(group = "drive")
-@Disabled
+//@Disabled
 public class StraightTest extends LinearOpMode {
-    public static double DISTANCE = 30; // in
+    public static double DISTANCE = 80; // in
 
     @Override
     public void runOpMode() throws InterruptedException {
         telemetry = new MultipleTelemetry(telemetry, FtcDashboard.getInstance().getTelemetry());
 
-        HWMapTank drive = new HWMapTank(hardwareMap);
+        HWMapMecanum drive = new HWMapMecanum(hardwareMap);
 
         Trajectory trajectory = drive.trajectoryBuilder(new Pose2d())
                 .forward(DISTANCE)
