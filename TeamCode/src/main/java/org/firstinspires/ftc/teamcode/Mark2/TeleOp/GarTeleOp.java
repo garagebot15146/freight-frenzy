@@ -43,6 +43,10 @@ public class GarTeleOp extends OpMode {
     boolean lock2 = false;
     boolean state2 = false;
 
+    boolean lockServo = false;
+    boolean stateServo = false;
+
+
     @Override
     public void loop() {
 
@@ -112,17 +116,32 @@ public class GarTeleOp extends OpMode {
             robot.carouselMotor.setPower(0);
         }
 
-        if (gamepad2.left_bumper) {
-            robot.dropServo.setPosition(0.3);
-            telemetry.addData("pos 0", "boop");
+        if (gamepad2.left_bumper && !lockServo) {
+            lockServo = true;
+            if (stateServo) {
+                robot.dropServo.setPosition(0.75);
+                stateServo = false;
 
+            } else {
+                robot.dropServo.setPosition(0.3);
+                stateServo = true;
 
+            }
+        } else if (!gamepad2.left_bumper && lockServo) {
+            lockServo = false;
         }
-        if (gamepad2.right_bumper) {
-            robot.dropServo.setPosition(0.75);
-            telemetry.addData("pos 1", "wooo");
 
-        }
+//        if (gamepad2.left_bumper) {
+//            robot.dropServo.setPosition(0.3);
+//            telemetry.addData("pos 0", "boop");
+//
+//
+//        }
+//        if (gamepad2.right_bumper) {
+//            robot.dropServo.setPosition(0.75);
+//            telemetry.addData("pos 1", "wooo");
+//
+//        }
 
         if(robot.liftMotor.getCurrentPosition() < 1100 & robot.dropServo.getPosition() == 0.3){
             robot.dropServo.setPosition(0.75);
