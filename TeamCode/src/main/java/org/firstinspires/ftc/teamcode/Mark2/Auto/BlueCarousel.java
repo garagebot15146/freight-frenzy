@@ -10,6 +10,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.teamcode.Settings.DetectionSettings;
 import org.firstinspires.ftc.teamcode.Settings.HWMapMecanum;
 import org.firstinspires.ftc.teamcode.Settings.HWMapTeleOp;
 import org.opencv.core.Core;
@@ -34,9 +35,9 @@ public class BlueCarousel extends LinearOpMode {
     private ElapsedTime runtime = new ElapsedTime();
 
 //    //Vision
-//    OpenCvWebcam webcam;
-//    public static String position;
-//    SkystoneDeterminationPipeline pipeline;
+    OpenCvWebcam webcam;
+    public static String position;
+    SkystoneDeterminationPipeline pipeline;
 
     //Road Runner
     static HWMapMecanum drive;
@@ -58,22 +59,24 @@ public class BlueCarousel extends LinearOpMode {
         Pose2d startPose = new Pose2d(8, 64, Math.toRadians(270));
         drive.setPoseEstimate(startPose);
 
-//        // Camera Init
-//        int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
-//        webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
-//        webcam.setPipeline(new SkystoneDeterminationPipeline());
-//        FtcDashboard.getInstance().startCameraStream(webcam, 30);
-//        webcam.setMillisecondsPermissionTimeout(2500);
-//        webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
-//            @Override
-//            public void onOpened() {
-//                webcam.startStreaming(1280, 720, OpenCvCameraRotation.UPRIGHT);
-//            }
-//
-//            @Override
-//            public void onError(int errorCode) {
-//            }
-//        });
+        // Camera Init
+        int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
+        webcam = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
+        webcam.setPipeline(new SkystoneDeterminationPipeline());
+        FtcDashboard.getInstance().startCameraStream(webcam, 30);
+        webcam.setMillisecondsPermissionTimeout(2500);
+        webcam.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
+            @Override
+            public void onOpened() {
+                webcam.startStreaming(1280, 720, OpenCvCameraRotation.UPRIGHT);
+            }
+
+            @Override
+            public void onError(int errorCode) {
+            }
+        });
+
+        String route = "CENTER";
 
 //PATH CONSTANTS
 
@@ -120,10 +123,10 @@ public class BlueCarousel extends LinearOpMode {
         if (isStopRequested()) return;
         telemetry.update();
 
-
-        String route = "CENTER";
-//        String route = position;
-//        telemetry.addData("Ring Position", position);
+        telemetry.update();
+//        String route = "CENTER";
+         route = position;
+        telemetry.addData("Ring Position", position);
         telemetry.update();
         FtcDashboard.getInstance().stopCameraStream();
 
@@ -299,130 +302,131 @@ public class BlueCarousel extends LinearOpMode {
         }
     }
 
-//    // Pipeline class
-//    public static class SkystoneDeterminationPipeline extends OpenCvPipeline
-//    {
-//
-//        static final Scalar BLUE = new Scalar(0, 0, 255);
-//        static final Scalar GREEN = new Scalar(0, 255, 0);
-//
-//        static final Point REGION1_TOPLEFT_ANCHOR_POINT = new Point(180,440);
-//        static final Point REGION2_TOPLEFT_ANCHOR_POINT = new Point(590,440);
-//        static final Point REGION3_TOPLEFT_ANCHOR_POINT = new Point(973,450);
-//        static final int REGION_WIDTH = 50;
-//        static final int REGION_HEIGHT = 50;
-//
-//        Point region1_pointA = new Point(
-//                REGION1_TOPLEFT_ANCHOR_POINT.x,
-//                REGION1_TOPLEFT_ANCHOR_POINT.y);
-//        Point region1_pointB = new Point(
-//                REGION1_TOPLEFT_ANCHOR_POINT.x + REGION_WIDTH,
-//                REGION1_TOPLEFT_ANCHOR_POINT.y + REGION_HEIGHT);
-//        Point region2_pointA = new Point(
-//                REGION2_TOPLEFT_ANCHOR_POINT.x,
-//                REGION2_TOPLEFT_ANCHOR_POINT.y);
-//        Point region2_pointB = new Point(
-//                REGION2_TOPLEFT_ANCHOR_POINT.x + REGION_WIDTH,
-//                REGION2_TOPLEFT_ANCHOR_POINT.y + REGION_HEIGHT);
-//        Point region3_pointA = new Point(
-//                REGION3_TOPLEFT_ANCHOR_POINT.x,
-//                REGION3_TOPLEFT_ANCHOR_POINT.y);
-//        Point region3_pointB = new Point(
-//                REGION3_TOPLEFT_ANCHOR_POINT.x + REGION_WIDTH,
-//                REGION3_TOPLEFT_ANCHOR_POINT.y + REGION_HEIGHT);
-//
-//        /*
-//         * Working variables
-//         */
-//        Mat region1_Cb, region2_Cb, region3_Cb;
-//        Mat YCrCb = new Mat();
-//        Mat Cb = new Mat();
-//        int avg1, avg2, avg3;
-//
-//        void inputToCb(Mat input)
-//        {
-//            Imgproc.cvtColor(input, YCrCb, Imgproc.COLOR_RGB2YCrCb);
-//            Core.extractChannel(YCrCb, Cb, 2);
-//        }
-//
-//        @Override
-//        public void init(Mat firstFrame)
-//        {
-//            inputToCb(firstFrame);
-//            region1_Cb = Cb.submat(new Rect(region1_pointA, region1_pointB));
-//            region2_Cb = Cb.submat(new Rect(region2_pointA, region2_pointB));
-//            region3_Cb = Cb.submat(new Rect(region3_pointA, region3_pointB));
-//        }
-//
-//        @Override
-//        public Mat processFrame(Mat input)
-//        {
-//            inputToCb(input);
-//            avg1 = (int) Core.mean(region1_Cb).val[0];
-//            avg2 = (int) Core.mean(region2_Cb).val[0];
-//            avg3 = (int) Core.mean(region3_Cb).val[0];
-//
-//            Imgproc.rectangle(
-//                    input, // Buffer to draw on
-//                    region1_pointA, // First point which defines the rectangle
-//                    region1_pointB, // Second point which defines the rectangle
-//                    BLUE, // The color the rectangle is drawn in
-//                    2); // Thickness of the rectangle lines
-//
-//            Imgproc.rectangle(
-//                    input, // Buffer to draw on
-//                    region2_pointA, // First point which defines the rectangle
-//                    region2_pointB, // Second point which defines the rectangle
-//                    BLUE, // The color the rectangle is drawn in
-//                    2); // Thickness of the rectangle lines
-//
-//            Imgproc.rectangle(
-//                    input, // Buffer to draw on
-//                    region3_pointA, // First point which defines the rectangle
-//                    region3_pointB, // Second point which defines the rectangle
-//                    BLUE, // The color the rectangle is drawn in
-//                    2); // Thickness of the rectangle lines
-//
-//            int maxOneTwo = Math.max(avg1, avg2);
-//            int max = Math.max(maxOneTwo, avg3);
-//
-//            if(max == avg1) // Was it from region 1?
-//            {
-//                position = "LEFT"; // Record our analysis
-//
-//                Imgproc.rectangle(
-//                        input, // Buffer to draw on
-//                        region1_pointA, // First point which defines the rectangle
-//                        region1_pointB, // Second point which defines the rectangle
-//                        GREEN, // The color the rectangle is drawn in
-//                        -1); // Negative thickness means solid fill
-//            }
-//            else if(max == avg2) // Was it from region 2?
-//            {
-//                position = "CENTER"; // Record our analysis
-//
-//                Imgproc.rectangle(
-//                        input, // Buffer to draw on
-//                        region2_pointA, // First point which defines the rectangle
-//                        region2_pointB, // Second point which defines the rectangle
-//                        GREEN, // The color the rectangle is drawn in
-//                        -1); // Negative thickness means solid fill
-//            }
-//            else if(max == avg3) // Was it from region 3?
-//            {
-//                position = "RIGHT"; // Record our analysis
-//
-//                Imgproc.rectangle(
-//                        input, // Buffer to draw on
-//                        region3_pointA, // First point which defines the rectangle
-//                        region3_pointB, // Second point which defines the rectangle
-//                        GREEN, // The color the rectangle is drawn in
-//                        -1); // Negative thickness means solid fill
-//            }
-//
-//            return input;
-//        }
-//    }
+    // Pipeline class
+    public static class SkystoneDeterminationPipeline extends OpenCvPipeline
+    {
+
+        static final Scalar BLUE = new Scalar(0, 0, 255);
+        static final Scalar GREEN = new Scalar(0, 255, 0);
+
+        static DetectionSettings box = new DetectionSettings();
+        static final Point REGION1_TOPLEFT_ANCHOR_POINT = new Point(box.getBlueCarouselLeftX(),box.getBlueCarouselLeftY());
+        static final Point REGION2_TOPLEFT_ANCHOR_POINT = new Point(box.getBlueCarouselCenterX(),box.getBlueCarouselCenterY());
+        static final Point REGION3_TOPLEFT_ANCHOR_POINT = new Point(box.getBlueCarouselRightX(),box.getBlueCarouselRightY());
+        static final int REGION_WIDTH = 50;
+        static final int REGION_HEIGHT = 50;
+
+        Point region1_pointA = new Point(
+                REGION1_TOPLEFT_ANCHOR_POINT.x,
+                REGION1_TOPLEFT_ANCHOR_POINT.y);
+        Point region1_pointB = new Point(
+                REGION1_TOPLEFT_ANCHOR_POINT.x + REGION_WIDTH,
+                REGION1_TOPLEFT_ANCHOR_POINT.y + REGION_HEIGHT);
+        Point region2_pointA = new Point(
+                REGION2_TOPLEFT_ANCHOR_POINT.x,
+                REGION2_TOPLEFT_ANCHOR_POINT.y);
+        Point region2_pointB = new Point(
+                REGION2_TOPLEFT_ANCHOR_POINT.x + REGION_WIDTH,
+                REGION2_TOPLEFT_ANCHOR_POINT.y + REGION_HEIGHT);
+        Point region3_pointA = new Point(
+                REGION3_TOPLEFT_ANCHOR_POINT.x,
+                REGION3_TOPLEFT_ANCHOR_POINT.y);
+        Point region3_pointB = new Point(
+                REGION3_TOPLEFT_ANCHOR_POINT.x + REGION_WIDTH,
+                REGION3_TOPLEFT_ANCHOR_POINT.y + REGION_HEIGHT);
+
+        /*
+         * Working variables
+         */
+        Mat region1_Cb, region2_Cb, region3_Cb;
+        Mat YCrCb = new Mat();
+        Mat Cb = new Mat();
+        int avg1, avg2, avg3;
+
+        void inputToCb(Mat input)
+        {
+            Imgproc.cvtColor(input, YCrCb, Imgproc.COLOR_RGB2YCrCb);
+            Core.extractChannel(YCrCb, Cb, 2);
+        }
+
+        @Override
+        public void init(Mat firstFrame)
+        {
+            inputToCb(firstFrame);
+            region1_Cb = Cb.submat(new Rect(region1_pointA, region1_pointB));
+            region2_Cb = Cb.submat(new Rect(region2_pointA, region2_pointB));
+            region3_Cb = Cb.submat(new Rect(region3_pointA, region3_pointB));
+        }
+
+        @Override
+        public Mat processFrame(Mat input)
+        {
+            inputToCb(input);
+            avg1 = (int) Core.mean(region1_Cb).val[0];
+            avg2 = (int) Core.mean(region2_Cb).val[0];
+            avg3 = (int) Core.mean(region3_Cb).val[0];
+
+            Imgproc.rectangle(
+                    input, // Buffer to draw on
+                    region1_pointA, // First point which defines the rectangle
+                    region1_pointB, // Second point which defines the rectangle
+                    BLUE, // The color the rectangle is drawn in
+                    2); // Thickness of the rectangle lines
+
+            Imgproc.rectangle(
+                    input, // Buffer to draw on
+                    region2_pointA, // First point which defines the rectangle
+                    region2_pointB, // Second point which defines the rectangle
+                    BLUE, // The color the rectangle is drawn in
+                    2); // Thickness of the rectangle lines
+
+            Imgproc.rectangle(
+                    input, // Buffer to draw on
+                    region3_pointA, // First point which defines the rectangle
+                    region3_pointB, // Second point which defines the rectangle
+                    BLUE, // The color the rectangle is drawn in
+                    2); // Thickness of the rectangle lines
+
+            int maxOneTwo = Math.max(avg1, avg2);
+            int max = Math.max(maxOneTwo, avg3);
+
+            if(max == avg1) // Was it from region 1?
+            {
+                position = "LEFT"; // Record our analysis
+
+                Imgproc.rectangle(
+                        input, // Buffer to draw on
+                        region1_pointA, // First point which defines the rectangle
+                        region1_pointB, // Second point which defines the rectangle
+                        GREEN, // The color the rectangle is drawn in
+                        -1); // Negative thickness means solid fill
+            }
+            else if(max == avg2) // Was it from region 2?
+            {
+                position = "CENTER"; // Record our analysis
+
+                Imgproc.rectangle(
+                        input, // Buffer to draw on
+                        region2_pointA, // First point which defines the rectangle
+                        region2_pointB, // Second point which defines the rectangle
+                        GREEN, // The color the rectangle is drawn in
+                        -1); // Negative thickness means solid fill
+            }
+            else if(max == avg3) // Was it from region 3?
+            {
+                position = "RIGHT"; // Record our analysis
+
+                Imgproc.rectangle(
+                        input, // Buffer to draw on
+                        region3_pointA, // First point which defines the rectangle
+                        region3_pointB, // Second point which defines the rectangle
+                        GREEN, // The color the rectangle is drawn in
+                        -1); // Negative thickness means solid fill
+            }
+
+            return input;
+        }
+    }
 
 
 }

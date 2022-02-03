@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.teamcode.Settings.DetectionSettings;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
@@ -53,6 +54,8 @@ public class DetectTest extends LinearOpMode {
             public void onError(int errorCode) {
             }
         });
+
+
 
         telemetry.addData("Status", "Pipeline Initializing");
         telemetry.update();
@@ -106,9 +109,10 @@ public class DetectTest extends LinearOpMode {
         static final Scalar BLUE = new Scalar(0, 0, 255);
         static final Scalar GREEN = new Scalar(0, 255, 0);
 
-        static final Point REGION1_TOPLEFT_ANCHOR_POINT = new Point(180,440);
-        static final Point REGION2_TOPLEFT_ANCHOR_POINT = new Point(590,440);
-        static final Point REGION3_TOPLEFT_ANCHOR_POINT = new Point(973,450);
+        static DetectionSettings box = new DetectionSettings();
+        static final Point REGION1_TOPLEFT_ANCHOR_POINT = new Point(box.getBlueCarouselLeftX(),box.getBlueCarouselLeftY());
+        static final Point REGION2_TOPLEFT_ANCHOR_POINT = new Point(box.getBlueCarouselCenterX(),box.getBlueCarouselCenterY());
+        static final Point REGION3_TOPLEFT_ANCHOR_POINT = new Point(box.getBlueCarouselRightX(),box.getBlueCarouselRightY());
         static final int REGION_WIDTH = 50;
         static final int REGION_HEIGHT = 50;
 
