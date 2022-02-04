@@ -80,39 +80,18 @@ public class BlueWarehouse extends LinearOpMode {
 
 //PATH CONSTANTS
 
-//
-////CASE Left INIT START
         Trajectory trajectoryA1 = drive.trajectoryBuilder(startPose)
-                .lineToLinearHeading(new Pose2d(10, 41.8, Math.toRadians(30)))
+                .lineToLinearHeading(new Pose2d(0, 41.8, Math.toRadians(240)))
                 .build();
         Trajectory trajectoryA2 = drive.trajectoryBuilder(trajectoryA1.end())
-                .lineToLinearHeading(new Pose2d(6, 74, Math.toRadians(220)))
-                .build();
+                .splineToLinearHeading(new Pose2d(5, 64), Math.toRadians(180))
+                .splineTo(new Vector2d(50, 64), Math.toRadians(180))                .build();
         Trajectory trajectoryA3 = drive.trajectoryBuilder(trajectoryA2.end().plus(new Pose2d(0,0, Math.toRadians(10))))
                 .strafeTo(new Vector2d(50, 74))
                 .build();
         Trajectory trajectoryA4 = drive.trajectoryBuilder(trajectoryA3.end())
                 .strafeTo(new Vector2d(-62, 40))
                 .build();
-////CASE Left INIT END
-
-////CASE Center INIT START
-        Trajectory trajectoryB1 = drive.trajectoryBuilder(startPose)
-                .strafeTo(new Vector2d(-39, 56))
-                .build();
-        Trajectory trajectoryB2 = drive.trajectoryBuilder(trajectoryB1.end())
-                .strafeTo(new Vector2d(-39, 40))
-                .build();
-////CASE Center INIT END
-
-//CASE Right INIT START
-        Trajectory trajectoryC1 = drive.trajectoryBuilder(startPose)
-                .strafeTo(new Vector2d(-39, 56))
-                .build();
-        Trajectory trajectoryC2 = drive.trajectoryBuilder(trajectoryC1.end())
-                .strafeTo(new Vector2d(-39, 41))
-                .build();
-//CASE Right INIT END
 
 
         telemetry.addData("Status", "Pipeline Initializing");
@@ -133,11 +112,13 @@ public class BlueWarehouse extends LinearOpMode {
         switch (route) {
             case "LEFT":
                 drive.followTrajectory(trajectoryA1);
-                liftUp(11.3, 3);
-                deposit();
-                liftDown();
                 drive.followTrajectory(trajectoryA2);
-                encoderDrive(0.5, -20, -20, 5);
+
+//                liftUp(11.3, 3);
+//                deposit();
+//                liftDown();
+//                drive.followTrajectory(trajectoryA2);
+//                encoderDrive(0.5, -20, -20, 5);
 
                 telemetry.addData("Path Left", "Complete");
                 telemetry.update();

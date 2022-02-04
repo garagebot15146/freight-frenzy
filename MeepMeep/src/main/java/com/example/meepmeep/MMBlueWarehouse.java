@@ -16,11 +16,13 @@ public class MMBlueWarehouse {
                 .setConstraints(45, 45, Math.toRadians(300), Math.toRadians(300), 15)
                 .followTrajectorySequence(drive ->
                                 drive.trajectorySequenceBuilder(new Pose2d(34, 64, Math.toRadians(270)))
-                                .lineToLinearHeading(new Pose2d(-19, 41.8, Math.toRadians(300)))
-                                .lineToLinearHeading(new Pose2d(-64, 49, Math.toRadians(270)))
-                                .lineToLinearHeading(new Pose2d(-64, 40, Math.toRadians(180)))
+                                .lineToLinearHeading(new Pose2d(0, 41.8, Math.toRadians(240)))
+//                                .lineToLinearHeading(new Pose2d(10, 64, Math.toRadians(180)))
+//                                .lineToLinearHeading(new Pose2d(-64, 40, Math.toRadians(180)))
 //                                .splineTo(new Vector2d(-19, 41.8), Math.toRadians(300))
-//                                .splineTo(new Vector2d(-64, 49), Math.toRadians(270))
+                                .splineToLinearHeading(new Pose2d(5, 64), Math.toRadians(180))
+                                .splineTo(new Vector2d(50, 64), Math.toRadians(180))
+
 //                                .splineTo(new Vector2d(-64, 40), Math.toRadians(180))
                                         .build()
                 );
