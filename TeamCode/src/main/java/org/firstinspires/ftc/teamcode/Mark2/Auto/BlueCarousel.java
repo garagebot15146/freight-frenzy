@@ -56,7 +56,7 @@ public class BlueCarousel extends LinearOpMode {
         robot.init(hardwareMap);
 
         //Set starting position
-        Pose2d startPose = new Pose2d(8, 64, Math.toRadians(270));
+        Pose2d startPose = new Pose2d(-34, 64, Math.toRadians(270));
         drive.setPoseEstimate(startPose);
 
         // Camera Init
@@ -83,13 +83,14 @@ public class BlueCarousel extends LinearOpMode {
 //
 ////CASE Left INIT START
         Trajectory trajectoryA1 = drive.trajectoryBuilder(startPose)
-                .strafeTo(new Vector2d(8, 41.8))
+                .lineToLinearHeading(new Pose2d(-19, 41.8, Math.toRadians(300)))
                 .build();
+
         Trajectory trajectoryA2 = drive.trajectoryBuilder(trajectoryA1.end())
-                .lineToLinearHeading(new Pose2d(6, 74, Math.toRadians(220)))
+                .lineToLinearHeading(new Pose2d(-64, 49, Math.toRadians(270)))
                 .build();
-        Trajectory trajectoryA3 = drive.trajectoryBuilder(trajectoryA2.end().plus(new Pose2d(0,0, Math.toRadians(10))))
-                .strafeTo(new Vector2d(50, 74))
+        Trajectory trajectoryA3 = drive.trajectoryBuilder(trajectoryA2.end())
+                .lineToLinearHeading(new Pose2d(-60, 36, Math.toRadians(180)))
                 .build();
         Trajectory trajectoryA4 = drive.trajectoryBuilder(trajectoryA3.end())
                 .strafeTo(new Vector2d(-62, 40))
@@ -124,8 +125,8 @@ public class BlueCarousel extends LinearOpMode {
         telemetry.update();
 
         telemetry.update();
-//        String route = "CENTER";
-         route = position;
+         route = "LEFT";
+//         route = position;
         telemetry.addData("Ring Position", position);
         telemetry.update();
         FtcDashboard.getInstance().stopCameraStream();
@@ -133,11 +134,14 @@ public class BlueCarousel extends LinearOpMode {
         switch (route) {
             case "LEFT":
                 drive.followTrajectory(trajectoryA1);
-                liftUp(11.3, 3);
-                deposit();
-                liftDown();
                 drive.followTrajectory(trajectoryA2);
-                encoderDrive(0.5, -20, -20, 5);
+                drive.followTrajectory(trajectoryA3);
+
+//                liftUp(11.3, 3);
+//                deposit();
+//                liftDown();
+//                drive.followTrajectory(trajectoryA2);
+//                encoderDrive(0.5, -20, -20, 5);
 
                 telemetry.addData("Path Left", "Complete");
                 telemetry.update();
