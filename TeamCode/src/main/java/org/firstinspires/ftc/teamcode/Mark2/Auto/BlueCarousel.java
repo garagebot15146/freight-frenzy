@@ -13,6 +13,7 @@ import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.firstinspires.ftc.teamcode.Settings.DetectionSettings;
 import org.firstinspires.ftc.teamcode.Settings.HWMapMecanum;
 import org.firstinspires.ftc.teamcode.Settings.HWMapTeleOp;
+import org.firstinspires.ftc.teamcode.Settings.trajectorysequence.TrajectorySequence;
 import org.opencv.core.Core;
 import org.opencv.core.Mat;
 import org.opencv.core.Point;
@@ -80,40 +81,16 @@ public class BlueCarousel extends LinearOpMode {
 
 //PATH CONSTANTS
 
-//
-////CASE Left INIT START
-        Trajectory trajectoryA1 = drive.trajectoryBuilder(startPose)
+        TrajectorySequence trajLeft = drive.trajectorySequenceBuilder(startPose)
                 .lineToLinearHeading(new Pose2d(-19, 41.8, Math.toRadians(300)))
-                .build();
-
-        Trajectory trajectoryA2 = drive.trajectoryBuilder(trajectoryA1.end())
+//                                .UNSTABLE_addTemporalMarkerOffset(-0.5, () ->  liftUp(11.3, 3)) // Lower servo
+                .waitSeconds(3)
+//                                .UNSTABLE_addTemporalMarkerOffset(-0.3, () -> deposit())
                 .lineToLinearHeading(new Pose2d(-64, 49, Math.toRadians(270)))
-                .build();
-        Trajectory trajectoryA3 = drive.trajectoryBuilder(trajectoryA2.end())
+//                                .UNSTABLE_addTemporalMarkerOffset(-0.5, () -> liftDown())
+                .back(4)
                 .lineToLinearHeading(new Pose2d(-60, 36, Math.toRadians(180)))
                 .build();
-        Trajectory trajectoryA4 = drive.trajectoryBuilder(trajectoryA3.end())
-                .strafeTo(new Vector2d(-62, 40))
-                .build();
-////CASE Left INIT END
-
-////CASE Center INIT START
-        Trajectory trajectoryB1 = drive.trajectoryBuilder(startPose)
-                .strafeTo(new Vector2d(-39, 56))
-                .build();
-        Trajectory trajectoryB2 = drive.trajectoryBuilder(trajectoryB1.end())
-                .strafeTo(new Vector2d(-39, 40))
-                .build();
-////CASE Center INIT END
-
-//CASE Right INIT START
-        Trajectory trajectoryC1 = drive.trajectoryBuilder(startPose)
-                .strafeTo(new Vector2d(-39, 56))
-                .build();
-        Trajectory trajectoryC2 = drive.trajectoryBuilder(trajectoryC1.end())
-                .strafeTo(new Vector2d(-39, 41))
-                .build();
-//CASE Right INIT END
 
 
         telemetry.addData("Status", "Pipeline Initializing");
@@ -133,58 +110,15 @@ public class BlueCarousel extends LinearOpMode {
 
         switch (route) {
             case "LEFT":
-                drive.followTrajectory(trajectoryA1);
-                drive.followTrajectory(trajectoryA2);
-                drive.followTrajectory(trajectoryA3);
-
-//                liftUp(11.3, 3);
-//                deposit();
-//                liftDown();
-//                drive.followTrajectory(trajectoryA2);
-//                encoderDrive(0.5, -20, -20, 5);
-
-                telemetry.addData("Path Left", "Complete");
-                telemetry.update();
+                drive.followTrajectorySequence(trajLeft);
                 break;
             case "CENTER":
-                drive.followTrajectory(trajectoryA1);
-                liftUp(9, 3);
-                deposit();
-                liftDown();
-                drive.followTrajectory(trajectoryA2);
-                encoderDrive(0.5, -20, -20, 5);
-
-                telemetry.addData("Path Center", "Complete");
-                telemetry.update();
+                drive.followTrajectorySequence(trajLeft);
                 break;
             case "RIGHT":
-                drive.followTrajectory(trajectoryA1);
-                liftUp(6.3, 3);
-                deposit();
-                liftDown();
-                drive.followTrajectory(trajectoryA2);
-                encoderDrive(0.5, -20, -20, 5);
-
-                telemetry.addData("Path Right", "Complete");
-                telemetry.update();
+                drive.followTrajectorySequence(trajLeft);
                 break;
             default:
-                drive.followTrajectory(trajectoryA1);
-                drive.turn(Math.toRadians(104));
-                drive.followTrajectory(trajectoryA2);
-                liftUp(11, 2);
-                pause(1);
-                deposit();
-                liftDown();
-                drive.followTrajectory(trajectoryA3);
-                drive.turn(Math.toRadians(-70));
-                drive.followTrajectory(trajectoryA4);
-                encoderDrive(0.1, -2.2, -2.2, 3);
-                duckBlue(3);
-                drive.turn(Math.toRadians(-50));
-                encoderDrive(0.2, 5, 5, 3);
-                liftReset(1);
-
                 telemetry.addData("Path Default", "Complete");
                 telemetry.update();
         }
