@@ -85,9 +85,9 @@ public class BlueWarehouse extends LinearOpMode {
                 .build();
         Trajectory trajectoryA2 = drive.trajectoryBuilder(trajectoryA1.end())
                 .splineToLinearHeading(new Pose2d(5, 64), Math.toRadians(180))
-                .splineTo(new Vector2d(50, 64), Math.toRadians(180))                .build();
-        Trajectory trajectoryA3 = drive.trajectoryBuilder(trajectoryA2.end().plus(new Pose2d(0,0, Math.toRadians(10))))
-                .strafeTo(new Vector2d(50, 74))
+                .build();
+        Trajectory trajectoryA3 = drive.trajectoryBuilder(trajectoryA2.end())
+                .splineTo(new Vector2d(50, 64), Math.toRadians(180))
                 .build();
         Trajectory trajectoryA4 = drive.trajectoryBuilder(trajectoryA3.end())
                 .strafeTo(new Vector2d(-62, 40))
@@ -113,6 +113,7 @@ public class BlueWarehouse extends LinearOpMode {
             case "LEFT":
                 drive.followTrajectory(trajectoryA1);
                 drive.followTrajectory(trajectoryA2);
+                drive.followTrajectory(trajectoryA3);
 
 //                liftUp(11.3, 3);
 //                deposit();
