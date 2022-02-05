@@ -107,6 +107,18 @@ public class BlueCarousel extends LinearOpMode {
                 .lineToLinearHeading(new Pose2d(-60, 36, Math.toRadians(180)))
                 .build();
 
+        TrajectorySequence trajRight = drive.trajectorySequenceBuilder(startPose)
+                .lineToLinearHeading(new Pose2d(-19, 45, Math.toRadians(300)))
+                .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(7, 3))
+                .UNSTABLE_addTemporalMarkerOffset(1, () -> deposit())
+                .UNSTABLE_addTemporalMarkerOffset(2, () -> liftDown())
+                .waitSeconds(3)
+                .lineToLinearHeading(new Pose2d(-64, 49, Math.toRadians(270)))
+                .back(5)
+                .UNSTABLE_addTemporalMarkerOffset(0.3, () -> duckBlue(3))
+                .waitSeconds(3)
+                .lineToLinearHeading(new Pose2d(-60, 36, Math.toRadians(180)))
+                .build();
         telemetry.addData("Status", "Pipeline Initializing");
         telemetry.update();
 
@@ -116,7 +128,7 @@ public class BlueCarousel extends LinearOpMode {
         telemetry.update();
 
         telemetry.update();
-         route = "CENTER";
+         route = "RIGHT";
 //         route = position;
         telemetry.addData("Ring Position", position);
         telemetry.update();
@@ -131,7 +143,7 @@ public class BlueCarousel extends LinearOpMode {
                 drive.followTrajectorySequence(trajCenter);
                 break;
             case "RIGHT":
-                drive.followTrajectorySequence(trajLeft);
+                drive.followTrajectorySequence(trajRight);
                 break;
             default:
                 telemetry.addData("Path Default", "Complete");
