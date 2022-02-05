@@ -53,7 +53,7 @@ public class RedCarousel extends LinearOpMode {
         robot.init(hardwareMap);
 
         //Set starting position
-        Pose2d startPose = new Pose2d(-34, 64, Math.toRadians(270));
+        Pose2d startPose = new Pose2d(-34, -64, Math.toRadians(90));
         drive.setPoseEstimate(startPose);
 
         // Camera Init
@@ -78,42 +78,42 @@ public class RedCarousel extends LinearOpMode {
 //PATH CONSTANTS
 
         TrajectorySequence trajLeft = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(new Pose2d(-19, 42.7, Math.toRadians(300)))
-                .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(11, 3))
+                .lineToLinearHeading(new Pose2d(-19, -42.7, Math.toRadians(65)))
+                .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(10.5, 3))
                 .UNSTABLE_addTemporalMarkerOffset(1, () -> deposit())
                 .UNSTABLE_addTemporalMarkerOffset(2, () -> liftDown())
                 .waitSeconds(3)
-                .lineToLinearHeading(new Pose2d(-64, 49, Math.toRadians(270)))
-                .back(5)
-                .UNSTABLE_addTemporalMarkerOffset(0.3, () -> duckBlue(3))
+                .lineToLinearHeading(new Pose2d(-64, -49, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(-64, -60, Math.toRadians(0)))
+                .UNSTABLE_addTemporalMarkerOffset(0.3, () -> duckRed(3))
                 .waitSeconds(3)
-                .lineToLinearHeading(new Pose2d(-60, 36, Math.toRadians(180)))
+                .lineToLinearHeading(new Pose2d(-64, -40, Math.toRadians(0)))
                 .build();
 
         TrajectorySequence trajCenter = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(new Pose2d(-19, 45, Math.toRadians(300)))
-                .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(9, 3))
+                .lineToLinearHeading(new Pose2d(-19, -42.7, Math.toRadians(65)))
+                .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(8, 3))
                 .UNSTABLE_addTemporalMarkerOffset(1, () -> deposit())
                 .UNSTABLE_addTemporalMarkerOffset(2, () -> liftDown())
                 .waitSeconds(3)
-                .lineToLinearHeading(new Pose2d(-64, 49, Math.toRadians(270)))
-                .back(5)
-                .UNSTABLE_addTemporalMarkerOffset(0.3, () -> duckBlue(3))
+                .lineToLinearHeading(new Pose2d(-64, -49, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(-64, -63, Math.toRadians(0)))
+                .UNSTABLE_addTemporalMarkerOffset(0.3, () -> duckRed(3))
                 .waitSeconds(3)
-                .lineToLinearHeading(new Pose2d(-60, 36, Math.toRadians(180)))
+                .lineToLinearHeading(new Pose2d(-64, -40, Math.toRadians(0)))
                 .build();
 
         TrajectorySequence trajRight = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(new Pose2d(-19, 45, Math.toRadians(300)))
-                .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(7, 3))
+                .lineToLinearHeading(new Pose2d(-19, -42.7, Math.toRadians(65)))
+                .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(6, 3))
                 .UNSTABLE_addTemporalMarkerOffset(1, () -> deposit())
                 .UNSTABLE_addTemporalMarkerOffset(2, () -> liftDown())
                 .waitSeconds(3)
-                .lineToLinearHeading(new Pose2d(-64, 49, Math.toRadians(270)))
-                .back(5)
-                .UNSTABLE_addTemporalMarkerOffset(0.3, () -> duckBlue(3))
+                .lineToLinearHeading(new Pose2d(-64, -49, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(-64, -63, Math.toRadians(0)))
+                .UNSTABLE_addTemporalMarkerOffset(0.3, () -> duckRed(3))
                 .waitSeconds(3)
-                .lineToLinearHeading(new Pose2d(-60, 36, Math.toRadians(180)))
+                .lineToLinearHeading(new Pose2d(-64, -40, Math.toRadians(0)))
                 .build();
         telemetry.addData("Status", "Pipeline Initializing");
         telemetry.update();
@@ -124,7 +124,7 @@ public class RedCarousel extends LinearOpMode {
         telemetry.update();
 
         telemetry.update();
-         route = "RIGHT";
+         route = "CENTER";
 //         route = position;
         telemetry.addData("Ring Position", position);
         telemetry.update();
@@ -204,9 +204,9 @@ public class RedCarousel extends LinearOpMode {
 
     }
 
-    public void duckBlue(double seconds){
+    public void duckRed(double seconds){
         runtime.reset();
-        robot.carouselMotor.setPower(-0.4);
+        robot.carouselMotor.setPower(0.4);
         while (opModeIsActive() && runtime.seconds() < seconds) {
         }
         robot.carouselMotor.setPower(0);

@@ -53,7 +53,7 @@ public class RedWarehouse extends LinearOpMode {
         robot.init(hardwareMap);
 
         //Set starting position
-        Pose2d startPose = new Pose2d(12.5, 62.5, Math.toRadians(270));
+        Pose2d startPose = new Pose2d(12.5, -62.5, Math.toRadians(90));
         drive.setPoseEstimate(startPose);
 
         // Camera Init
@@ -78,36 +78,36 @@ public class RedWarehouse extends LinearOpMode {
 //PATH CONSTANTS
 
         TrajectorySequence trajLeft = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(new Pose2d(-3, 41, Math.toRadians(240)))
-                .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(11, 3))
+                .lineToLinearHeading(new Pose2d(-3, -41, Math.toRadians(120)))
+                .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(10.5, 3))
                 .UNSTABLE_addTemporalMarkerOffset(1, () -> deposit())
                 .UNSTABLE_addTemporalMarkerOffset(2, () -> liftDown())
-                .waitSeconds(3)
-                .lineToLinearHeading(new Pose2d(6, 65.5, Math.toRadians(180)))
-                .lineToLinearHeading(new Pose2d(40, 65.5, Math.toRadians(180)))
-                .lineToLinearHeading(new Pose2d(40, 48, Math.toRadians(180)))
+                .waitSeconds(4)
+                .lineToLinearHeading(new Pose2d(6, -65.5, Math.toRadians(180)))
+                .lineToLinearHeading(new Pose2d(40, -65.5, Math.toRadians(180)))
+                .lineToLinearHeading(new Pose2d(40, -48, Math.toRadians(180)))
                 .build();
 
         TrajectorySequence trajCenter = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(new Pose2d(-3, 41, Math.toRadians(240)))
-                .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(8, 3))
+                .lineToLinearHeading(new Pose2d(-3, -41, Math.toRadians(120)))
+                .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(7.6, 3))
                 .UNSTABLE_addTemporalMarkerOffset(1, () -> deposit())
                 .UNSTABLE_addTemporalMarkerOffset(2, () -> liftDown())
                 .waitSeconds(3)
-                .lineToLinearHeading(new Pose2d(6, 65.5, Math.toRadians(180)))
-                .lineToLinearHeading(new Pose2d(40, 65.5, Math.toRadians(180)))
-                .lineToLinearHeading(new Pose2d(40, 48, Math.toRadians(180)))
+                .lineToLinearHeading(new Pose2d(6, -65.5, Math.toRadians(180)))
+                .lineToLinearHeading(new Pose2d(40, -65.5, Math.toRadians(180)))
+                .lineToLinearHeading(new Pose2d(40, -48, Math.toRadians(180)))
                 .build();
 
         TrajectorySequence trajRight = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(new Pose2d(-3, 41, Math.toRadians(240)))
-                .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(5.9, 3))
+                .lineToLinearHeading(new Pose2d(-3, -41, Math.toRadians(120)))
+                .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(6.5, 3))
                 .UNSTABLE_addTemporalMarkerOffset(1, () -> deposit())
                 .UNSTABLE_addTemporalMarkerOffset(2, () -> liftDown())
                 .waitSeconds(3)
-                .lineToLinearHeading(new Pose2d(6, 65.5, Math.toRadians(180)))
-                .lineToLinearHeading(new Pose2d(40, 65.5, Math.toRadians(180)))
-                .lineToLinearHeading(new Pose2d(40, 48, Math.toRadians(180)))
+                .lineToLinearHeading(new Pose2d(6, -65.5, Math.toRadians(180)))
+                .lineToLinearHeading(new Pose2d(40, -65.5, Math.toRadians(180)))
+                .lineToLinearHeading(new Pose2d(40, -48, Math.toRadians(180)))
                 .build();
 
         telemetry.addData("Status", "Pipeline Initializing");
@@ -119,7 +119,7 @@ public class RedWarehouse extends LinearOpMode {
         telemetry.update();
 
         telemetry.update();
-          route = "RIGHT";
+          route = "CENTER";
 //        route = position;
         telemetry.addData("Ring Position", position);
         telemetry.update();
