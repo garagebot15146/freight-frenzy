@@ -81,7 +81,7 @@ public class BlueWarehouse extends LinearOpMode {
 //PATH CONSTANTS
 
         TrajectorySequence trajLeft = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(new Pose2d(-3, 41, Math.toRadians(240)))
+                .lineToLinearHeading(new Pose2d(-3, 40.6, Math.toRadians(240)))
                 .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(5.9, 3))
                 .UNSTABLE_addTemporalMarkerOffset(1, () -> deposit())
                 .UNSTABLE_addTemporalMarkerOffset(2, () -> liftDown())
@@ -92,7 +92,7 @@ public class BlueWarehouse extends LinearOpMode {
                 .build();
 
         TrajectorySequence trajCenter = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(new Pose2d(-3, 41, Math.toRadians(240)))
+                .lineToLinearHeading(new Pose2d(-3, 40.6, Math.toRadians(240)))
                 .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(8, 3))
                 .UNSTABLE_addTemporalMarkerOffset(1, () -> deposit())
                 .UNSTABLE_addTemporalMarkerOffset(2, () -> liftDown())

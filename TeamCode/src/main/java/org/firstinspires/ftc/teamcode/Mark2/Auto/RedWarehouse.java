@@ -77,7 +77,7 @@ public class RedWarehouse extends LinearOpMode {
 //PATH CONSTANTS
 
         TrajectorySequence trajLeft = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(new Pose2d(-3, -43, Math.toRadians(120)))
+                .lineToLinearHeading(new Pose2d(-3, -42.6, Math.toRadians(120)))
                 .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(6.5, 3))
                 .UNSTABLE_addTemporalMarkerOffset(1, () -> deposit())
                 .UNSTABLE_addTemporalMarkerOffset(2, () -> liftDown())
@@ -88,7 +88,7 @@ public class RedWarehouse extends LinearOpMode {
                 .build();
 
         TrajectorySequence trajCenter = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(new Pose2d(-3, -43, Math.toRadians(120)))
+                .lineToLinearHeading(new Pose2d(-3, -42.6, Math.toRadians(120)))
                 .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(8.2, 3))
                 .UNSTABLE_addTemporalMarkerOffset(1, () -> deposit())
                 .UNSTABLE_addTemporalMarkerOffset(2, () -> liftDown())

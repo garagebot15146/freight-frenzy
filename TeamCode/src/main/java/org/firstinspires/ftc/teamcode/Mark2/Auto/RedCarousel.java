@@ -77,7 +77,7 @@ public class RedCarousel extends LinearOpMode {
 //PATH CONSTANTS
 
         TrajectorySequence trajLeft = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(new Pose2d(-19, -43.3, Math.toRadians(65)))
+                .lineToLinearHeading(new Pose2d(-19, -42.9, Math.toRadians(65)))
                 .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(6, 3))
                 .UNSTABLE_addTemporalMarkerOffset(1, () -> deposit())
                 .UNSTABLE_addTemporalMarkerOffset(3, () -> liftDown())

@@ -81,20 +81,20 @@ public class BlueCarousel extends LinearOpMode {
 //PATH CONSTANTS
 
         TrajectorySequence trajLeft = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(new Pose2d(-19, 45, Math.toRadians(300)))
-                .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(7, 3))
+                .lineToLinearHeading(new Pose2d(-19, 43.9, Math.toRadians(300)))
+                .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(6.8, 3))
                 .UNSTABLE_addTemporalMarkerOffset(1, () -> deposit())
                 .UNSTABLE_addTemporalMarkerOffset(2, () -> liftDown())
                 .waitSeconds(3)
                 .lineToLinearHeading(new Pose2d(-64, 49, Math.toRadians(270)))
-                .back(5)
+                .back(5.6)
                 .UNSTABLE_addTemporalMarkerOffset(0.3, () -> duckBlue(3))
                 .waitSeconds(3)
                 .lineToLinearHeading(new Pose2d(-60, 36, Math.toRadians(180)))
                 .build();
 
         TrajectorySequence trajCenter = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(new Pose2d(-19, 45, Math.toRadians(300)))
+                .lineToLinearHeading(new Pose2d(-19, 44.6, Math.toRadians(300)))
                 .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(9, 3))
                 .UNSTABLE_addTemporalMarkerOffset(1, () -> deposit())
                 .UNSTABLE_addTemporalMarkerOffset(2, () -> liftDown())
@@ -107,7 +107,7 @@ public class BlueCarousel extends LinearOpMode {
                 .build();
 
         TrajectorySequence trajRight = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(new Pose2d(-19, 42.7, Math.toRadians(300)))
+                .lineToLinearHeading(new Pose2d(-19, 42.5, Math.toRadians(300)))
                 .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(11, 3))
                 .UNSTABLE_addTemporalMarkerOffset(1, () -> deposit())
                 .UNSTABLE_addTemporalMarkerOffset(2, () -> liftDown())
