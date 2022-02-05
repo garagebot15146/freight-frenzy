@@ -109,9 +109,9 @@ public class GarTeleOp extends OpMode {
 
         //carousel
         if (gamepad2.a == true) {
-            robot.carouselMotor.setPower(0.6);
+            robot.carouselMotor.setPower(0.53);
         } else if (gamepad2.b == true) {
-            robot.carouselMotor.setPower(-0.6);
+            robot.carouselMotor.setPower(-0.53);
         } else {
             robot.carouselMotor.setPower(0);
         }
@@ -131,17 +131,6 @@ public class GarTeleOp extends OpMode {
             lockServo = false;
         }
 
-//        if (gamepad2.left_bumper) {
-//            robot.dropServo.setPosition(0.3);
-//            telemetry.addData("pos 0", "boop");
-//
-//
-//        }
-//        if (gamepad2.right_bumper) {
-//            robot.dropServo.setPosition(0.75);
-//            telemetry.addData("pos 1", "wooo");
-//
-//        }
 
         if(robot.liftMotor.getCurrentPosition() < 1100 & robot.dropServo.getPosition() == 0.3){
             robot.dropServo.setPosition(0.75);
