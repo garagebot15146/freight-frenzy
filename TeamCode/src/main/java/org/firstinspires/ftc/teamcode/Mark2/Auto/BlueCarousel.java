@@ -37,7 +37,7 @@ public class BlueCarousel extends LinearOpMode {
 
 //    //Vision
     OpenCvWebcam webcam;
-    public static String position;
+    public static String position = "LEFT";
     SkystoneDeterminationPipeline pipeline;
 
     //Road Runner
@@ -59,6 +59,7 @@ public class BlueCarousel extends LinearOpMode {
         //Set starting position
         Pose2d startPose = new Pose2d(-34, 64, Math.toRadians(270));
         drive.setPoseEstimate(startPose);
+        String route;
 
         // Camera Init
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
@@ -76,8 +77,6 @@ public class BlueCarousel extends LinearOpMode {
             public void onError(int errorCode) {
             }
         });
-
-        String route = "CENTER";
 
 //PATH CONSTANTS
 
@@ -128,8 +127,8 @@ public class BlueCarousel extends LinearOpMode {
         telemetry.update();
 
         telemetry.update();
-         route = "RIGHT";
-//         route = position;
+//         route = "RIGHT";
+         route = position;
         telemetry.addData("Ring Position", position);
         telemetry.update();
         FtcDashboard.getInstance().stopCameraStream();
@@ -145,8 +144,7 @@ public class BlueCarousel extends LinearOpMode {
                 drive.followTrajectorySequence(trajRight);
                 break;
             default:
-                telemetry.addData("Path Default", "Complete");
-                telemetry.update();
+                drive.followTrajectorySequence(trajLeft);
         }
 
     }

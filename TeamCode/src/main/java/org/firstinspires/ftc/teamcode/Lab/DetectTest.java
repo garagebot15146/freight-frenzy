@@ -110,9 +110,27 @@ public class DetectTest extends LinearOpMode {
         static final Scalar GREEN = new Scalar(0, 255, 0);
 
         static DetectionSettings box = new DetectionSettings();
-        static final Point REGION1_TOPLEFT_ANCHOR_POINT = new Point(box.getBlueCarouselLeftX(),box.getBlueCarouselLeftY());
-        static final Point REGION2_TOPLEFT_ANCHOR_POINT = new Point(box.getBlueCarouselCenterX(),box.getBlueCarouselCenterY());
-        static final Point REGION3_TOPLEFT_ANCHOR_POINT = new Point(box.getBlueCarouselRightX(),box.getBlueCarouselRightY());
+
+        //Blue Carousel
+//        static final Point REGION1_TOPLEFT_ANCHOR_POINT = new Point(box.getBlueCarouselLeftX(),box.getBlueCarouselLeftY());
+//        static final Point REGION2_TOPLEFT_ANCHOR_POINT = new Point(box.getBlueCarouselCenterX(),box.getBlueCarouselCenterY());
+//        static final Point REGION3_TOPLEFT_ANCHOR_POINT = new Point(box.getBlueCarouselRightX(),box.getBlueCarouselRightY());
+
+//        //Red Carousel
+//        static final Point REGION1_TOPLEFT_ANCHOR_POINT = new Point(box.getRedCarouselLeftX(),box.getRedCarouselLeftY());
+//        static final Point REGION2_TOPLEFT_ANCHOR_POINT = new Point(box.getRedCarouselCenterX(),box.getRedCarouselCenterY());
+//        static final Point REGION3_TOPLEFT_ANCHOR_POINT = new Point(box.getRedCarouselRightX(),box.getRedCarouselRightY());
+
+        //Blue Warehouse
+        static final Point REGION1_TOPLEFT_ANCHOR_POINT = new Point(box.getBlueWarehouseLeftX(),box.getBlueWarehouseLeftY());
+        static final Point REGION2_TOPLEFT_ANCHOR_POINT = new Point(box.getBlueWarehouseCenterX(),box.getBlueWarehouseCenterY());
+        static final Point REGION3_TOPLEFT_ANCHOR_POINT = new Point(box.getBlueWarehouseRightX(),box.getBlueWarehouseRightY());
+
+//        //Red Warehouse
+//        static final Point REGION1_TOPLEFT_ANCHOR_POINT = new Point(box.getRedWarehouseLeftX(),box.getRedWarehouseLeftY());
+//        static final Point REGION2_TOPLEFT_ANCHOR_POINT = new Point(box.getRedWarehouseCenterX(),box.getRedWarehouseCenterY());
+//        static final Point REGION3_TOPLEFT_ANCHOR_POINT = new Point(box.getRedWarehouseRightX(),box.getRedWarehouseRightY());
+
         static final int REGION_WIDTH = 50;
         static final int REGION_HEIGHT = 50;
 

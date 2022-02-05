@@ -33,7 +33,7 @@ public class RedWarehouse extends LinearOpMode {
 
     //    //Vision
     OpenCvWebcam webcam;
-    public static String position;
+    public static String position = "LEFT";
     SkystoneDeterminationPipeline pipeline;
 
     //Road Runner
@@ -53,8 +53,9 @@ public class RedWarehouse extends LinearOpMode {
         robot.init(hardwareMap);
 
         //Set starting position
-        Pose2d startPose = new Pose2d(12.5, -62.5, Math.toRadians(90));
+        Pose2d startPose = new Pose2d(11, -62.5, Math.toRadians(90));
         drive.setPoseEstimate(startPose);
+        String route;
 
         // Camera Init
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
@@ -73,8 +74,6 @@ public class RedWarehouse extends LinearOpMode {
             }
         });
 
-        String route = "Default";
-
 //PATH CONSTANTS
 
         TrajectorySequence trajLeft = drive.trajectorySequenceBuilder(startPose)
@@ -89,8 +88,8 @@ public class RedWarehouse extends LinearOpMode {
                 .build();
 
         TrajectorySequence trajCenter = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(new Pose2d(-3, -41, Math.toRadians(120)))
-                .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(7.6, 3))
+                .lineToLinearHeading(new Pose2d(-3, -43, Math.toRadians(120)))
+                .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(8.2, 3))
                 .UNSTABLE_addTemporalMarkerOffset(1, () -> deposit())
                 .UNSTABLE_addTemporalMarkerOffset(2, () -> liftDown())
                 .waitSeconds(3)
@@ -100,7 +99,7 @@ public class RedWarehouse extends LinearOpMode {
                 .build();
 
         TrajectorySequence trajRight = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(new Pose2d(-3, -41, Math.toRadians(120)))
+                .lineToLinearHeading(new Pose2d(-3, -43, Math.toRadians(120)))
                 .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(6.5, 3))
                 .UNSTABLE_addTemporalMarkerOffset(1, () -> deposit())
                 .UNSTABLE_addTemporalMarkerOffset(2, () -> liftDown())
@@ -119,8 +118,8 @@ public class RedWarehouse extends LinearOpMode {
         telemetry.update();
 
         telemetry.update();
-          route = "LEFT";
-//        route = position;
+//          route = "LEFT";
+        route = position;
         telemetry.addData("Ring Position", position);
         telemetry.update();
         FtcDashboard.getInstance().stopCameraStream();
@@ -136,7 +135,7 @@ public class RedWarehouse extends LinearOpMode {
                 drive.followTrajectorySequence(trajRight);
                 break;
             default:
-
+                drive.followTrajectorySequence(trajLeft);
         }
 
     }
@@ -264,9 +263,9 @@ public class RedWarehouse extends LinearOpMode {
         static final Scalar GREEN = new Scalar(0, 255, 0);
 
         static DetectionSettings box = new DetectionSettings();
-        static final Point REGION1_TOPLEFT_ANCHOR_POINT = new Point(box.getBlueCarouselLeftX(),box.getBlueCarouselLeftY());
-        static final Point REGION2_TOPLEFT_ANCHOR_POINT = new Point(box.getBlueCarouselCenterX(),box.getBlueCarouselCenterY());
-        static final Point REGION3_TOPLEFT_ANCHOR_POINT = new Point(box.getBlueCarouselRightX(),box.getBlueCarouselRightY());
+        static final Point REGION1_TOPLEFT_ANCHOR_POINT = new Point(box.getRedWarehouseLeftX(),box.getRedWarehouseLeftY());
+        static final Point REGION2_TOPLEFT_ANCHOR_POINT = new Point(box.getRedWarehouseCenterX(),box.getRedWarehouseCenterY());
+        static final Point REGION3_TOPLEFT_ANCHOR_POINT = new Point(box.getRedWarehouseRightX(),box.getRedWarehouseRightY());
         static final int REGION_WIDTH = 50;
         static final int REGION_HEIGHT = 50;
 

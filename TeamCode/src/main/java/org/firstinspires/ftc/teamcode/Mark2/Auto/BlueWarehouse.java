@@ -37,7 +37,7 @@ public class BlueWarehouse extends LinearOpMode {
 
     //    //Vision
     OpenCvWebcam webcam;
-    public static String position;
+    public static String position = "LEFT";
     SkystoneDeterminationPipeline pipeline;
 
     //Road Runner
@@ -57,8 +57,9 @@ public class BlueWarehouse extends LinearOpMode {
         robot.init(hardwareMap);
 
         //Set starting position
-        Pose2d startPose = new Pose2d(12.5, 62.5, Math.toRadians(270));
+        Pose2d startPose = new Pose2d(11, 62.5, Math.toRadians(270));
         drive.setPoseEstimate(startPose);
+        String route;
 
         // Camera Init
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
@@ -76,8 +77,6 @@ public class BlueWarehouse extends LinearOpMode {
             public void onError(int errorCode) {
             }
         });
-
-        String route = "Default";
 
 //PATH CONSTANTS
 
@@ -123,8 +122,8 @@ public class BlueWarehouse extends LinearOpMode {
         telemetry.update();
 
         telemetry.update();
-          route = "RIGHT";
-//        route = position;
+//          route = "RIGHT";
+        route = position;
         telemetry.addData("Ring Position", position);
         telemetry.update();
         FtcDashboard.getInstance().stopCameraStream();
@@ -140,7 +139,7 @@ public class BlueWarehouse extends LinearOpMode {
                 drive.followTrajectorySequence(trajRight);
                 break;
             default:
-
+                drive.followTrajectorySequence(trajLeft);
         }
 
     }
@@ -268,9 +267,9 @@ public class BlueWarehouse extends LinearOpMode {
         static final Scalar GREEN = new Scalar(0, 255, 0);
 
         static DetectionSettings box = new DetectionSettings();
-        static final Point REGION1_TOPLEFT_ANCHOR_POINT = new Point(box.getBlueCarouselLeftX(),box.getBlueCarouselLeftY());
-        static final Point REGION2_TOPLEFT_ANCHOR_POINT = new Point(box.getBlueCarouselCenterX(),box.getBlueCarouselCenterY());
-        static final Point REGION3_TOPLEFT_ANCHOR_POINT = new Point(box.getBlueCarouselRightX(),box.getBlueCarouselRightY());
+        static final Point REGION1_TOPLEFT_ANCHOR_POINT = new Point(box.getBlueWarehouseLeftX(),box.getBlueWarehouseLeftY());
+        static final Point REGION2_TOPLEFT_ANCHOR_POINT = new Point(box.getBlueWarehouseCenterX(),box.getBlueWarehouseCenterY());
+        static final Point REGION3_TOPLEFT_ANCHOR_POINT = new Point(box.getBlueWarehouseRightX(),box.getBlueWarehouseRightY());
         static final int REGION_WIDTH = 50;
         static final int REGION_HEIGHT = 50;
 
