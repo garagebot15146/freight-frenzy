@@ -78,12 +78,12 @@ public class RedCarousel extends LinearOpMode {
 //PATH CONSTANTS
 
         TrajectorySequence trajLeft = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(new Pose2d(-19, -42.7, Math.toRadians(65)))
-                .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(10.5, 3))
+                .lineToLinearHeading(new Pose2d(-19, -42.7, Math.toRadians(60)))
+                .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(10.7, 3))
                 .UNSTABLE_addTemporalMarkerOffset(1, () -> deposit())
                 .UNSTABLE_addTemporalMarkerOffset(2, () -> liftDown())
                 .waitSeconds(3)
-                .lineToLinearHeading(new Pose2d(-64, -49, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(-64, -50, Math.toRadians(0)))
                 .lineToLinearHeading(new Pose2d(-64, -60, Math.toRadians(0)))
                 .UNSTABLE_addTemporalMarkerOffset(0.3, () -> duckRed(3))
                 .waitSeconds(3)
@@ -96,7 +96,7 @@ public class RedCarousel extends LinearOpMode {
                 .UNSTABLE_addTemporalMarkerOffset(1, () -> deposit())
                 .UNSTABLE_addTemporalMarkerOffset(2, () -> liftDown())
                 .waitSeconds(3)
-                .lineToLinearHeading(new Pose2d(-64, -49, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(-64, -49.5, Math.toRadians(0)))
                 .lineToLinearHeading(new Pose2d(-64, -63, Math.toRadians(0)))
                 .UNSTABLE_addTemporalMarkerOffset(0.3, () -> duckRed(3))
                 .waitSeconds(3)
@@ -124,7 +124,7 @@ public class RedCarousel extends LinearOpMode {
         telemetry.update();
 
         telemetry.update();
-         route = "CENTER";
+         route = "RIGHT";
 //         route = position;
         telemetry.addData("Ring Position", position);
         telemetry.update();
