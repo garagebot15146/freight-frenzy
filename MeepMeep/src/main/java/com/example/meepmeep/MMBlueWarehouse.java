@@ -15,11 +15,18 @@ public class MMBlueWarehouse {
                 // Set bot constraints: maxVel, maxAccel, maxAngVel, maxAngAccel, track width
                 .setConstraints(45, 45, Math.toRadians(300), Math.toRadians(300), 15)
                 .followTrajectorySequence(drive ->
-                                drive.trajectorySequenceBuilder(new Pose2d(34, 64, Math.toRadians(270)))
-                                .lineToLinearHeading(new Pose2d(0, 41.8, Math.toRadians(240)))
-                                .lineToLinearHeading(new Pose2d(5, 64, Math.toRadians(180)))
-                                .lineTo(new Vector2d(50, 64))
-                                .build()
+                                drive.trajectorySequenceBuilder(new Pose2d(12.5, 62.5, Math.toRadians(270)))
+                                        .lineToLinearHeading(new Pose2d(-3, 40, Math.toRadians(240)))
+//                                .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(11, 3))
+//                                .UNSTABLE_addTemporalMarkerOffset(1, () -> deposit())
+//                                .UNSTABLE_addTemporalMarkerOffset(2, () -> liftDown())
+                                        .waitSeconds(3)
+                                        .lineToLinearHeading(new Pose2d(6, 64, Math.toRadians(180)))
+
+//                                .UNSTABLE_addTemporalMarkerOffset(0.3, () -> duckBlue(3))
+
+                                        .lineToLinearHeading(new Pose2d(61, 64, Math.toRadians(180)))
+                                        .build()
                 );
 
 

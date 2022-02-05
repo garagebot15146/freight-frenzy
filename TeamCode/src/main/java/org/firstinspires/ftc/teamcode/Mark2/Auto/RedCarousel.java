@@ -2,8 +2,6 @@ package org.firstinspires.ftc.teamcode.Mark2.Auto;
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
-import com.acmerobotics.roadrunner.geometry.Vector2d;
-import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -24,18 +22,16 @@ import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvPipeline;
-
-import org.firstinspires.ftc.teamcode.Settings.HWMapTank;
 import org.openftc.easyopencv.OpenCvWebcam;
 
-@Autonomous(name = "Blue Warehouse", group = "Autonomous")
+@Autonomous(name = "Red Carousel", group = "Autonomous")
 //@Disabled
-public class BlueWarehouse extends LinearOpMode {
+public class RedCarousel extends LinearOpMode {
 
     //Runtime
     private ElapsedTime runtime = new ElapsedTime();
 
-    //    //Vision
+//    //Vision
     OpenCvWebcam webcam;
     public static String position;
     SkystoneDeterminationPipeline pipeline;
@@ -57,7 +53,7 @@ public class BlueWarehouse extends LinearOpMode {
         robot.init(hardwareMap);
 
         //Set starting position
-        Pose2d startPose = new Pose2d(12.5, 62.5, Math.toRadians(270));
+        Pose2d startPose = new Pose2d(-34, 64, Math.toRadians(270));
         drive.setPoseEstimate(startPose);
 
         // Camera Init
@@ -77,43 +73,48 @@ public class BlueWarehouse extends LinearOpMode {
             }
         });
 
-        String route = "Default";
+        String route = "CENTER";
 
 //PATH CONSTANTS
 
         TrajectorySequence trajLeft = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(new Pose2d(-3, 41, Math.toRadians(240)))
+                .lineToLinearHeading(new Pose2d(-19, 42.7, Math.toRadians(300)))
                 .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(11, 3))
                 .UNSTABLE_addTemporalMarkerOffset(1, () -> deposit())
                 .UNSTABLE_addTemporalMarkerOffset(2, () -> liftDown())
                 .waitSeconds(3)
-                .lineToLinearHeading(new Pose2d(6, 65.5, Math.toRadians(180)))
-                .lineToLinearHeading(new Pose2d(40, 65.5, Math.toRadians(180)))
-                .lineToLinearHeading(new Pose2d(40, 48, Math.toRadians(180)))
+                .lineToLinearHeading(new Pose2d(-64, 49, Math.toRadians(270)))
+                .back(5)
+                .UNSTABLE_addTemporalMarkerOffset(0.3, () -> duckBlue(3))
+                .waitSeconds(3)
+                .lineToLinearHeading(new Pose2d(-60, 36, Math.toRadians(180)))
                 .build();
 
         TrajectorySequence trajCenter = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(new Pose2d(-3, 41, Math.toRadians(240)))
-                .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(8, 3))
+                .lineToLinearHeading(new Pose2d(-19, 45, Math.toRadians(300)))
+                .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(9, 3))
                 .UNSTABLE_addTemporalMarkerOffset(1, () -> deposit())
                 .UNSTABLE_addTemporalMarkerOffset(2, () -> liftDown())
                 .waitSeconds(3)
-                .lineToLinearHeading(new Pose2d(6, 65.5, Math.toRadians(180)))
-                .lineToLinearHeading(new Pose2d(40, 65.5, Math.toRadians(180)))
-                .lineToLinearHeading(new Pose2d(40, 48, Math.toRadians(180)))
+                .lineToLinearHeading(new Pose2d(-64, 49, Math.toRadians(270)))
+                .back(5)
+                .UNSTABLE_addTemporalMarkerOffset(0.3, () -> duckBlue(3))
+                .waitSeconds(3)
+                .lineToLinearHeading(new Pose2d(-60, 36, Math.toRadians(180)))
                 .build();
 
         TrajectorySequence trajRight = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(new Pose2d(-3, 41, Math.toRadians(240)))
-                .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(5.9, 3))
+                .lineToLinearHeading(new Pose2d(-19, 45, Math.toRadians(300)))
+                .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(7, 3))
                 .UNSTABLE_addTemporalMarkerOffset(1, () -> deposit())
                 .UNSTABLE_addTemporalMarkerOffset(2, () -> liftDown())
                 .waitSeconds(3)
-                .lineToLinearHeading(new Pose2d(6, 65.5, Math.toRadians(180)))
-                .lineToLinearHeading(new Pose2d(40, 65.5, Math.toRadians(180)))
-                .lineToLinearHeading(new Pose2d(40, 48, Math.toRadians(180)))
+                .lineToLinearHeading(new Pose2d(-64, 49, Math.toRadians(270)))
+                .back(5)
+                .UNSTABLE_addTemporalMarkerOffset(0.3, () -> duckBlue(3))
+                .waitSeconds(3)
+                .lineToLinearHeading(new Pose2d(-60, 36, Math.toRadians(180)))
                 .build();
-
         telemetry.addData("Status", "Pipeline Initializing");
         telemetry.update();
 
@@ -123,8 +124,8 @@ public class BlueWarehouse extends LinearOpMode {
         telemetry.update();
 
         telemetry.update();
-          route = "RIGHT";
-//        route = position;
+         route = "RIGHT";
+//         route = position;
         telemetry.addData("Ring Position", position);
         telemetry.update();
         FtcDashboard.getInstance().stopCameraStream();
@@ -140,7 +141,8 @@ public class BlueWarehouse extends LinearOpMode {
                 drive.followTrajectorySequence(trajRight);
                 break;
             default:
-
+                telemetry.addData("Path Default", "Complete");
+                telemetry.update();
         }
 
     }
@@ -204,7 +206,7 @@ public class BlueWarehouse extends LinearOpMode {
 
     public void duckBlue(double seconds){
         runtime.reset();
-        robot.carouselMotor.setPower(-0.25);
+        robot.carouselMotor.setPower(-0.4);
         while (opModeIsActive() && runtime.seconds() < seconds) {
         }
         robot.carouselMotor.setPower(0);

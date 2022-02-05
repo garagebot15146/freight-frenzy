@@ -2,8 +2,6 @@ package org.firstinspires.ftc.teamcode.Mark2.Auto;
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
-import com.acmerobotics.roadrunner.geometry.Vector2d;
-import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -24,13 +22,11 @@ import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvPipeline;
-
-import org.firstinspires.ftc.teamcode.Settings.HWMapTank;
 import org.openftc.easyopencv.OpenCvWebcam;
 
-@Autonomous(name = "Blue Warehouse", group = "Autonomous")
+@Autonomous(name = "Red Warehouse", group = "Autonomous")
 //@Disabled
-public class BlueWarehouse extends LinearOpMode {
+public class RedWarehouse extends LinearOpMode {
 
     //Runtime
     private ElapsedTime runtime = new ElapsedTime();

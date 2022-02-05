@@ -137,7 +137,6 @@ public class BlueCarousel extends LinearOpMode {
         switch (route) {
             case "LEFT":
                 drive.followTrajectorySequence(trajLeft);
-//                liftUp(4, 3);
                 break;
             case "CENTER":
                 drive.followTrajectorySequence(trajCenter);
