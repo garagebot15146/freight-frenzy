@@ -77,12 +77,12 @@ public class RedWarehouse extends LinearOpMode {
 //PATH CONSTANTS
 
         TrajectorySequence trajLeft = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(new Pose2d(-3, -41, Math.toRadians(120)))
-                .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(10.5, 3))
+                .lineToLinearHeading(new Pose2d(-3, -43, Math.toRadians(120)))
+                .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(6.5, 3))
                 .UNSTABLE_addTemporalMarkerOffset(1, () -> deposit())
                 .UNSTABLE_addTemporalMarkerOffset(2, () -> liftDown())
-                .waitSeconds(4)
-                .lineToLinearHeading(new Pose2d(6, -65.5, Math.toRadians(180)))
+                .waitSeconds(3)
+                .lineToLinearHeading(new Pose2d(6, -66.5, Math.toRadians(180)))
                 .lineToLinearHeading(new Pose2d(40, -65.5, Math.toRadians(180)))
                 .lineToLinearHeading(new Pose2d(40, -48, Math.toRadians(180)))
                 .build();
@@ -99,12 +99,12 @@ public class RedWarehouse extends LinearOpMode {
                 .build();
 
         TrajectorySequence trajRight = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(new Pose2d(-3, -43, Math.toRadians(120)))
-                .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(6.5, 3))
+                .lineToLinearHeading(new Pose2d(-3, -41, Math.toRadians(120)))
+                .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(10.5, 3))
                 .UNSTABLE_addTemporalMarkerOffset(1, () -> deposit())
                 .UNSTABLE_addTemporalMarkerOffset(2, () -> liftDown())
-                .waitSeconds(3)
-                .lineToLinearHeading(new Pose2d(6, -66.5, Math.toRadians(180)))
+                .waitSeconds(4)
+                .lineToLinearHeading(new Pose2d(6, -65.5, Math.toRadians(180)))
                 .lineToLinearHeading(new Pose2d(40, -65.5, Math.toRadians(180)))
                 .lineToLinearHeading(new Pose2d(40, -48, Math.toRadians(180)))
                 .build();

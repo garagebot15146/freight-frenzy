@@ -81,8 +81,8 @@ public class BlueCarousel extends LinearOpMode {
 //PATH CONSTANTS
 
         TrajectorySequence trajLeft = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(new Pose2d(-19, 42.7, Math.toRadians(300)))
-                .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(11, 3))
+                .lineToLinearHeading(new Pose2d(-19, 45, Math.toRadians(300)))
+                .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(7, 3))
                 .UNSTABLE_addTemporalMarkerOffset(1, () -> deposit())
                 .UNSTABLE_addTemporalMarkerOffset(2, () -> liftDown())
                 .waitSeconds(3)
@@ -107,8 +107,8 @@ public class BlueCarousel extends LinearOpMode {
                 .build();
 
         TrajectorySequence trajRight = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(new Pose2d(-19, 45, Math.toRadians(300)))
-                .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(7, 3))
+                .lineToLinearHeading(new Pose2d(-19, 42.7, Math.toRadians(300)))
+                .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(11, 3))
                 .UNSTABLE_addTemporalMarkerOffset(1, () -> deposit())
                 .UNSTABLE_addTemporalMarkerOffset(2, () -> liftDown())
                 .waitSeconds(3)
@@ -118,6 +118,7 @@ public class BlueCarousel extends LinearOpMode {
                 .waitSeconds(3)
                 .lineToLinearHeading(new Pose2d(-60, 36, Math.toRadians(180)))
                 .build();
+
         telemetry.addData("Status", "Pipeline Initializing");
         telemetry.update();
 

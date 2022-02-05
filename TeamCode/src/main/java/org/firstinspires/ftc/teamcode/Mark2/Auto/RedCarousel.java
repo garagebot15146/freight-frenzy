@@ -77,16 +77,16 @@ public class RedCarousel extends LinearOpMode {
 //PATH CONSTANTS
 
         TrajectorySequence trajLeft = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(new Pose2d(-19, -42.7, Math.toRadians(60)))
-                .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(10.7, 3))
+                .lineToLinearHeading(new Pose2d(-19, -43.3, Math.toRadians(65)))
+                .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(6, 3))
                 .UNSTABLE_addTemporalMarkerOffset(1, () -> deposit())
-                .UNSTABLE_addTemporalMarkerOffset(2, () -> liftDown())
-                .waitSeconds(3)
-                .lineToLinearHeading(new Pose2d(-64, -50, Math.toRadians(0)))
-                .lineToLinearHeading(new Pose2d(-64, -60, Math.toRadians(0)))
+                .UNSTABLE_addTemporalMarkerOffset(3, () -> liftDown())
+                .waitSeconds(4)
+                .lineToLinearHeading(new Pose2d(-64, -49, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(-64, -63, Math.toRadians(0)))
                 .UNSTABLE_addTemporalMarkerOffset(0.3, () -> duckRed(3))
                 .waitSeconds(3)
-                .lineToLinearHeading(new Pose2d(-64, -40, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(-64, -41, Math.toRadians(0)))
                 .build();
 
         TrajectorySequence trajCenter = drive.trajectorySequenceBuilder(startPose)
@@ -103,17 +103,18 @@ public class RedCarousel extends LinearOpMode {
                 .build();
 
         TrajectorySequence trajRight = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(new Pose2d(-19, -42.7, Math.toRadians(65)))
-                .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(6, 3))
+                .lineToLinearHeading(new Pose2d(-19, -42.7, Math.toRadians(60)))
+                .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(10.7, 3))
                 .UNSTABLE_addTemporalMarkerOffset(1, () -> deposit())
                 .UNSTABLE_addTemporalMarkerOffset(2, () -> liftDown())
                 .waitSeconds(3)
-                .lineToLinearHeading(new Pose2d(-64, -49, Math.toRadians(0)))
-                .lineToLinearHeading(new Pose2d(-64, -63, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(-64, -50, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(-64, -60, Math.toRadians(0)))
                 .UNSTABLE_addTemporalMarkerOffset(0.3, () -> duckRed(3))
                 .waitSeconds(3)
                 .lineToLinearHeading(new Pose2d(-64, -40, Math.toRadians(0)))
                 .build();
+
         telemetry.addData("Status", "Pipeline Initializing");
         telemetry.update();
 
