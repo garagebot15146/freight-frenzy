@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.teamcode.Settings.HWMapTeleOp;
 
 @TeleOp(name = "TeleOp", group = "Iterative Opmode")
-//@Disabled
+@Disabled
 public class GarTeleOp extends OpMode {
 
     HWMapTeleOp robot = new HWMapTeleOp();
