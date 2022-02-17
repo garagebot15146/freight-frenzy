@@ -84,12 +84,20 @@ public class BlueWarehouse extends LinearOpMode {
         TrajectorySequence trajLeft = drive.trajectorySequenceBuilder(startPose)
                 .lineToLinearHeading(new Pose2d(-3, 40.6, Math.toRadians(240)))
                 .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(5.9, 3))
-                .UNSTABLE_addTemporalMarkerOffset(1, () -> deposit())
-                .UNSTABLE_addTemporalMarkerOffset(2, () -> liftDown())
-                .waitSeconds(3)
+                .UNSTABLE_addTemporalMarkerOffset(0.5, () -> deposit())
+                .UNSTABLE_addTemporalMarkerOffset(1, () -> liftDown())
+                .waitSeconds(1.5)
                 .lineToLinearHeading(new Pose2d(6, 65.5, Math.toRadians(180)))
-                .lineToLinearHeading(new Pose2d(40, 65.5, Math.toRadians(180)))
-                .lineToLinearHeading(new Pose2d(40, 48, Math.toRadians(180)))
+                .UNSTABLE_addTemporalMarkerOffset(0, () -> intake())
+                .lineToLinearHeading(new Pose2d(46, 65.5, Math.toRadians(180)))
+                .UNSTABLE_addTemporalMarkerOffset(0, () -> outake())
+                .lineToLinearHeading(new Pose2d(6, 65.5, Math.toRadians(180)))
+                .lineToLinearHeading(new Pose2d(-3, 40.6, Math.toRadians(240)))
+                .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(5.9, 3))
+                .UNSTABLE_addTemporalMarkerOffset(0.5, () -> deposit())
+                .UNSTABLE_addTemporalMarkerOffset(1, () -> liftDown())
+                .waitSeconds(1.5)
+                .lineToLinearHeading(new Pose2d(6, 65.5, Math.toRadians(180)))
                 .build();
 
         TrajectorySequence trajCenter = drive.trajectorySequenceBuilder(startPose)
@@ -200,6 +208,18 @@ public class BlueWarehouse extends LinearOpMode {
         while (opModeIsActive() && runtime.seconds() < seconds) {
         }
 
+    }
+
+    public void intake(){
+        robot.intakeMotor.setPower(-0.7);
+    }
+
+    public void outake(){
+        robot.intakeMotor.setPower(0.7);
+    }
+
+    public void intakeOff(){
+        robot.intakeMotor.setPower(0);
     }
 
     public void duckBlue(double seconds){

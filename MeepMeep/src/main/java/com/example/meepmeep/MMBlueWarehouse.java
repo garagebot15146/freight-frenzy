@@ -16,18 +16,15 @@ public class MMBlueWarehouse {
                 .setConstraints(45, 45, Math.toRadians(300), Math.toRadians(300), 15)
                 .followTrajectorySequence(drive ->
                                 drive.trajectorySequenceBuilder(new Pose2d(12.5, 62.5, Math.toRadians(270)))
-                                        .lineToLinearHeading(new Pose2d(-3, 40, Math.toRadians(240)))
-//                                .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(11, 3))
-//                                .UNSTABLE_addTemporalMarkerOffset(1, () -> deposit())
-//                                .UNSTABLE_addTemporalMarkerOffset(2, () -> liftDown())
+                                        .lineToLinearHeading(new Pose2d(-3, 40.6, Math.toRadians(240)))
+//                                        .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(5.9, 3))
+//                                        .UNSTABLE_addTemporalMarkerOffset(1, () -> deposit())
+//                                        .UNSTABLE_addTemporalMarkerOffset(2, () -> liftDown())
                                         .waitSeconds(3)
-                                        .lineToLinearHeading(new Pose2d(6, 64, Math.toRadians(180)))
-
-//                                .UNSTABLE_addTemporalMarkerOffset(0.3, () -> duckBlue(3))
-
-                                        .lineToLinearHeading(new Pose2d(61, 64, Math.toRadians(180)))
-                                        .build()
-                );
+                                        .lineToLinearHeading(new Pose2d(6, 65.5, Math.toRadians(180)))
+                                        .lineToLinearHeading(new Pose2d(40, 65.5, Math.toRadians(180)))
+                                        .lineToLinearHeading(new Pose2d(40, 48, Math.toRadians(180)))
+                                        .build());
 
 
         meepMeep.setBackground(MeepMeep.Background.FIELD_FREIGHTFRENZY_ADI_DARK)
