@@ -136,7 +136,7 @@ public class BlueWarehouse extends LinearOpMode {
                 .build();
 
         TrajectorySequence trajRight = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(new Pose2d(-5, 41.6, Math.toRadians(250)))
+                .lineToLinearHeading(new Pose2d(-5, 41, Math.toRadians(250)))
                 .waitSeconds(0.2)
                 .UNSTABLE_addTemporalMarkerOffset(0, () ->  depositCycle(11, 3))
                 .lineToLinearHeading(new Pose2d(-3, 69, Math.toRadians(180)))
@@ -151,13 +151,13 @@ public class BlueWarehouse extends LinearOpMode {
                 .lineToLinearHeading(new Pose2d(0, 72, Math.toRadians(180)))
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> intake())
                 .lineToLinearHeading(new Pose2d(55, 75, Math.toRadians(180)))
-                .waitSeconds(0.5)
+                .waitSeconds(0.43)
                 .UNSTABLE_addTemporalMarkerOffset(0.1, () -> outake())
                 .lineToLinearHeading(new Pose2d(0, 75, Math.toRadians(178)))
                 .lineToLinearHeading(new Pose2d(-5, 49, Math.toRadians(247)))
                 .waitSeconds(0.2)
                 .UNSTABLE_addTemporalMarkerOffset(0, () ->  depositCycleFinal(10.5, 3))
-                .waitSeconds(1)
+                .waitSeconds(0.9)
                 .lineToLinearHeading(new Pose2d(-3, 80, Math.toRadians(180)))
                 .lineToLinearHeading(new Pose2d(53, 80, Math.toRadians(180)))
                 .build();
