@@ -82,10 +82,34 @@ public class BlueWarehouse extends LinearOpMode {
 //PATH CONSTANTS
 
         TrajectorySequence trajLeft = drive.trajectorySequenceBuilder(startPose)
+                .lineToLinearHeading(new Pose2d(-5, 40.5, Math.toRadians(250)))
+                .waitSeconds(0.2)
+                .UNSTABLE_addTemporalMarkerOffset(0, () ->  depositCycle(6, 3))
+                .lineToLinearHeading(new Pose2d(-3, 69, Math.toRadians(180)))
+                .UNSTABLE_addTemporalMarkerOffset(0, () -> intake())
+                .lineToLinearHeading(new Pose2d(56, 72, Math.toRadians(180)))
+                .waitSeconds(0.2)
+                .UNSTABLE_addTemporalMarkerOffset(0.1, () -> outake())
+                .lineToLinearHeading(new Pose2d(0, 70, Math.toRadians(185)))
+                .lineToLinearHeading(new Pose2d(-7, 43.3, Math.toRadians(260)))
+                .waitSeconds(0.2)
+                .UNSTABLE_addTemporalMarkerOffset(0, () ->  depositCycle(11, 3))
+                .lineToLinearHeading(new Pose2d(0, 72, Math.toRadians(180)))
+                .UNSTABLE_addTemporalMarkerOffset(0, () -> intake())
+                .lineToLinearHeading(new Pose2d(56, 75, Math.toRadians(180)))
+                .waitSeconds(0.5)
+                .UNSTABLE_addTemporalMarkerOffset(0.1, () -> outake())
+                .lineToLinearHeading(new Pose2d(0, 75, Math.toRadians(185)))
+                .lineToLinearHeading(new Pose2d(-5, 49, Math.toRadians(260)))
+                .waitSeconds(0.2)
+                .UNSTABLE_addTemporalMarkerOffset(0, () ->  depositCycleFinal(11, 3))
+                .lineToLinearHeading(new Pose2d(-3, 80, Math.toRadians(180)))
+                .lineToLinearHeading(new Pose2d(50, 80, Math.toRadians(180)))
+                .build();
+
+        TrajectorySequence trajCenter = drive.trajectorySequenceBuilder(startPose)
                 .lineToLinearHeading(new Pose2d(-5, 41, Math.toRadians(255)))
-                .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(6.2, 3))
-                .UNSTABLE_addTemporalMarkerOffset(0.2, () -> deposit())
-                .UNSTABLE_addTemporalMarkerOffset(0.5, () -> liftDown())
+                .UNSTABLE_addTemporalMarkerOffset(0, () ->  depositCycle(7.7, 3))
                 .waitSeconds(0.6)
                 .lineToLinearHeading(new Pose2d(-3, 69, Math.toRadians(180)))
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> intake())
@@ -94,9 +118,7 @@ public class BlueWarehouse extends LinearOpMode {
                 .UNSTABLE_addTemporalMarkerOffset(0.1, () -> outake())
                 .lineToLinearHeading(new Pose2d(0, 70, Math.toRadians(185)))
                 .lineToLinearHeading(new Pose2d(-7, 43.3, Math.toRadians(255)))
-                .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(11, 3))
-                .UNSTABLE_addTemporalMarkerOffset(0.2, () -> deposit())
-                .UNSTABLE_addTemporalMarkerOffset(0.5, () -> liftDown())
+                .UNSTABLE_addTemporalMarkerOffset(0, () ->  depositCycle(11, 3))
                 .waitSeconds(0.6)
                 .lineToLinearHeading(new Pose2d(0, 72, Math.toRadians(180)))
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> intake())
@@ -105,74 +127,38 @@ public class BlueWarehouse extends LinearOpMode {
                 .UNSTABLE_addTemporalMarkerOffset(0.1, () -> outake())
                 .lineToLinearHeading(new Pose2d(0, 75, Math.toRadians(185)))
                 .lineToLinearHeading(new Pose2d(-5, 49, Math.toRadians(255)))
-                .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(11, 3))
-                .UNSTABLE_addTemporalMarkerOffset(0.2, () -> depositFinal())
+                .UNSTABLE_addTemporalMarkerOffset(0, () ->  depositCycleFinal(11, 3))
                 .waitSeconds(0.6)
                 .lineToLinearHeading(new Pose2d(-3, 80, Math.toRadians(180)))
                 .lineToLinearHeading(new Pose2d(45, 80, Math.toRadians(180)))
                 .build();
 
-        TrajectorySequence trajCenter = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(new Pose2d(-5, 39, Math.toRadians(235)))
-                .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(7.7, 3))
-                .UNSTABLE_addTemporalMarkerOffset(0.2, () -> deposit())
-                .UNSTABLE_addTemporalMarkerOffset(0.3, () -> liftDown())
-                .waitSeconds(0.32)
-                .lineToLinearHeading(new Pose2d(-3, 68, Math.toRadians(180)))
-                .UNSTABLE_addTemporalMarkerOffset(0, () -> intake())
-                .lineToLinearHeading(new Pose2d(53, 68, Math.toRadians(180)))
-                .waitSeconds(0.2)
-                .UNSTABLE_addTemporalMarkerOffset(0, () -> outake())
-                .lineToLinearHeading(new Pose2d(-3, 68, Math.toRadians(180)))
-                .lineToLinearHeading(new Pose2d(-3, 40.6, Math.toRadians(250)))
-                .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(11, 3))
-                .UNSTABLE_addTemporalMarkerOffset(0.2, () -> deposit())
-                .UNSTABLE_addTemporalMarkerOffset(0.4, () -> liftDown())
-                .waitSeconds(0.5)
-                .lineToLinearHeading(new Pose2d(-3, 68, Math.toRadians(180)))
-                .UNSTABLE_addTemporalMarkerOffset(0, () -> intake())
-                .lineToLinearHeading(new Pose2d(53, 68, Math.toRadians(180)))
-                .waitSeconds(0.2)
-                .UNSTABLE_addTemporalMarkerOffset(0, () -> outake())
-                .lineToLinearHeading(new Pose2d(-3, 70, Math.toRadians(180)))
-                .lineToLinearHeading(new Pose2d(-3, 41, Math.toRadians(240)))
-                .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(11, 3))
-                .UNSTABLE_addTemporalMarkerOffset(0.2, () -> deposit())
-                .waitSeconds(0.2)
+        TrajectorySequence trajRight = drive.trajectorySequenceBuilder(startPose)
+                .lineToLinearHeading(new Pose2d(-5, 41, Math.toRadians(255)))
+                .UNSTABLE_addTemporalMarkerOffset(0, () ->  depositCycle(11, 3))
+                .waitSeconds(0.6)
                 .lineToLinearHeading(new Pose2d(-3, 69, Math.toRadians(180)))
-                .lineToLinearHeading(new Pose2d(45, 65.5, Math.toRadians(180)))
+                .UNSTABLE_addTemporalMarkerOffset(0, () -> intake())
+                .lineToLinearHeading(new Pose2d(56, 72, Math.toRadians(180)))
+                .waitSeconds(0.2)
+                .UNSTABLE_addTemporalMarkerOffset(0.1, () -> outake())
+                .lineToLinearHeading(new Pose2d(0, 70, Math.toRadians(185)))
+                .lineToLinearHeading(new Pose2d(-7, 43.3, Math.toRadians(255)))
+                .UNSTABLE_addTemporalMarkerOffset(0, () ->  depositCycle(11, 3))
+                .waitSeconds(0.6)
+                .lineToLinearHeading(new Pose2d(0, 72, Math.toRadians(180)))
+                .UNSTABLE_addTemporalMarkerOffset(0, () -> intake())
+                .lineToLinearHeading(new Pose2d(56, 75, Math.toRadians(180)))
+                .waitSeconds(0.7)
+                .UNSTABLE_addTemporalMarkerOffset(0.1, () -> outake())
+                .lineToLinearHeading(new Pose2d(0, 75, Math.toRadians(185)))
+                .lineToLinearHeading(new Pose2d(-5, 49, Math.toRadians(255)))
+                .UNSTABLE_addTemporalMarkerOffset(0, () ->  depositCycleFinal(11, 3))
+                .waitSeconds(0.6)
+                .lineToLinearHeading(new Pose2d(-3, 80, Math.toRadians(180)))
+                .lineToLinearHeading(new Pose2d(45, 80, Math.toRadians(180)))
                 .build();
 
-        TrajectorySequence trajRight = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(new Pose2d(-5, 39, Math.toRadians(240)))
-                .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(11, 3))
-                .UNSTABLE_addTemporalMarkerOffset(0.2, () -> deposit())
-                .UNSTABLE_addTemporalMarkerOffset(0.3, () -> liftDown())
-                .waitSeconds(0.32)
-                .lineToLinearHeading(new Pose2d(-3, 68, Math.toRadians(180)))
-                .UNSTABLE_addTemporalMarkerOffset(0, () -> intake())
-                .lineToLinearHeading(new Pose2d(53, 68, Math.toRadians(180)))
-                .waitSeconds(0.2)
-                .UNSTABLE_addTemporalMarkerOffset(0, () -> outake())
-                .lineToLinearHeading(new Pose2d(-3, 68, Math.toRadians(180)))
-                .lineToLinearHeading(new Pose2d(-3, 40.6, Math.toRadians(250)))
-                .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(11, 3))
-                .UNSTABLE_addTemporalMarkerOffset(0.2, () -> deposit())
-                .UNSTABLE_addTemporalMarkerOffset(0.4, () -> liftDown())
-                .waitSeconds(0.5)
-                .lineToLinearHeading(new Pose2d(-3, 68, Math.toRadians(180)))
-                .UNSTABLE_addTemporalMarkerOffset(0, () -> intake())
-                .lineToLinearHeading(new Pose2d(53, 68, Math.toRadians(180)))
-                .waitSeconds(0.2)
-                .UNSTABLE_addTemporalMarkerOffset(0, () -> outake())
-                .lineToLinearHeading(new Pose2d(-3, 70, Math.toRadians(180)))
-                .lineToLinearHeading(new Pose2d(-3, 41, Math.toRadians(240)))
-                .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(11, 3))
-                .UNSTABLE_addTemporalMarkerOffset(0.2, () -> deposit())
-                .waitSeconds(0.2)
-                .lineToLinearHeading(new Pose2d(-3, 69, Math.toRadians(180)))
-                .lineToLinearHeading(new Pose2d(45, 65.5, Math.toRadians(180)))
-                .build();
 
         telemetry.addData("Status", "Pipeline Initializing");
         telemetry.update();
@@ -183,8 +169,8 @@ public class BlueWarehouse extends LinearOpMode {
         telemetry.update();
 
         telemetry.update();
-//          route = "LEFT";
-        route = position;
+          route = "LEFT";
+//        route = position;
         telemetry.addData("Ring Position", position);
         telemetry.update();
         FtcDashboard.getInstance().stopCameraStream();
@@ -203,6 +189,17 @@ public class BlueWarehouse extends LinearOpMode {
                 drive.followTrajectorySequence(trajLeft);
         }
 
+    }
+
+    public void depositCycle(double inches, double timeoutS){
+        liftUp(inches, timeoutS);
+        deposit();
+        liftDown();
+    }
+
+    public void depositCycleFinal(double inches, double timeoutS){
+        liftUp(inches, timeoutS);
+        depositFinal();
     }
 
     public void liftUp(double inches, double timeoutS) {
@@ -250,7 +247,7 @@ public class BlueWarehouse extends LinearOpMode {
 
     public void deposit(){
         robot.dropServo.setPosition(0.3);
-        pause(1);
+        pause(0.7);
         robot.dropServo.setPosition(0.75);
         telemetry.addData("Servo", "Worked");
     }
