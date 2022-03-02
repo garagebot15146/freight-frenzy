@@ -268,11 +268,11 @@ public class RedWarehouse extends LinearOpMode {
     }
 
     public void intake(){
-        robot.intakeMotor.setPower(-0.7);
+        robot.intakeMotor.setPower(-0.65);
     }
 
     public void outake(){
-        robot.intakeMotor.setPower(0.7);
+        robot.intakeMotor.setPower(0.8);
     }
 
     public void intakeOff(){
