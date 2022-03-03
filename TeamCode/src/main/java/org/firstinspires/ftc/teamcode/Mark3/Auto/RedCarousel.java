@@ -78,11 +78,9 @@ public class RedCarousel extends LinearOpMode {
 //PATH CONSTANTS
 
         TrajectorySequence trajLeft = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(new Pose2d(-18, -42.1, Math.toRadians(55)))
-                .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(6.2, 3))
-                .UNSTABLE_addTemporalMarkerOffset(0.6, () -> deposit())
-                .UNSTABLE_addTemporalMarkerOffset(1.6, () -> liftDown())
-                .waitSeconds(2.5)
+                .lineToLinearHeading(new Pose2d(-18, -42.9, Math.toRadians(55)))
+                .waitSeconds(0.2)
+                .UNSTABLE_addTemporalMarkerOffset(0, () ->  depositCycle(5.42, 3))
                 .lineToLinearHeading(new Pose2d(-59, -49, Math.toRadians(0)))
                 .lineToLinearHeading(new Pose2d(-59, -65, Math.toRadians(0)))
                 .UNSTABLE_addTemporalMarkerOffset(0.3, () -> duckRed(3))
@@ -97,11 +95,9 @@ public class RedCarousel extends LinearOpMode {
                 .build();
 
         TrajectorySequence trajCenter = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(new Pose2d(-18, -41.85, Math.toRadians(55)))
-                .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(7.7, 3))
-                .UNSTABLE_addTemporalMarkerOffset(0.6, () -> deposit())
-                .UNSTABLE_addTemporalMarkerOffset(1.6, () -> liftDown())
-                .waitSeconds(2.5)
+                .lineToLinearHeading(new Pose2d(-18, -42.5, Math.toRadians(55)))
+                .waitSeconds(0.2)
+                .UNSTABLE_addTemporalMarkerOffset(0, () ->  depositCycle(7.7, 3))
                 .lineToLinearHeading(new Pose2d(-59, -49, Math.toRadians(0)))
                 .lineToLinearHeading(new Pose2d(-59, -65, Math.toRadians(0)))
                 .UNSTABLE_addTemporalMarkerOffset(0.3, () -> duckRed(3))
@@ -117,10 +113,8 @@ public class RedCarousel extends LinearOpMode {
 
         TrajectorySequence trajRight = drive.trajectorySequenceBuilder(startPose)
                 .lineToLinearHeading(new Pose2d(-18, -42.1, Math.toRadians(55)))
-                .UNSTABLE_addTemporalMarkerOffset(0, () ->  liftUp(11, 3))
-                .UNSTABLE_addTemporalMarkerOffset(0.6, () -> deposit())
-                .UNSTABLE_addTemporalMarkerOffset(1.6, () -> liftDown())
-                .waitSeconds(2.5)
+                .waitSeconds(0.2)
+                .UNSTABLE_addTemporalMarkerOffset(0, () ->  depositCycle(11, 3))
                 .lineToLinearHeading(new Pose2d(-59, -49, Math.toRadians(0)))
                 .lineToLinearHeading(new Pose2d(-59, -65, Math.toRadians(0)))
                 .UNSTABLE_addTemporalMarkerOffset(0.3, () -> duckRed(3))
@@ -163,6 +157,12 @@ public class RedCarousel extends LinearOpMode {
                 drive.followTrajectorySequence(trajLeft);
         }
 
+    }
+
+    public void depositCycle(double inches, double timeoutS){
+        liftUp(inches, timeoutS);
+        deposit();
+        liftDown();
     }
 
     public void liftUp(double inches, double timeoutS) {
