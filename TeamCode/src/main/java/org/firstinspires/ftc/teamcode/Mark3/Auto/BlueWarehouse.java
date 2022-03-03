@@ -252,12 +252,10 @@ public class BlueWarehouse extends LinearOpMode {
         robot.dropServo.setPosition(0.3);
         pause(0.7);
         robot.dropServo.setPosition(0.75);
-        telemetry.addData("Servo", "Worked");
     }
 
     public void depositFinal(){
         robot.dropServo.setPosition(0.3);
-        telemetry.addData("Servo", "Worked");
     }
 
     public void pause(double seconds){
