@@ -96,6 +96,7 @@ public class BlueCarousel extends LinearOpMode {
                 .UNSTABLE_addTemporalMarkerOffset(0.3, () -> duckBlue(3))
                 .waitSeconds(3)
                 .lineToLinearHeading(new Pose2d(-60, 36, Math.toRadians(180)))
+                .forward(2)
                 .build();
 
         TrajectorySequence trajCenter = drive.trajectorySequenceBuilder(startPose)
@@ -113,6 +114,7 @@ public class BlueCarousel extends LinearOpMode {
                 .UNSTABLE_addTemporalMarkerOffset(0.3, () -> duckBlue(3))
                 .waitSeconds(3)
                 .lineToLinearHeading(new Pose2d(-60, 36, Math.toRadians(180)))
+                .forward(2)
                 .build();
 
         TrajectorySequence trajRight = drive.trajectorySequenceBuilder(startPose)
@@ -130,6 +132,7 @@ public class BlueCarousel extends LinearOpMode {
                 .UNSTABLE_addTemporalMarkerOffset(0.3, () -> duckBlue(3))
                 .waitSeconds(3)
                 .lineToLinearHeading(new Pose2d(-60, 36, Math.toRadians(180)))
+                .forward(2)
                 .build();
 
         telemetry.addData("Status", "Pipeline Initializing");
