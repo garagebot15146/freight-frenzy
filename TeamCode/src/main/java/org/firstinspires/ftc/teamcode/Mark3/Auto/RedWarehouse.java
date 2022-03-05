@@ -105,6 +105,7 @@ public class RedWarehouse extends LinearOpMode {
                 .UNSTABLE_addTemporalMarkerOffset(0, () ->  depositCycle(10.7, 3))
                 .lineToLinearHeading(new Pose2d(-3, -75, Math.toRadians(177)))
                 .lineToLinearHeading(new Pose2d(51, -75, Math.toRadians(177)))
+                .UNSTABLE_addTemporalMarkerOffset(0, () -> liftDown())
                 .build();
 
         TrajectorySequence trajCenter = drive.trajectorySequenceBuilder(startPose)
@@ -131,6 +132,7 @@ public class RedWarehouse extends LinearOpMode {
                 .UNSTABLE_addTemporalMarkerOffset(0, () ->  depositCycle(10.7, 3))
                 .lineToLinearHeading(new Pose2d(-3, -75, Math.toRadians(177)))
                 .lineToLinearHeading(new Pose2d(51, -75, Math.toRadians(177)))
+                .UNSTABLE_addTemporalMarkerOffset(0, () -> liftDown())
                 .build();
 
         TrajectorySequence trajRight = drive.trajectorySequenceBuilder(startPose)
@@ -157,6 +159,7 @@ public class RedWarehouse extends LinearOpMode {
                 .UNSTABLE_addTemporalMarkerOffset(0, () ->  depositCycle(10.7, 3))
                 .lineToLinearHeading(new Pose2d(-3, -75, Math.toRadians(177)))
                 .lineToLinearHeading(new Pose2d(51, -75, Math.toRadians(177)))
+                .UNSTABLE_addTemporalMarkerOffset(0, () -> liftDown())
                 .build();
 
         telemetry.addData("Status", "Pipeline Initializing");

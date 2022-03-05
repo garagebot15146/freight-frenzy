@@ -105,6 +105,7 @@ public class BlueWarehouse extends LinearOpMode {
                 .UNSTABLE_addTemporalMarkerOffset(0, () ->  depositCycle(10.7, 3))
                 .lineToLinearHeading(new Pose2d(-3, 80, Math.toRadians(180)))
                 .lineToLinearHeading(new Pose2d(53, 80, Math.toRadians(180)))
+                .UNSTABLE_addTemporalMarkerOffset(0, () -> liftDown())
                 .build();
 
         TrajectorySequence trajCenter = drive.trajectorySequenceBuilder(startPose)
@@ -131,6 +132,7 @@ public class BlueWarehouse extends LinearOpMode {
                 .UNSTABLE_addTemporalMarkerOffset(0, () ->  depositCycle(10.7, 3))
                 .lineToLinearHeading(new Pose2d(-3, 80, Math.toRadians(180)))
                 .lineToLinearHeading(new Pose2d(53, 80, Math.toRadians(180)))
+                .UNSTABLE_addTemporalMarkerOffset(0, () -> liftDown())
                 .build();
 
         TrajectorySequence trajRight = drive.trajectorySequenceBuilder(startPose)
@@ -157,6 +159,7 @@ public class BlueWarehouse extends LinearOpMode {
                 .UNSTABLE_addTemporalMarkerOffset(0, () ->  depositCycle(10.7, 3))
                 .lineToLinearHeading(new Pose2d(-3, 80, Math.toRadians(180)))
                 .lineToLinearHeading(new Pose2d(53, 80, Math.toRadians(180)))
+                .UNSTABLE_addTemporalMarkerOffset(0, () -> liftDown())
                 .build();
 
 
@@ -235,15 +238,6 @@ public class BlueWarehouse extends LinearOpMode {
         robot.liftMotor.setPower(0);
     }
 
-    public void liftReset(double timeoutS){
-        robot.liftMotor.setTargetPosition(0);
-        runtime.reset();
-        robot.liftMotor.setPower(0.3);
-        robot.liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        while (opModeIsActive() && robot.liftMotor.isBusy() && (runtime.seconds() < timeoutS)) {
-        }
-        robot.liftMotor.setPower(0);
-    }
 
     public void deposit(){
         robot.dropServo.setPosition(0.3);
