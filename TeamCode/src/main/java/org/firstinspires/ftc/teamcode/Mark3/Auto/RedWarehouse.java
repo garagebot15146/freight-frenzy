@@ -38,7 +38,7 @@ public class RedWarehouse extends LinearOpMode {
 
     //    //Vision
     OpenCvWebcam webcam;
-    public static String position = "LEFT";
+    public static String position = "RIGHT";
     SkystoneDeterminationPipeline pipeline;
 
     //Road Runner
@@ -82,9 +82,9 @@ public class RedWarehouse extends LinearOpMode {
 //PATH CONSTANTS
 
         TrajectorySequence trajLeft = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(new Pose2d(-5, -46, Math.toRadians(110)))
+                .lineToLinearHeading(new Pose2d(-5, -45, Math.toRadians(110)))
                 .waitSeconds(0.2)
-                .UNSTABLE_addTemporalMarkerOffset(0, () ->  depositCycle(7.5, 3))
+                .UNSTABLE_addTemporalMarkerOffset(0, () ->  depositCycle(6.9, 3))
                 .lineToLinearHeading(new Pose2d(-3, -70, Math.toRadians(178)))
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> intake())
                 .lineToLinearHeading(new Pose2d(53, -70, Math.toRadians(178)))
@@ -94,17 +94,17 @@ public class RedWarehouse extends LinearOpMode {
                 .lineToLinearHeading(new Pose2d(-6, -49.2, Math.toRadians(118)))
                 .waitSeconds(0.3)
                 .UNSTABLE_addTemporalMarkerOffset(0, () ->  depositCycle(10.5, 3))
-                .lineToLinearHeading(new Pose2d(0, -74, Math.toRadians(178)))
+                .lineToLinearHeading(new Pose2d(0, -77, Math.toRadians(178)))
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> intake())
-                .lineToLinearHeading(new Pose2d(55, -74, Math.toRadians(175)))
+                .lineToLinearHeading(new Pose2d(51, -75, Math.toRadians(180)))
                 .waitSeconds(0.3)
                 .UNSTABLE_addTemporalMarkerOffset(0.1, () -> outake())
-                .lineToLinearHeading(new Pose2d(0, -74, Math.toRadians(185)))
-                .lineToLinearHeading(new Pose2d(-6, -49.2, Math.toRadians(118)))
+                .lineToLinearHeading(new Pose2d(0, -83, Math.toRadians(177)))
+                .lineToLinearHeading(new Pose2d(-5, -49.2, Math.toRadians(130)))
                 .waitSeconds(0.2)
                 .UNSTABLE_addTemporalMarkerOffset(0, () ->  depositCycle(10.7, 3))
-                .lineToLinearHeading(new Pose2d(-3, -75, Math.toRadians(177)))
-                .lineToLinearHeading(new Pose2d(51, -75, Math.toRadians(177)))
+                .lineToLinearHeading(new Pose2d(-3, -80, Math.toRadians(177)))
+                .lineToLinearHeading(new Pose2d(51, -80, Math.toRadians(177)))
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> liftDown())
                 .build();
 
@@ -126,7 +126,7 @@ public class RedWarehouse extends LinearOpMode {
                 .lineToLinearHeading(new Pose2d(55, -74, Math.toRadians(175)))
                 .waitSeconds(0.3)
                 .UNSTABLE_addTemporalMarkerOffset(0.1, () -> outake())
-                .lineToLinearHeading(new Pose2d(0, -74, Math.toRadians(185)))
+                .lineToLinearHeading(new Pose2d(0, -78, Math.toRadians(185)))
                 .lineToLinearHeading(new Pose2d(-6, -49.2, Math.toRadians(118)))
                 .waitSeconds(0.2)
                 .UNSTABLE_addTemporalMarkerOffset(0, () ->  depositCycle(10.7, 3))
