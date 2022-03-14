@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode.Lab;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -7,7 +8,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import org.firstinspires.ftc.teamcode.Settings.HWMapTeleOp;
 
 @TeleOp(name = "EncoderTest", group = "Iterative Opmode")
-//@Disabled
+@Disabled
 public class EncoderTest extends OpMode {
 
     HWMapTeleOp robot = new HWMapTeleOp();

@@ -82,18 +82,23 @@ public class BlueWarehouse extends LinearOpMode {
 //PATH CONSTANTS
 
         TrajectorySequence trajLeft = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(new Pose2d(-8, 40.5, Math.toRadians(250)))
+                .lineToLinearHeading(new Pose2d(-8, 43, Math.toRadians(250)))
                 .waitSeconds(0.2)
-                .UNSTABLE_addTemporalMarkerOffset(0, () ->  depositCycle(6, 3))
-                .lineToLinearHeading(new Pose2d(-3, 69, Math.toRadians(180)))
+                .UNSTABLE_addTemporalMarkerOffset(0, () ->  depositCycle(6.2, 3))
+                .lineToLinearHeading(new Pose2d(-3, 70, Math.toRadians(180)))
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> intake())
-                .lineToLinearHeading(new Pose2d(53, 72, Math.toRadians(180)))
-                .waitSeconds(0.2)
+                .lineToLinearHeading(new Pose2d(60, 72, Math.toRadians(180)))
+                .waitSeconds(1)
+                .lineToLinearHeading(new Pose2d(66, 65, Math.toRadians(180)))
+                .waitSeconds(1)
+                .lineToLinearHeading(new Pose2d(60, 72, Math.toRadians(180)))
                 .UNSTABLE_addTemporalMarkerOffset(0.1, () -> outake())
+                .waitSeconds(1)
                 .lineToLinearHeading(new Pose2d(0, 70, Math.toRadians(178)))
-                .lineToLinearHeading(new Pose2d(-4, 50, Math.toRadians(245)))
+                .lineToLinearHeading(new Pose2d(-4, 42, Math.toRadians(245)))
+                .UNSTABLE_addTemporalMarkerOffset(0, () -> intakeOff())
                 .waitSeconds(0.2)
-                .UNSTABLE_addTemporalMarkerOffset(0, () ->  depositCycle(10.5, 3))
+                .UNSTABLE_addTemporalMarkerOffset(0, () ->  depositCycle(10.8, 3))
                 .lineToLinearHeading(new Pose2d(0, 72, Math.toRadians(180)))
                 .lineToLinearHeading(new Pose2d(55, 75, Math.toRadians(180)))
                 .build();
@@ -144,11 +149,6 @@ public class BlueWarehouse extends LinearOpMode {
         liftDown();
     }
 
-    public void depositCycleFinal(double inches, double timeoutS){
-        liftUp(inches, timeoutS);
-        depositFinal();
-    }
-
     public void liftUp(double inches, double timeoutS) {
         robot.liftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
@@ -165,6 +165,7 @@ public class BlueWarehouse extends LinearOpMode {
         while (opModeIsActive() && robot.liftMotor.isBusy() && (runtime.seconds() < timeoutS)) {
 
         }
+
     }
 
     public void liftDown() {
@@ -189,9 +190,6 @@ public class BlueWarehouse extends LinearOpMode {
         robot.dropServo.setPosition(0.75);
     }
 
-    public void depositFinal(){
-        robot.dropServo.setPosition(0.3);
-    }
 
     public void pause(double seconds){
         runtime.reset();
