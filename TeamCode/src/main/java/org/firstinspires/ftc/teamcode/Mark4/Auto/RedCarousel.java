@@ -2,8 +2,6 @@ package org.firstinspires.ftc.teamcode.Mark4.Auto;
 
 import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.roadrunner.geometry.Pose2d;
-import com.acmerobotics.roadrunner.geometry.Vector2d;
-import com.acmerobotics.roadrunner.trajectory.Trajectory;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -25,13 +23,11 @@ import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvPipeline;
-
-import org.firstinspires.ftc.teamcode.Settings.HWMapTank;
 import org.openftc.easyopencv.OpenCvWebcam;
 
-@Autonomous(name = "Red Warehouse", group = "Autonomous")
+@Autonomous(name = "Red Carousel", group = "Autonomous")
 //@Disabled
-public class RedWarehouse extends LinearOpMode {
+public class RedCarousel extends LinearOpMode {
 
     //Runtime
     private ElapsedTime runtime = new ElapsedTime();
@@ -58,7 +54,7 @@ public class RedWarehouse extends LinearOpMode {
         robot.init(hardwareMap);
 
         //Set starting position
-        Pose2d startPose = new Pose2d(11, -62.5, Math.toRadians(90));
+        Pose2d startPose = new Pose2d(-34, -64, Math.toRadians(90));
         drive.setPoseEstimate(startPose);
         String route;
 
@@ -82,38 +78,54 @@ public class RedWarehouse extends LinearOpMode {
 //PATH CONSTANTS
 
         TrajectorySequence trajLeft = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(new Pose2d(-5, -45, Math.toRadians(110)))
+                .lineToLinearHeading(new Pose2d(-19, -43, Math.toRadians(55)))
                 .waitSeconds(0.2)
-                 .UNSTABLE_addTemporalMarkerOffset(0, () ->  depositCycle(6.9, 3))
-                .lineToLinearHeading(new Pose2d(0, -68, Math.toRadians(180)))
-                .UNSTABLE_addTemporalMarkerOffset(0, () -> intake())
-                .lineToLinearHeading(new Pose2d(53, -68, Math.toRadians(178)))
-                .waitSeconds(0.2)
-                .UNSTABLE_addTemporalMarkerOffset(0.1, () -> outake())
-                .lineToLinearHeading(new Pose2d(0, -68, Math.toRadians(185)))
-                .lineToLinearHeading(new Pose2d(-5, -45, Math.toRadians(120)))
-                .waitSeconds(0.3)
-                .UNSTABLE_addTemporalMarkerOffset(0, () ->  depositCycle(10.7, 3))
-                .lineToLinearHeading(new Pose2d(0, -68, Math.toRadians(178)))
-                .UNSTABLE_addTemporalMarkerOffset(0, () -> intake())
-                .lineToLinearHeading(new Pose2d(51, -68, Math.toRadians(178)))
-                .waitSeconds(0.3)
-                .UNSTABLE_addTemporalMarkerOffset(0.1, () -> outake())
-                .lineToLinearHeading(new Pose2d(0, -68, Math.toRadians(185)))
-                .lineToLinearHeading(new Pose2d(-5, -45, Math.toRadians(120)))
-                .waitSeconds(0.2)
-                .UNSTABLE_addTemporalMarkerOffset(0, () ->  depositCycle(10.7, 3))
-                .lineToLinearHeading(new Pose2d(0, -68, Math.toRadians(178)))
-                .lineToLinearHeading(new Pose2d(51, -68, Math.toRadians(178)))
-                .UNSTABLE_addTemporalMarkerOffset(0, () -> liftDown())
+                .UNSTABLE_addTemporalMarkerOffset(0, () ->  depositCycle(5.42, 3))
+                .lineToLinearHeading(new Pose2d(-59, -49, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(-59, -65, Math.toRadians(0)))
+                .UNSTABLE_addTemporalMarkerOffset(0.3, () -> duckRed(3))
+                .waitSeconds(3)
+                .lineToLinearHeading(new Pose2d(-59, -67, Math.toRadians(0)))
+                .UNSTABLE_addTemporalMarkerOffset(0.3, () -> duckRed(2))
+                .waitSeconds(3)
+                .lineToLinearHeading(new Pose2d(-59, -70, Math.toRadians(0)))
+                .UNSTABLE_addTemporalMarkerOffset(0.3, () -> duckRed(2))
+                .waitSeconds(3)
+                .lineToLinearHeading(new Pose2d(-61, -45, Math.toRadians(0)))
                 .build();
 
         TrajectorySequence trajCenter = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(new Pose2d(-5, -42, Math.toRadians(110)))
+                .lineToLinearHeading(new Pose2d(-20, -43, Math.toRadians(55)))
+                .waitSeconds(0.2)
+                .UNSTABLE_addTemporalMarkerOffset(0, () ->  depositCycle(8.2, 3))
+                .lineToLinearHeading(new Pose2d(-59, -49, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(-59, -65, Math.toRadians(0)))
+                .UNSTABLE_addTemporalMarkerOffset(0.3, () -> duckRed(3))
+                .waitSeconds(3)
+                .lineToLinearHeading(new Pose2d(-59, -67, Math.toRadians(0)))
+                .UNSTABLE_addTemporalMarkerOffset(0.3, () -> duckRed(2))
+                .waitSeconds(3)
+                .lineToLinearHeading(new Pose2d(-59, -70, Math.toRadians(0)))
+                .UNSTABLE_addTemporalMarkerOffset(0.3, () -> duckRed(2))
+                .waitSeconds(3)
+                .lineToLinearHeading(new Pose2d(-61, -45, Math.toRadians(0)))
                 .build();
 
         TrajectorySequence trajRight = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(new Pose2d(-5, -41.9, Math.toRadians(110)))
+                .lineToLinearHeading(new Pose2d(-20, -42.1, Math.toRadians(55)))
+                .waitSeconds(0.2)
+                .UNSTABLE_addTemporalMarkerOffset(0, () ->  depositCycle(11, 3))
+                .lineToLinearHeading(new Pose2d(-59, -49, Math.toRadians(0)))
+                .lineToLinearHeading(new Pose2d(-59, -65, Math.toRadians(0)))
+                .UNSTABLE_addTemporalMarkerOffset(0.3, () -> duckRed(3))
+                .waitSeconds(3)
+                .lineToLinearHeading(new Pose2d(-59, -67, Math.toRadians(0)))
+                .UNSTABLE_addTemporalMarkerOffset(0.3, () -> duckRed(2))
+                .waitSeconds(3)
+                .lineToLinearHeading(new Pose2d(-59, -70, Math.toRadians(0)))
+                .UNSTABLE_addTemporalMarkerOffset(0.3, () -> duckRed(2))
+                .waitSeconds(3)
+                .lineToLinearHeading(new Pose2d(-61, -45, Math.toRadians(0)))
                 .build();
 
         telemetry.addData("Status", "Pipeline Initializing");
@@ -125,8 +137,8 @@ public class RedWarehouse extends LinearOpMode {
         telemetry.update();
 
         telemetry.update();
-        route = "LEFT";
-//        route = position;
+//         route = "RIGHT";
+        route = position;
         telemetry.addData("Ring Position", position);
         telemetry.update();
         FtcDashboard.getInstance().stopCameraStream();
@@ -153,11 +165,6 @@ public class RedWarehouse extends LinearOpMode {
         liftDown();
     }
 
-    public void depositCycleFinal(double inches, double timeoutS){
-        liftUp(inches, timeoutS);
-        depositFinal();
-    }
-
     public void liftUp(double inches, double timeoutS) {
         robot.liftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
@@ -180,7 +187,7 @@ public class RedWarehouse extends LinearOpMode {
         robot.liftMotor.setTargetPosition(0);
         runtime.reset();
 
-        robot.liftMotor.setPower(0.57);
+        robot.liftMotor.setPower(0.3);
 
         robot.liftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
@@ -191,7 +198,7 @@ public class RedWarehouse extends LinearOpMode {
         robot.liftMotor.setPower(0);
     }
 
-    public void liftReset(double timeoutS){
+    public void liftReset(double timeoutS) {
         robot.liftMotor.setTargetPosition(0);
         runtime.reset();
         robot.liftMotor.setPower(0.3);
@@ -201,42 +208,40 @@ public class RedWarehouse extends LinearOpMode {
         robot.liftMotor.setPower(0);
     }
 
-    public void deposit(){
+    public void deposit() {
         robot.dropServo.setPosition(0.3);
-        pause(0.7);
+        pause(1);
         robot.dropServo.setPosition(0.75);
+        telemetry.addData("Servo", "Worked");
     }
 
-    public void depositFinal(){
-        robot.dropServo.setPosition(0.3);
-    }
-
-    public void pause(double seconds){
+    public void pause(double seconds) {
         runtime.reset();
         while (opModeIsActive() && runtime.seconds() < seconds) {
         }
 
     }
 
+    public void duckRed(double seconds) {
+        runtime.reset();
+        robot.carouselMotor.setPower(0.4);
+        while (opModeIsActive() && runtime.seconds() < seconds) {
+        }
+        robot.carouselMotor.setPower(0);
+    }
+
     public void intake(){
-        robot.intakeMotor.setPower(-0.65);
+        robot.intakeMotor.setPower(-0.7);
     }
 
     public void outake(){
-        robot.intakeMotor.setPower(0.8);
+        robot.intakeMotor.setPower(0.7);
     }
 
     public void intakeOff(){
         robot.intakeMotor.setPower(0);
     }
 
-    public void duckBlue(double seconds){
-        runtime.reset();
-        robot.carouselMotor.setPower(-0.25);
-        while (opModeIsActive() && runtime.seconds() < seconds) {
-        }
-        robot.carouselMotor.setPower(0);
-    }
     public void encoderDrive(double speed, double leftInches, double rightInches, double timeoutS) {
         int newLeftFrontTarget;
         int newLeftRearTarget;
@@ -248,10 +253,10 @@ public class RedWarehouse extends LinearOpMode {
         if (opModeIsActive()) {
 
             // Determine new target position, and pass to motor controller
-            newLeftFrontTarget = robot.leftFrontMotor.getCurrentPosition() + (int)(leftInches * 50);
-            newLeftRearTarget = robot.leftBackMotor.getCurrentPosition() + (int)(leftInches * 200);
-            newRightFrontTarget = robot.rightFrontMotor.getCurrentPosition() + (int)(rightInches * 200);
-            newRightRearTarget = robot.rightBackMotor.getCurrentPosition() + (int)(rightInches * 200);
+            newLeftFrontTarget = robot.leftFrontMotor.getCurrentPosition() + (int) (leftInches * 50);
+            newLeftRearTarget = robot.leftBackMotor.getCurrentPosition() + (int) (leftInches * 200);
+            newRightFrontTarget = robot.rightFrontMotor.getCurrentPosition() + (int) (rightInches * 200);
+            newRightRearTarget = robot.rightBackMotor.getCurrentPosition() + (int) (rightInches * 200);
 
             robot.leftFrontMotor.setTargetPosition(newLeftFrontTarget);
             robot.leftBackMotor.setTargetPosition(newLeftRearTarget);
@@ -289,16 +294,15 @@ public class RedWarehouse extends LinearOpMode {
     }
 
     // Pipeline class
-    public static class SkystoneDeterminationPipeline extends OpenCvPipeline
-    {
+    public static class SkystoneDeterminationPipeline extends OpenCvPipeline {
 
         static final Scalar BLUE = new Scalar(0, 0, 255);
         static final Scalar GREEN = new Scalar(0, 255, 0);
 
         static DetectionSettings box = new DetectionSettings();
-        static final Point REGION1_TOPLEFT_ANCHOR_POINT = new Point(box.getBlueWarehouseLeftX(),box.getBlueWarehouseLeftY());
-        static final Point REGION2_TOPLEFT_ANCHOR_POINT = new Point(box.getBlueWarehouseCenterX(),box.getBlueWarehouseCenterY());
-        static final Point REGION3_TOPLEFT_ANCHOR_POINT = new Point(box.getBlueWarehouseRightX(),box.getBlueWarehouseRightY());
+        static final Point REGION1_TOPLEFT_ANCHOR_POINT = new Point(box.getRedCarouselLeftX(), box.getRedCarouselLeftY());
+        static final Point REGION2_TOPLEFT_ANCHOR_POINT = new Point(box.getRedCarouselCenterX(), box.getRedCarouselCenterY());
+        static final Point REGION3_TOPLEFT_ANCHOR_POINT = new Point(box.getRedCarouselRightX(), box.getRedCarouselRightY());
         static final int REGION_WIDTH = 50;
         static final int REGION_HEIGHT = 50;
 
@@ -329,15 +333,13 @@ public class RedWarehouse extends LinearOpMode {
         Mat Cb = new Mat();
         int avg1, avg2, avg3;
 
-        void inputToCb(Mat input)
-        {
+        void inputToCb(Mat input) {
             Imgproc.cvtColor(input, YCrCb, Imgproc.COLOR_RGB2YCrCb);
             Core.extractChannel(YCrCb, Cb, 2);
         }
 
         @Override
-        public void init(Mat firstFrame)
-        {
+        public void init(Mat firstFrame) {
             inputToCb(firstFrame);
             region1_Cb = Cb.submat(new Rect(region1_pointA, region1_pointB));
             region2_Cb = Cb.submat(new Rect(region2_pointA, region2_pointB));
@@ -345,8 +347,7 @@ public class RedWarehouse extends LinearOpMode {
         }
 
         @Override
-        public Mat processFrame(Mat input)
-        {
+        public Mat processFrame(Mat input) {
             inputToCb(input);
             avg1 = (int) Core.mean(region1_Cb).val[0];
             avg2 = (int) Core.mean(region2_Cb).val[0];
@@ -376,7 +377,7 @@ public class RedWarehouse extends LinearOpMode {
             int maxOneTwo = Math.max(avg1, avg2);
             int max = Math.max(maxOneTwo, avg3);
 
-            if(max == avg1) // Was it from region 1?
+            if (max == avg1) // Was it from region 1?
             {
                 position = "LEFT"; // Record our analysis
 
@@ -386,8 +387,7 @@ public class RedWarehouse extends LinearOpMode {
                         region1_pointB, // Second point which defines the rectangle
                         GREEN, // The color the rectangle is drawn in
                         -1); // Negative thickness means solid fill
-            }
-            else if(max == avg2) // Was it from region 2?
+            } else if (max == avg2) // Was it from region 2?
             {
                 position = "CENTER"; // Record our analysis
 
@@ -397,8 +397,7 @@ public class RedWarehouse extends LinearOpMode {
                         region2_pointB, // Second point which defines the rectangle
                         GREEN, // The color the rectangle is drawn in
                         -1); // Negative thickness means solid fill
-            }
-            else if(max == avg3) // Was it from region 3?
+            } else if (max == avg3) // Was it from region 3?
             {
                 position = "RIGHT"; // Record our analysis
 
