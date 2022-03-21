@@ -85,7 +85,7 @@ public class HWMapTeleOp {
         carouselMotor.setPower(0);
         //        capMotor.setPower(0);
 
-        dropServo.setPosition(0.75);
+        dropServo.setPosition(0.58);
 
     }
 }
