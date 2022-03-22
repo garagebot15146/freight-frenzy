@@ -133,7 +133,7 @@ public class GarTeleOp extends OpMode {
 
 
         if(robot.liftMotor.getCurrentPosition() < 1000 & robot.dropServo.getPosition() == 0.3){
-            robot.dropServo.setPosition(0.75);
+            robot.dropServo.setPosition(0.58);
             telemetry.addData("lift", "below safe region");
         }
 

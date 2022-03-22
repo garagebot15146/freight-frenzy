@@ -209,9 +209,9 @@ public class RedCarousel extends LinearOpMode {
     }
 
     public void deposit() {
-        robot.dropServo.setPosition(0.3);
+        robot.dropServo.setPosition(0.2);
         pause(1);
-        robot.dropServo.setPosition(0.75);
+        robot.dropServo.setPosition(0.58);
         telemetry.addData("Servo", "Worked");
     }
 

@@ -88,24 +88,18 @@ public class RedWarehouse extends LinearOpMode {
                 .lineToLinearHeading(new Pose2d(0, -68, Math.toRadians(180)))
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> intake())
                 .lineToLinearHeading(new Pose2d(53, -68, Math.toRadians(178)))
-                .waitSeconds(0.2)
+                .waitSeconds(1)
+                .lineToLinearHeading(new Pose2d(56, -60, Math.toRadians(180)))
+                .waitSeconds(1)
+                .lineToLinearHeading(new Pose2d(49, -68, Math.toRadians(178)))
                 .UNSTABLE_addTemporalMarkerOffset(0.1, () -> outake())
                 .lineToLinearHeading(new Pose2d(0, -68, Math.toRadians(185)))
                 .lineToLinearHeading(new Pose2d(-5, -45, Math.toRadians(120)))
-                .waitSeconds(0.3)
-                .UNSTABLE_addTemporalMarkerOffset(0, () ->  depositCycle(10.7, 3))
-                .lineToLinearHeading(new Pose2d(0, -68, Math.toRadians(178)))
-                .UNSTABLE_addTemporalMarkerOffset(0, () -> intake())
-                .lineToLinearHeading(new Pose2d(51, -68, Math.toRadians(178)))
-                .waitSeconds(0.3)
-                .UNSTABLE_addTemporalMarkerOffset(0.1, () -> outake())
-                .lineToLinearHeading(new Pose2d(0, -68, Math.toRadians(185)))
-                .lineToLinearHeading(new Pose2d(-5, -45, Math.toRadians(120)))
+                .UNSTABLE_addTemporalMarkerOffset(0, () -> intakeOff())
                 .waitSeconds(0.2)
                 .UNSTABLE_addTemporalMarkerOffset(0, () ->  depositCycle(10.7, 3))
                 .lineToLinearHeading(new Pose2d(0, -68, Math.toRadians(178)))
                 .lineToLinearHeading(new Pose2d(51, -68, Math.toRadians(178)))
-                .UNSTABLE_addTemporalMarkerOffset(0, () -> liftDown())
                 .build();
 
         TrajectorySequence trajCenter = drive.trajectorySequenceBuilder(startPose)
@@ -150,6 +144,7 @@ public class RedWarehouse extends LinearOpMode {
     public void depositCycle(double inches, double timeoutS){
         liftUp(inches, timeoutS);
         deposit();
+        pause(0.5);
         liftDown();
     }
 
@@ -202,9 +197,9 @@ public class RedWarehouse extends LinearOpMode {
     }
 
     public void deposit(){
-        robot.dropServo.setPosition(0.3);
-        pause(0.7);
-        robot.dropServo.setPosition(0.75);
+        robot.dropServo.setPosition(0.2);
+        pause(0.9);
+        robot.dropServo.setPosition(0.58);
     }
 
     public void depositFinal(){

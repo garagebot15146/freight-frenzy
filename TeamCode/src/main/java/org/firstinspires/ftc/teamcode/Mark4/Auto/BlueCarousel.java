@@ -84,7 +84,7 @@ public class BlueCarousel extends LinearOpMode {
         TrajectorySequence trajLeft = drive.trajectorySequenceBuilder(startPose)
                 .lineToLinearHeading(new Pose2d(-19, 43, Math.toRadians(300)))
                 .waitSeconds(0.2)
-                .UNSTABLE_addTemporalMarkerOffset(0, () ->  depositCycle(5.42, 3))
+                .UNSTABLE_addTemporalMarkerOffset(0, () ->  depositCycle(5, 3))
                 .lineToLinearHeading(new Pose2d(-64, 49, Math.toRadians(270)))
                 .back(6)
                 .UNSTABLE_addTemporalMarkerOffset(0.3, () -> duckBlue(3))
@@ -100,9 +100,9 @@ public class BlueCarousel extends LinearOpMode {
                 .build();
 
         TrajectorySequence trajCenter = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(new Pose2d(-19, 42.9, Math.toRadians(300)))
+                .lineToLinearHeading(new Pose2d(-19, 43.1, Math.toRadians(300)))
                 .waitSeconds(0.2)
-                .UNSTABLE_addTemporalMarkerOffset(0, () ->  depositCycle(8, 3))
+                .UNSTABLE_addTemporalMarkerOffset(0, () ->  depositCycle(7.4, 3))
                 .lineToLinearHeading(new Pose2d(-64, 49, Math.toRadians(270)))
                 .back(6)
                 .UNSTABLE_addTemporalMarkerOffset(0.3, () -> duckBlue(3))
@@ -216,9 +216,9 @@ public class BlueCarousel extends LinearOpMode {
     }
 
     public void deposit(){
-        robot.dropServo.setPosition(0.3);
-        pause(1);
-        robot.dropServo.setPosition(0.75);
+        robot.dropServo.setPosition(0.23);
+        pause(0.9);
+        robot.dropServo.setPosition(0.58);
         telemetry.addData("Servo", "Worked");
     }
 
