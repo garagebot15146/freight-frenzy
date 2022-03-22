@@ -82,7 +82,7 @@ public class RedWarehouse extends LinearOpMode {
 //PATH CONSTANTS
 
         TrajectorySequence trajLeft = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(new Pose2d(-7, -44, Math.toRadians(112)))
+                .lineToLinearHeading(new Pose2d(-7, -43, Math.toRadians(112)))
                 .waitSeconds(0.2)
                  .UNSTABLE_addTemporalMarkerOffset(0, () ->  depositCycle(5, 3))
                 .lineToLinearHeading(new Pose2d(0, -68, Math.toRadians(180)))

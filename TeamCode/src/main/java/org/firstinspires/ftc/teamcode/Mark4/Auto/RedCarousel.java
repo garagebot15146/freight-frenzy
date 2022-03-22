@@ -78,9 +78,9 @@ public class RedCarousel extends LinearOpMode {
 //PATH CONSTANTS
 
         TrajectorySequence trajLeft = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(new Pose2d(-19, -43, Math.toRadians(55)))
+                .lineToLinearHeading(new Pose2d(-19, -43, Math.toRadians(57)))
                 .waitSeconds(0.2)
-                .UNSTABLE_addTemporalMarkerOffset(0, () ->  depositCycle(5.42, 3))
+                .UNSTABLE_addTemporalMarkerOffset(0, () ->  depositCycle(5, 3))
                 .lineToLinearHeading(new Pose2d(-59, -49, Math.toRadians(0)))
                 .lineToLinearHeading(new Pose2d(-59, -65, Math.toRadians(0)))
                 .UNSTABLE_addTemporalMarkerOffset(0.3, () -> duckRed(3))
@@ -95,9 +95,9 @@ public class RedCarousel extends LinearOpMode {
                 .build();
 
         TrajectorySequence trajCenter = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(new Pose2d(-20, -43, Math.toRadians(55)))
+                .lineToLinearHeading(new Pose2d(-20, -43, Math.toRadians(57)))
                 .waitSeconds(0.2)
-                .UNSTABLE_addTemporalMarkerOffset(0, () ->  depositCycle(8.2, 3))
+                .UNSTABLE_addTemporalMarkerOffset(0, () ->  depositCycle(7.2, 3))
                 .lineToLinearHeading(new Pose2d(-59, -49, Math.toRadians(0)))
                 .lineToLinearHeading(new Pose2d(-59, -65, Math.toRadians(0)))
                 .UNSTABLE_addTemporalMarkerOffset(0.3, () -> duckRed(3))
@@ -112,7 +112,7 @@ public class RedCarousel extends LinearOpMode {
                 .build();
 
         TrajectorySequence trajRight = drive.trajectorySequenceBuilder(startPose)
-                .lineToLinearHeading(new Pose2d(-20, -42.1, Math.toRadians(55)))
+                .lineToLinearHeading(new Pose2d(-20, -42.1, Math.toRadians(57)))
                 .waitSeconds(0.2)
                 .UNSTABLE_addTemporalMarkerOffset(0, () ->  depositCycle(11, 3))
                 .lineToLinearHeading(new Pose2d(-59, -49, Math.toRadians(0)))
@@ -209,8 +209,8 @@ public class RedCarousel extends LinearOpMode {
     }
 
     public void deposit() {
-        robot.dropServo.setPosition(0.2);
-        pause(1);
+        robot.dropServo.setPosition(0.23);
+        pause(0.9);
         robot.dropServo.setPosition(0.58);
         telemetry.addData("Servo", "Worked");
     }
@@ -224,7 +224,7 @@ public class RedCarousel extends LinearOpMode {
 
     public void duckRed(double seconds) {
         runtime.reset();
-        robot.carouselMotor.setPower(0.4);
+        robot.carouselMotor.setPower(0.3);
         while (opModeIsActive() && runtime.seconds() < seconds) {
         }
         robot.carouselMotor.setPower(0);

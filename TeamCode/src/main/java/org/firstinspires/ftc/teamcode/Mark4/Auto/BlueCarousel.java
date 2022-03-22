@@ -231,7 +231,7 @@ public class BlueCarousel extends LinearOpMode {
 
     public void duckBlue(double seconds){
         runtime.reset();
-        robot.carouselMotor.setPower(-0.4);
+        robot.carouselMotor.setPower(-0.3);
         while (opModeIsActive() && runtime.seconds() < seconds) {
         }
         robot.carouselMotor.setPower(0);
