@@ -73,7 +73,7 @@ public class GarTeleOp extends OpMode {
         robot.rightBackMotor.setPower(rightBackPower * nerf);
 
         //outtake
-        double intakeNerf = 1;
+        double intakeNerf = 0.8;
         if (gamepad1.right_bumper && !lock1 && !gamepad1.left_bumper) {
             lock1 = true;
             if (state1) {
