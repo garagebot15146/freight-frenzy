@@ -88,13 +88,13 @@ public class BlueWarehouse extends LinearOpMode {
                 .lineToLinearHeading(new Pose2d(-3, 68, Math.toRadians(180)))
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> intake())
                 .lineToLinearHeading(new Pose2d(50, 68, Math.toRadians(180)))
-                .waitSeconds(1.5)
+                .waitSeconds(1.3)
                 .lineToLinearHeading(new Pose2d(53, 60, Math.toRadians(180)))
-                .waitSeconds(1.5)
+                .waitSeconds(1.3)
                 .lineToLinearHeading(new Pose2d(40, 68, Math.toRadians(179)))
                 .waitSeconds(0.4)
                 .UNSTABLE_addTemporalMarkerOffset(0.1, () -> outake())
-                .waitSeconds(0.5)
+                .waitSeconds(1)
                 .lineToLinearHeading(new Pose2d(0, 70, Math.toRadians(178)))
                 .lineToLinearHeading(new Pose2d(-2, 42, Math.toRadians(235)))
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> intakeOff())
@@ -111,13 +111,13 @@ public class BlueWarehouse extends LinearOpMode {
                 .lineToLinearHeading(new Pose2d(-3, 68, Math.toRadians(180)))
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> intake())
                 .lineToLinearHeading(new Pose2d(50, 68, Math.toRadians(180)))
-                .waitSeconds(1.5)
+                .waitSeconds(1.3)
                 .lineToLinearHeading(new Pose2d(53, 60, Math.toRadians(180)))
-                .waitSeconds(1.5)
+                .waitSeconds(1.3)
                 .lineToLinearHeading(new Pose2d(40, 68, Math.toRadians(179)))
                 .waitSeconds(0.4)
                 .UNSTABLE_addTemporalMarkerOffset(0.1, () -> outake())
-                .waitSeconds(0.5)
+                .waitSeconds(1)
                 .lineToLinearHeading(new Pose2d(0, 70, Math.toRadians(178)))
                 .lineToLinearHeading(new Pose2d(-2, 42, Math.toRadians(235)))
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> intakeOff())
@@ -134,13 +134,13 @@ public class BlueWarehouse extends LinearOpMode {
                 .lineToLinearHeading(new Pose2d(-3, 68, Math.toRadians(180)))
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> intake())
                 .lineToLinearHeading(new Pose2d(50, 68, Math.toRadians(180)))
-                .waitSeconds(1.5)
+                .waitSeconds(1.3)
                 .lineToLinearHeading(new Pose2d(53, 60, Math.toRadians(180)))
-                .waitSeconds(1.5)
+                .waitSeconds(1.3)
                 .lineToLinearHeading(new Pose2d(40, 68, Math.toRadians(179)))
                 .waitSeconds(0.4)
                 .UNSTABLE_addTemporalMarkerOffset(0.1, () -> outake())
-                .waitSeconds(0.5)
+                .waitSeconds(1)
                 .lineToLinearHeading(new Pose2d(0, 70, Math.toRadians(178)))
                 .lineToLinearHeading(new Pose2d(-2, 42, Math.toRadians(235)))
                 .UNSTABLE_addTemporalMarkerOffset(0, () -> intakeOff())
@@ -238,11 +238,11 @@ public class BlueWarehouse extends LinearOpMode {
     }
 
     public void intake(){
-        robot.intakeMotor.setPower(-0.8);
+        robot.intakeMotor.setPower(-0.6);
     }
 
     public void outake(){
-        robot.intakeMotor.setPower(0.8);
+        robot.intakeMotor.setPower(0.6);
     }
 
     public void intakeOff(){
